@@ -13,7 +13,7 @@ export class AdminheaderComponent implements OnInit {
   ngOnInit() {
   }
   logout(){
-    console.log("logout");
+    
     this.cookieService.deleteAll();
     this.router.navigateByUrl('/login');
   }

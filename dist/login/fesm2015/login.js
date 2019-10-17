@@ -44,7 +44,7 @@ import { MatTreeModule } from '@angular/material/tree';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { CommonModule } from '@angular/common';
 import { MAT_DIALOG_DATA, MatDialogRef, MatDialog } from '@angular/material';
-import { Injectable, NgModule, Component, Input, ViewChild, CUSTOM_ELEMENTS_SCHEMA, Inject, defineInjectable, inject } from '@angular/core';
+import { Injectable, NgModule, Component, Input, ViewChild, Inject, CUSTOM_ELEMENTS_SCHEMA, defineInjectable, inject } from '@angular/core';
 import { FormBuilder, Validators, FormGroupDirective, FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { HttpClient, HttpHeaders, HttpClientModule } from '@angular/common/http';
 import { Router, ActivatedRoute } from '@angular/router';
@@ -721,16 +721,17 @@ class LoginComponent {
              * @return {?}
              */
             (response) => {
-                console.log(response);
+                //console.log(response);
                 /** @type {?} */
                 let result = {};
                 result = response;
                 if (result.status == "success") {
                     this.cookieService.set('user_id', result.item[0]._id);
                     this.cookieService.set('userdetails', JSON.stringify(result.item));
+                    this.cookieService.set('jwtToken', result.token);
                     this.router.navigateByUrl('/clientdashboard');
                     for (const key in this.routerStatusValue.data) {
-                        console.log(this.routerStatusValue.data[key].type);
+                        //console.log(this.routerStatusValue.data[key].type);
                         if (result.type === this.routerStatusValue.data[key].type) {
                             this.router.navigateByUrl('/' + this.routerStatusValue.data[key].routerNav); // navigate to dashboard url 
                         }

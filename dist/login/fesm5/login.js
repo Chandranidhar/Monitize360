@@ -885,16 +885,17 @@ var LoginComponent = /** @class */ (function () {
              * @return {?}
              */
             function (response) {
-                console.log(response);
+                //console.log(response);
                 /** @type {?} */
                 var result = {};
                 result = response;
                 if (result.status == "success") {
                     _this.cookieService.set('user_id', result.item[0]._id);
                     _this.cookieService.set('userdetails', JSON.stringify(result.item));
+                    _this.cookieService.set('jwtToken', result.token);
                     _this.router.navigateByUrl('/clientdashboard');
                     for (var key in _this.routerStatusValue.data) {
-                        console.log(_this.routerStatusValue.data[key].type);
+                        //console.log(this.routerStatusValue.data[key].type);
                         if (result.type === _this.routerStatusValue.data[key].type) {
                             _this.router.navigateByUrl('/' + _this.routerStatusValue.data[key].routerNav); // navigate to dashboard url 
                         }
