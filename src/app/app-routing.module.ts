@@ -8,6 +8,7 @@ import { ClientdashboardComponent } from './components/clientdashboard/clientdas
 import { AdmindashboardComponent } from './components/admindashboard/admindashboard.component'; 
 import { EditprofileComponent } from './components/editprofile/editprofile.component';
 import { SupportComponent } from './components/support/support.component';
+import { AddadminComponent } from './components/addadmin/addadmin.component';
 
 const routes: Routes = [
   {path: '', component: LoginComponent},
@@ -18,7 +19,8 @@ const routes: Routes = [
   {path:'clientdashboard', component:ClientdashboardComponent},
   {path:'admindashboard', component:AdmindashboardComponent},
   {path:'editprofile',component:EditprofileComponent},
-  {path:'support', component:SupportComponent}
+  {path:'support', component:SupportComponent},
+  {path:'addadmin',component:AddadminComponent}
 ];
 
 @NgModule({

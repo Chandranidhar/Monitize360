@@ -22,7 +22,7 @@ import { AdmindashboardComponent } from './components/admindashboard/admindashbo
 import { AdminheaderComponent } from './components/adminheader/adminheader.component';
 import { EditprofileComponent,commonModalComponent } from './components/editprofile/editprofile.component';
 import { SupportComponent } from './components/support/support.component';
-
+import { AddadminComponent } from './components/addadmin/addadmin.component';
 
 @NgModule({
   declarations: [
@@ -36,7 +36,8 @@ import { SupportComponent } from './components/support/support.component';
     AdminheaderComponent,
     EditprofileComponent,
     commonModalComponent,
-    SupportComponent
+    SupportComponent,
+    AddadminComponent
   ],
   imports: [
     BrowserModule.withServerTransition({ appId: 'serverApp' }),
