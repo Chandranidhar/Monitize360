@@ -20,14 +20,17 @@
 
     <mat-card-content class="profile_section">
         <mat-menu #appMenu="matMenu">
-            <button mat-menu-item>
+            <!-- <button mat-menu-item>
                 <mat-icon>account_circle</mat-icon> Account
-            </button>
+            </button> -->
             <button mat-menu-item>
                 <mat-icon>build</mat-icon> Settings
             </button>
             <button type="button"  [routerLink]="[ '/editprofile' ]"mat-menu-item>
                 <mat-icon>edit</mat-icon> Edit Profile
+            </button>
+            <button type="button"  (click)="logout()" mat-menu-item>
+                <mat-icon>edit</mat-icon> Logout
             </button>
         </mat-menu>
         <span class="username">Adam Coury</span>

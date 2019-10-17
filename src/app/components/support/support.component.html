@@ -1,19 +1,25 @@
 <app-adminheader>
-    <form [formGroup]="SupportForm"  (ngSubmit)="SupportFormSubmit()">
-        <mat-form-field>
-          <input matInput type="text" placeholder="Subject" formControlName="subject" (blur)="inputUntouched('subject')">
-          <mat-error
-            *ngIf="!SupportForm.controls['subject'].valid && SupportForm.controls['subject'].errors.required && SupportForm.controls['subject'].touched">
-            Subject field can not be blank</mat-error>
-        </mat-form-field>
-  
-  
-        <mat-form-field>
-          <textarea matInput type="text" placeholder="Descriptiion" formControlName="description" (blur)="inputUntouched('description')"></textarea>
-          <mat-error
-            *ngIf="!SupportForm.controls['description'].valid && SupportForm.controls['description'].errors.required && SupportForm.controls['description'].touched">
-            Description field can not be blank</mat-error>
-        </mat-form-field>
-        <button mat-button color="warn">Send</button>
+        <mat-card>
+    <div class="example-container">
+        <form [formGroup]="SupportForm" (ngSubmit)="SupportFormSubmit()">
+            <mat-form-field>
+                <input matInput type="text" placeholder="Subject" formControlName="subject"
+                    (blur)="inputUntouched('subject')">
+                <mat-error
+                    *ngIf="!SupportForm.controls['subject'].valid && SupportForm.controls['subject'].errors.required && SupportForm.controls['subject'].touched">
+                    Subject field can not be blank</mat-error>
+            </mat-form-field>
+
+
+            <mat-form-field>
+                <textarea matInput type="text" placeholder="Description" formControlName="description"
+                    (blur)="inputUntouched('description')"></textarea>
+                <mat-error
+                    *ngIf="!SupportForm.controls['description'].valid && SupportForm.controls['description'].errors.required && SupportForm.controls['description'].touched">
+                    Description field can not be blank</mat-error>
+            </mat-form-field>
+            <button mat-button color="warn">Send</button>
         </form>
+    </div>
+</mat-card>
 </app-adminheader>
