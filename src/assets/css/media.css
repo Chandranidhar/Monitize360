@@ -1,0 +1,150 @@
+@media only screen and (max-width: 1592px) {
+    .inner_card {
+        width: 21.6%;
+    }
+    .affiliateBanner_wrapper .time_and_price .t-price_container{ padding: 5px; }
+}
+@media only screen and (max-width: 1532px){
+    .inner_card { width: 21.5%; }
+}
+
+@media only screen and (max-width: 1480px){
+    .inner_card { width: 21.4%; }
+   }
+   @media only screen and (max-width: 1430px){
+   .inner_card { width: 21.3%; }
+   }
+   @media only screen and (max-width: 1383px){
+       .inner_card { width: 21.2%; }
+   }
+    @media only screen and (max-width: 1333px){
+          .inner_card { width: 21.1%; }
+      }
+  @media only screen and (max-width: 1303px){
+          .inner_card { width: 21%; }
+      }
+  @media only screen and (max-width: 1266px){
+          .inner_card { width: 20.9%; }
+      }
+ @media only screen and (max-width: 1230px){
+          .inner_card { width: 20.8%; }
+      }
+ @media only screen and (max-width: 1198px){
+      .inner_card { width: 28.6%; }
+ }
+ @media only screen and (max-width: 1056px){
+ .inner_card { width: 28.5%; }
+ }
+@media only screen and (max-width: 1190px) {
+   .mat-grid-tile {
+       display: initial!important;
+       position: inherit!important;
+       overflow: inherit;
+
+   }
+   .mat-grid-list {
+       position: inherit!important;
+       margin: 10px!important;
+       padding-bottom: 15px!important;
+ }
+
+    .mat-grid-tile .mat-figure {
+        top: 0;
+        left: 0;
+        right: 0;
+        bottom: 0;
+        position: inherit!important;
+        display: inherit!important;
+        align-items: inherit!important;
+        justify-content: inherit!important;
+        height: inherit!important;
+        padding: 0;
+        margin: 0;
+    }
+    .searchbar .mat-form-field {
+        padding-left: 0px!important;
+    }
+    .add_button_wrapper {
+        width: 100%;
+        margin-left: auto!important;
+        display: flex;
+        margin-right: 0px!important;
+        padding: 15px 0 0 0;
+        justify-content: space-between!important;
+    }
+}
+@media only screen and (max-width: 960px) {
+     .mat-dialog-container{ width: 80vw!important; }
+     .form_wrapper {
+         width: auto!important;
+         }
+
+}
+
+@media only screen and (max-width: 834px){
+    .inner_card {
+        width: 28.3%;
+    }
+   }
+ @media only screen and (max-width: 793px){
+    .inner_card {
+      width: 44.5%;
+    }
+ }
+  @media only screen and (max-width: 709px){
+     .inner_card {
+       width: 100%;
+     }
+  }
+@media only screen and (max-width: 500px) {
+    .s_getmyoffer_login_wrapper {
+        width:70% !important; padding: 26px 5%!important;  margin-bottom: 40px!important;
+    }
+    .s_getmyoffer .s_shatter_logo {
+        margin-top: 50px!important;
+    }
+}
+@media(max-width: 668px) {
+    .mobile-label {
+        width:100px!important;
+        display: inline-block!important;
+        font-weight: bold;
+        padding: 10px 0;
+    }
+
+    .mat-header-row {
+        display: none!important;
+    }
+
+    .mat-row {
+        flex-direction: column!important;
+        align-items: start!important;
+        padding: 8px!important;
+        display: flex!important;
+    }
+    tr.mat-footer-row, tr.mat-row {
+        height: auto!important;
+    }
+    td.mat-cell, td.mat-footer-cell, th.mat-header-cell {
+        width: 100%!important;
+    }
+    .actions {
+        flex-direction: column;
+        display: initial;
+    }
+    td.mat-cell:first-of-type, td.mat-footer-cell:first-of-type, th.mat-header-cell:first-of-type{padding-left: 0!important;}
+    .mat-raised-button{margin: 3px!important;}
+    .mat-paginator-container {
+        position: fixed;
+        bottom: 0;
+        background: #fff;
+        border-top: 2px solid #f2f1f3;
+        justify-content: center!important;
+    }
+}
+@media(max-width: 332px) {
+    .mobile-label {
+        width:80px!important;
+
+    }
+}

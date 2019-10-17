@@ -1,0 +1,11 @@
+@media screen and (max-width: 668px){
+    .login_wrapper { width: 450px; }
+
+}
+@media screen and (max-width: 480px) {
+    .login_wrapper { width: 360px; }
+}
+
+@media screen and (max-width: 420px) {
+    .login_wrapper { width: 300px; }
+}
