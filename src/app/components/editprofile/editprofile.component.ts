@@ -348,9 +348,13 @@ export class EditprofileComponent implements OnInit {
 })
 export class commonModalComponent {
   public resetForm:FormGroup;
-  constructor(public dialogRef: MatDialogRef<commonModalComponent>,  public fbb: FormBuilder) {
+  constructor(public dialogRef: MatDialogRef<commonModalComponent>,  public fbb: FormBuilder,public cook: CookieService,public apiService: ApiService) {
+    let userdetails = this.cook.get('userdetails');
+        let cookie: any;
+        cookie = JSON.parse(userdetails);
+        
     this.resetForm = this.fbb.group({
-      id: [null, null],
+      id: [cookie[0]._id, null],
       oldpass: [null, Validators.required],
       newpass: [null, Validators.required],
       conpass: [null, Validators.required],
@@ -365,11 +369,15 @@ export class commonModalComponent {
       if(this.resetForm.value.conpass!=null){
         delete this.resetForm.value.conpass;
         delete this.resetForm.value.oldpass;
-      
+        //let data: any = { 'source': 'user',  'data': {"password":this.resetForm.value.password,"id":this.resetForm.value.id} };
+      //   this.apiService.postData('addorupdatedata', data).subscribe((data) => {
+      //     console.log(data);
+      // })
       }
-      console.log(this.resetForm.value);
     }
   }
+
+
   inputUntouched(val: any) {
     this.resetForm.controls[val].markAsUntouched();
   }
