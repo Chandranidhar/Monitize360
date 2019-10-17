@@ -21,6 +21,7 @@ import { ClientdashboardComponent } from './components/clientdashboard/clientdas
 import { AdmindashboardComponent } from './components/admindashboard/admindashboard.component'; //login library
 import { AdminheaderComponent } from './components/adminheader/adminheader.component';
 import { EditprofileComponent,commonModalComponent } from './components/editprofile/editprofile.component';
+import { SupportComponent } from './components/support/support.component';
 
 
 @NgModule({
@@ -34,7 +35,8 @@ import { EditprofileComponent,commonModalComponent } from './components/editprof
     AdmindashboardComponent,
     AdminheaderComponent,
     EditprofileComponent,
-    commonModalComponent
+    commonModalComponent,
+    SupportComponent
   ],
   imports: [
     BrowserModule.withServerTransition({ appId: 'serverApp' }),
