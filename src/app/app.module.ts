@@ -29,6 +29,7 @@ import { NgxUploaderModule } from 'ngx-uploader';
 import { Resolveservice } from './services/resolve-service';
 
 import { AddadminComponent } from './components/addadmin/addadmin.component';
+import {ModaleComponent} from './components/addadmin/addadmin.component';
 
 @NgModule({
   declarations: [
@@ -43,8 +44,13 @@ import { AddadminComponent } from './components/addadmin/addadmin.component';
     EditprofileComponent,
     commonModalComponent,
     SupportComponent,
+<<<<<<< HEAD
+    AddadminComponent,
+    ModaleComponent
+=======
     UserDashboardComponent,
     AddadminComponent
+>>>>>>> e9b1a62a262d04d38e10cabd3e2cd999d6ced75c
   ],
   imports: [
     BrowserModule.withServerTransition({ appId: 'serverApp' }),
@@ -65,6 +71,6 @@ import { AddadminComponent } from './components/addadmin/addadmin.component';
   providers: [AuthGuard,CookieService,ApiService, Resolveservice],
   bootstrap: [AppComponent],
   schemas: [CUSTOM_ELEMENTS_SCHEMA],
-  entryComponents: [commonModalComponent]
+  entryComponents: [commonModalComponent,ModaleComponent]
 })
 export class AppModule { }

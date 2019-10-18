@@ -42,21 +42,7 @@
                     *ngIf="!addadminform.controls['confirmpassword'].touched && addadminform.controls['confirmpassword'].errors">
                 Confirm Password is required</mat-error>
         </mat-form-field>
-        <div style="color: red;" *ngIf="addadminform.hasError('mismatchedPasswords')">mismatched Passwords</div>
-        <br>
-        <mat-form-field>
-            <input matInput  type="text" formControlName="zipcode" (blur)="inputBlur('zipcode')" placeholder="Enter Zip Code" >
-            <mat-error
-                    *ngIf="!addadminform.controls['zipcode'].touched && addadminform.controls['zipcode'].errors">
-                Zipcode is required</mat-error>
-        </mat-form-field>
-        <br>
-        <mat-form-field>
-            <input matInput  type="text" formControlName="city" (blur)="inputBlur('city')"  placeholder="Enter City" >
-            <mat-error
-                    *ngIf="!addadminform.controls['city'].touched && addadminform.controls['city'].errors">
-                City is required</mat-error>
-        </mat-form-field>
+        <div style="color: red;" *ngIf="addadminform.hasError('mismatchedPasswords')">Passwords does not match</div>
         <br>
         <mat-form-field>
             <!-- <input matInput  type="text" formControlName="state" (blur)="inputBlur('state')"  placeholder="Enter State" > -->
@@ -67,6 +53,21 @@
             <mat-error
                     *ngIf="!addadminform.controls['state'].touched && addadminform.controls['state'].errors">
                 State is required</mat-error>
+        </mat-form-field>
+        
+        <br>
+        <mat-form-field>
+            <input matInput  type="text" formControlName="city" (blur)="inputBlur('city')"  placeholder="Enter City" >
+            <mat-error
+                    *ngIf="!addadminform.controls['city'].touched && addadminform.controls['city'].errors">
+                City is required</mat-error>
+        </mat-form-field>
+        <br>
+        <mat-form-field>
+            <input matInput  type="text" formControlName="zipcode" (blur)="inputBlur('zipcode')" placeholder="Enter Zip Code" >
+            <mat-error
+                    *ngIf="!addadminform.controls['zipcode'].touched && addadminform.controls['zipcode'].errors">
+                Zipcode is required</mat-error>
         </mat-form-field>
         <br>
         <button mat-raised-button color="primary" type="submit" >Submit</button>
