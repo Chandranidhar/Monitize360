@@ -32,24 +32,45 @@ if (endpoint.condition != '_id' && endpoint.condition != null) {
     }
 }
 
+        // return new Promise((resolve) => {
+           
+        //         console.log('route.data --  in resolve ');
+        //         console.log(route.data);
+        //         console.log(route.params);
+        //         if(route.data.condition!=null && route.data.condition.myid !=null && route.data.condition.myid=='id')
+        //             route.data.condition._id=this.cookieService.get('user_id');
+        //         this._apiService.getEndpoint(route.data).subscribe(api_object => {
+        //             console.log('api_object  !!!!');
+        //             console.log(api_object);
+        //             if (api_object) {
+        //                 return resolve(api_object);
+        //             } else { // id not found
+        //                 this.router.navigateByUrl('login');
+        //                 return true;
+        //             }
+        //         });
+            
+        // });
+
+
         return new Promise((resolve) => {
            
-                console.log('route.data --  in resolve ');
-                console.log(route.data);
-                console.log(route.params);
-                if(route.data.condition!=null && route.data.condition.myid !=null && route.data.condition.myid=='id')
-                    route.data.condition._id=this.cookieService.get('id');
-                this._apiService.getEndpoint(route.data).subscribe(api_object => {
-                    console.log('api_object  !!!!');
-                    console.log(api_object);
-                    if (api_object) {
-                        return resolve(api_object);
-                    } else { // id not found
-                        this.router.navigateByUrl('login');
-                        return true;
-                    }
-                });
-            
-        });
+            console.log('route.data --  in resolve ');
+            console.log(route.data);
+            console.log(route.params);
+            if(route.data.condition!=null && route.data.condition.myid !=null && route.data.condition.myid=='id')
+                route.data.condition._id=this.cookieService.get('user_id');
+            this._apiService.getData(route.data).subscribe(api_object => {
+                console.log('api_object  !!!!');
+                console.log(api_object);
+                if (api_object) {
+                    return resolve(api_object);
+                } else { // id not found
+                    this.router.navigateByUrl('login');
+                    return true;
+                }
+            });
+        
+    });
     }
 }

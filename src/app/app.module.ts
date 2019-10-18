@@ -22,6 +22,10 @@ import { AdmindashboardComponent } from './components/admindashboard/admindashbo
 import { AdminheaderComponent } from './components/adminheader/adminheader.component';
 import { EditprofileComponent,commonModalComponent } from './components/editprofile/editprofile.component';
 import { SupportComponent } from './components/support/support.component';
+import { UserDashboardComponent } from '../app/components/user-dashboard/user-dashboard.component';
+import { ListingModule } from 'listing-angular7';
+import { NgxUploaderModule } from 'ngx-uploader';
+import { Resolveservice } from './services/resolve-service';
 
 
 @NgModule({
@@ -36,7 +40,8 @@ import { SupportComponent } from './components/support/support.component';
     AdminheaderComponent,
     EditprofileComponent,
     commonModalComponent,
-    SupportComponent
+    SupportComponent,
+    UserDashboardComponent
   ],
   imports: [
     BrowserModule.withServerTransition({ appId: 'serverApp' }),
@@ -49,10 +54,12 @@ import { SupportComponent } from './components/support/support.component';
     FormsModule,
     ReactiveFormsModule,
     LoginModule,
+    ListingModule,
+    NgxUploaderModule,
     
     
   ],
-  providers: [AuthGuard,CookieService,ApiService],
+  providers: [AuthGuard,CookieService,ApiService, Resolveservice],
   bootstrap: [AppComponent],
   schemas: [CUSTOM_ELEMENTS_SCHEMA],
   entryComponents: [commonModalComponent]
