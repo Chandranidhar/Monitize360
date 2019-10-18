@@ -23,6 +23,7 @@ import { AdminheaderComponent } from './components/adminheader/adminheader.compo
 import { EditprofileComponent,commonModalComponent } from './components/editprofile/editprofile.component';
 import { SupportComponent } from './components/support/support.component';
 import { AddadminComponent } from './components/addadmin/addadmin.component';
+import {ModaleComponent} from './components/addadmin/addadmin.component';
 
 @NgModule({
   declarations: [
@@ -37,7 +38,8 @@ import { AddadminComponent } from './components/addadmin/addadmin.component';
     EditprofileComponent,
     commonModalComponent,
     SupportComponent,
-    AddadminComponent
+    AddadminComponent,
+    ModaleComponent
   ],
   imports: [
     BrowserModule.withServerTransition({ appId: 'serverApp' }),
@@ -56,6 +58,6 @@ import { AddadminComponent } from './components/addadmin/addadmin.component';
   providers: [AuthGuard,CookieService,ApiService],
   bootstrap: [AppComponent],
   schemas: [CUSTOM_ELEMENTS_SCHEMA],
-  entryComponents: [commonModalComponent]
+  entryComponents: [commonModalComponent,ModaleComponent]
 })
 export class AppModule { }
