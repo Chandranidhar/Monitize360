@@ -18,16 +18,16 @@ export class Resolveservice implements Resolve<EndpointComponent> {
     constructor(private _apiService: ApiService, private router: Router, private cookieService: CookieService) {}
     resolve(route: ActivatedRouteSnapshot, state: RouterStateSnapshot): Observable<any> | Promise<any> | any {
 
-console.log('resolve data');
+//console.log('resolve data');
 let endpoint: any = route.data;
 let condition: any = {};
-console.log(endpoint.condition);
+//console.log(endpoint.condition);
 if (endpoint.condition != '_id' && endpoint.condition != null) {
     for (let i in endpoint.condition) {
         if (i == '_id') {
             endpoint.condition[i] = route.params.id;
-            console.log('route.params.id');
-            console.log(route.params.id);
+            // console.log('route.params.id');
+            // console.log(route.params.id);
         }
     }
 }
