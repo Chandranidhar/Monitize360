@@ -30,7 +30,7 @@
             "scripts": []
           },
           "configurations": {
-            "production": {
+            "production": { 
               "fileReplacements": [
                 {
                   "replace": "src/environments/environment.ts",
@@ -54,7 +54,11 @@
                 }
               ]
             },
+<<<<<<< HEAD
             "development":{
+=======
+            "development": { 
+>>>>>>> e9b1a62a262d04d38e10cabd3e2cd999d6ced75c
               "fileReplacements": [
                 {
                   "replace": "src/environments/environment.ts",
@@ -140,6 +144,14 @@
                 {
                   "replace": "src/environments/environment.ts",
                   "with": "src/environments/environment.prod.ts"
+                }
+              ]
+            },
+            "development": {
+              "fileReplacements": [
+                {
+                  "replace": "src/environments/environment.ts",
+                  "with": "src/environments/environment.development.ts"
                 }
               ]
             }

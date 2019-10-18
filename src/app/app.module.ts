@@ -22,6 +22,12 @@ import { AdmindashboardComponent } from './components/admindashboard/admindashbo
 import { AdminheaderComponent } from './components/adminheader/adminheader.component';
 import { EditprofileComponent,commonModalComponent } from './components/editprofile/editprofile.component';
 import { SupportComponent } from './components/support/support.component';
+
+import { UserDashboardComponent } from '../app/components/user-dashboard/user-dashboard.component';
+import { ListingModule } from 'listing-angular7';
+import { NgxUploaderModule } from 'ngx-uploader';
+import { Resolveservice } from './services/resolve-service';
+
 import { AddadminComponent } from './components/addadmin/addadmin.component';
 import {ModaleComponent} from './components/addadmin/addadmin.component';
 
@@ -38,8 +44,13 @@ import {ModaleComponent} from './components/addadmin/addadmin.component';
     EditprofileComponent,
     commonModalComponent,
     SupportComponent,
+<<<<<<< HEAD
     AddadminComponent,
     ModaleComponent
+=======
+    UserDashboardComponent,
+    AddadminComponent
+>>>>>>> e9b1a62a262d04d38e10cabd3e2cd999d6ced75c
   ],
   imports: [
     BrowserModule.withServerTransition({ appId: 'serverApp' }),
@@ -52,10 +63,12 @@ import {ModaleComponent} from './components/addadmin/addadmin.component';
     FormsModule,
     ReactiveFormsModule,
     LoginModule,
+    ListingModule,
+    NgxUploaderModule,
     
     
   ],
-  providers: [AuthGuard,CookieService,ApiService],
+  providers: [AuthGuard,CookieService,ApiService, Resolveservice],
   bootstrap: [AppComponent],
   schemas: [CUSTOM_ELEMENTS_SCHEMA],
   entryComponents: [commonModalComponent,ModaleComponent]
