@@ -23,7 +23,7 @@ export class ApiService {
                 // public jwtHelper: JwtHelperService,
                 // private loggedinService: LoggedinService
     ) {
-        this.jwttoken=this.cookieService.get('jwttoken');
+        this.jwttoken=this.cookieService.get('jwtToken');
     }
 
 
@@ -74,7 +74,7 @@ export class ApiService {
         const httpOptions = {
             headers: new HttpHeaders({
                 'Content-Type':  'application/json',
-                'access-token': this.cookieService.get('jwttoken')
+                'access-token':this.jwttoken
             })
         };
         let condition:any=endpoint.condition;
@@ -98,7 +98,7 @@ export class ApiService {
         const httpOptions = {
             headers: new HttpHeaders({
                 'Content-Type':  'application/json',
-                'Authorization': this.cookieService.get('jwttoken')
+                'Authorization': this.jwttoken
             })
         };
         console.log(this.cookieService.get('id'));
@@ -124,7 +124,7 @@ export class ApiService {
             headers: new HttpHeaders({
                 'Content-Type':  'application/json',
                 // 'access-token': this.cookieService.get('jwttoken'),
-                'Authorization': this.cookieService.get('jwttoken')
+                'Authorization': this.jwttoken
             })
         
         };

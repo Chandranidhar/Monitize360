@@ -30,7 +30,7 @@
             "scripts": []
           },
           "configurations": {
-            "production": {
+            "production": { 
               "fileReplacements": [
                 {
                   "replace": "src/environments/environment.ts",
@@ -53,6 +53,14 @@
                   "maximumError": "5mb"
                 }
               ]
+            },
+            "development": { 
+              "fileReplacements": [
+                {
+                  "replace": "src/environments/environment.ts",
+                  "with": "src/environments/environment.development.ts"
+                }
+              ]
             }
           }
         },
@@ -64,6 +72,9 @@
           "configurations": {
             "production": {
               "browserTarget": "Monitize360:build:production"
+            },
+            "development": {
+              "browserTarget": "Monitize360:build:development"
             }
           }
         },
@@ -129,6 +140,14 @@
                 {
                   "replace": "src/environments/environment.ts",
                   "with": "src/environments/environment.prod.ts"
+                }
+              ]
+            },
+            "development": {
+              "fileReplacements": [
+                {
+                  "replace": "src/environments/environment.ts",
+                  "with": "src/environments/environment.development.ts"
                 }
               ]
             }
