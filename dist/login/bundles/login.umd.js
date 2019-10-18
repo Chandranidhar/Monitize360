@@ -1087,7 +1087,6 @@
      */
     var SignUpComponent = /** @class */ (function () {
         function SignUpComponent(fb, http, router$$1, dialog$$1, apiService, cookieService) {
-            var _this = this;
             this.fb = fb;
             this.http = http;
             this.router = router$$1;
@@ -1356,19 +1355,6 @@
             }, {
                 validator: matchingPasswords('password', 'confirmpassword')
             });
-            /** @type {?} */
-            var endpoint = 'gettemptoken';
-            this.http.get(this.serverUrlValue + endpoint).subscribe(( /**
-             * @param {?} res
-             * @return {?}
-             */function (res) {
-                /** @type {?} */
-                var result = {};
-                result = res;
-                if (result.status == "success") {
-                    _this.cookieService.set('jwttoken', result.token);
-                }
-            }));
             // this.openDialog();
         }
         Object.defineProperty(SignUpComponent.prototype, "userType", {
@@ -1457,6 +1443,7 @@
          * @return {?}
          */
             function () {
+                var _this = this;
                 this.apiService.clearServerUrl(); //  Clear the server url
                 // setTimeout(() => {
                 this.apiService.setServerUrl(this.serverUrlValue); //  set the server url
@@ -1465,7 +1452,21 @@
                 this.apiService.clearaddEndpoint(); //  Clear the endpoint
                 // setTimeout(() => {
                 this.apiService.setaddEndpoint(this.addEndpointValue.endpoint); //  set the endpoint
+                //  set the endpoint
                 // }, 50);
+                /** @type {?} */
+                var endpoint = 'gettemptoken';
+                this.http.get(this.serverUrlValue + endpoint).subscribe(( /**
+                 * @param {?} res
+                 * @return {?}
+                 */function (res) {
+                    /** @type {?} */
+                    var result = {};
+                    result = res;
+                    if (result.status == "success") {
+                        _this.cookieService.set('jwttoken', result.token);
+                    }
+                }));
             };
         /********* Sign Up Form Submit start here*********/
         /**
