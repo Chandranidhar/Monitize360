@@ -726,10 +726,8 @@ class LoginComponent {
                 let result = {};
                 result = response;
                 if (result.status == "success") {
-                    this.cookieService.set('user_id', result.item[0]._id);
                     this.cookieService.set('userdetails', JSON.stringify(result.item));
-                    this.cookieService.set('jwtToken', result.token);
-                    this.router.navigateByUrl('/clientdashboard');
+                    this.cookieService.set('jwttoken', result.token);
                     for (const key in this.routerStatusValue.data) {
                         //console.log(this.routerStatusValue.data[key].type);
                         if (result.type === this.routerStatusValue.data[key].type) {
@@ -1158,6 +1156,13 @@ class SignUpComponent {
         // this.openDialog();
     }
     /**
+     * @param {?} typeval
+     * @return {?}
+     */
+    set userType(typeval) {
+        this.typevalue = typeval;
+    }
+    /**
      * @param {?} formTitleVal
      * @return {?}
      */
@@ -1241,10 +1246,14 @@ class SignUpComponent {
             if (this.signUpForm.value.confirmpassword != null) {
                 delete this.signUpForm.value.confirmpassword;
             }
+            /** @type {?} */
+            let allData = this.signUpForm.value;
+            allData.type = this.typevalue;
+            console.log(allData);
             // let link: any = this.fullUrlValue;
             /** @type {?} */
             let data = {
-                'data': this.signUpForm.value,
+                'data': allData,
                 "source": this.addEndpointValue.source
             };
             console.log(data);
@@ -1333,6 +1342,7 @@ SignUpComponent.ctorParameters = () => [
 ];
 SignUpComponent.propDecorators = {
     formDirective: [{ type: ViewChild, args: [FormGroupDirective,] }],
+    userType: [{ type: Input }],
     formTitle: [{ type: Input }],
     serverUrl: [{ type: Input }],
     logo: [{ type: Input }],

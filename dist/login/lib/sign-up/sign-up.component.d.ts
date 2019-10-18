@@ -17,6 +17,7 @@ export declare class SignUpComponent implements OnInit {
     message: any;
     animal: string;
     name: string;
+    typevalue: any;
     state_usss: any;
     formDirective: FormGroupDirective;
     formTitleValue: any;
@@ -25,6 +26,7 @@ export declare class SignUpComponent implements OnInit {
     loginRouteingUrlValue: any;
     addEndpointValue: any;
     logoValue: any;
+    userType: any;
     formTitle: any;
     serverUrl: any;
     logo: any;

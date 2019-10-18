@@ -890,10 +890,8 @@ var LoginComponent = /** @class */ (function () {
                 var result = {};
                 result = response;
                 if (result.status == "success") {
-                    _this.cookieService.set('user_id', result.item[0]._id);
                     _this.cookieService.set('userdetails', JSON.stringify(result.item));
-                    _this.cookieService.set('jwtToken', result.token);
-                    _this.router.navigateByUrl('/clientdashboard');
+                    _this.cookieService.set('jwttoken', result.token);
                     for (var key in _this.routerStatusValue.data) {
                         //console.log(this.routerStatusValue.data[key].type);
                         if (result.type === _this.routerStatusValue.data[key].type) {
@@ -1334,6 +1332,17 @@ var SignUpComponent = /** @class */ (function () {
         });
         // this.openDialog();
     }
+    Object.defineProperty(SignUpComponent.prototype, "userType", {
+        set: /**
+         * @param {?} typeval
+         * @return {?}
+         */
+        function (typeval) {
+            this.typevalue = typeval;
+        },
+        enumerable: true,
+        configurable: true
+    });
     Object.defineProperty(SignUpComponent.prototype, "formTitle", {
         set: /**
          * @param {?} formTitleVal
@@ -1452,10 +1461,14 @@ var SignUpComponent = /** @class */ (function () {
             if (this.signUpForm.value.confirmpassword != null) {
                 delete this.signUpForm.value.confirmpassword;
             }
+            /** @type {?} */
+            var allData = this.signUpForm.value;
+            allData.type = this.typevalue;
+            console.log(allData);
             // let link: any = this.fullUrlValue;
             /** @type {?} */
             var data = {
-                'data': this.signUpForm.value,
+                'data': allData,
                 "source": this.addEndpointValue.source
             };
             console.log(data);
@@ -1564,6 +1577,7 @@ var SignUpComponent = /** @class */ (function () {
     ]; };
     SignUpComponent.propDecorators = {
         formDirective: [{ type: ViewChild, args: [FormGroupDirective,] }],
+        userType: [{ type: Input }],
         formTitle: [{ type: Input }],
         serverUrl: [{ type: Input }],
         logo: [{ type: Input }],

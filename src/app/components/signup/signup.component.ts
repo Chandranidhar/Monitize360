@@ -19,9 +19,9 @@ export class SignupComponent implements OnInit {
   public serverUrl: any = this.apiService.api_url;
   public addEndpoint: any = {
     endpoint:'addorupdatedata',
-    // source:'usermanagement'
     source:'user'
   };
+  public userType: any = 'user';
  
   constructor(public cook:CookieService, public apiService: ApiService) { }
 
