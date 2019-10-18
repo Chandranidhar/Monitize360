@@ -44,7 +44,7 @@ import { MatTreeModule } from '@angular/material/tree';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { CommonModule } from '@angular/common';
 import { MAT_DIALOG_DATA, MatDialogRef, MatDialog } from '@angular/material';
-import { Injectable, NgModule, Component, Input, ViewChild, CUSTOM_ELEMENTS_SCHEMA, Inject, defineInjectable, inject } from '@angular/core';
+import { Injectable, NgModule, Component, Input, ViewChild, Inject, CUSTOM_ELEMENTS_SCHEMA, defineInjectable, inject } from '@angular/core';
 import { FormBuilder, Validators, FormGroupDirective, FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { HttpClient, HttpHeaders, HttpClientModule } from '@angular/common/http';
 import { Router, ActivatedRoute } from '@angular/router';
@@ -593,6 +593,25 @@ class ApiService {
         };
         /** @type {?} */
         var result = this._http.post(this.serverUrl + endpoint, httpOptions).pipe(map((/**
+         * @param {?} res
+         * @return {?}
+         */
+        res => res)));
+        return result;
+    }
+    /**
+     * @param {?} data
+     * @return {?}
+     */
+    signup(data) {
+        /** @type {?} */
+        const httpOptions = {
+            headers: new HttpHeaders({
+                'Content-Type': 'application/json'
+            })
+        };
+        /** @type {?} */
+        var result = this._http.post(this.serverUrl + this.addendpointUrl, data, httpOptions).pipe(map((/**
          * @param {?} res
          * @return {?}
          */
@@ -1216,6 +1235,20 @@ class SignUpComponent {
         }, {
             validator: matchingPasswords('password', 'confirmpassword')
         });
+        /** @type {?} */
+        let endpoint = 'gettemptoken';
+        this.http.get(this.serverUrlValue + endpoint).subscribe((/**
+         * @param {?} res
+         * @return {?}
+         */
+        res => {
+            /** @type {?} */
+            let result = {};
+            result = res;
+            if (result.status == "success") {
+                this.cookieService.set('jwttoken', result.token);
+            }
+        }));
         // this.openDialog();
     }
     /**
@@ -1288,21 +1321,7 @@ class SignUpComponent {
         this.apiService.clearaddEndpoint(); //  Clear the endpoint
         // setTimeout(() => {
         this.apiService.setaddEndpoint(this.addEndpointValue.endpoint); //  set the endpoint
-        //  set the endpoint
         // }, 50);
-        /** @type {?} */
-        let endpoint = 'temptoken';
-        this.apiService.getToken(endpoint).subscribe((/**
-         * @param {?} res
-         * @return {?}
-         */
-        (res) => {
-            /** @type {?} */
-            let result = {};
-            result = res;
-            this.cookieService.set('jwttoken', result.token);
-            console.log(res);
-        }));
     }
     /**
      * ****** Sign Up Form Submit start here********
@@ -1325,10 +1344,11 @@ class SignUpComponent {
             /** @type {?} */
             let data = {
                 'data': allData,
-                "source": this.addEndpointValue.source
+                "source": this.addEndpointValue.source,
+                "token": this.cookieService.get('jwttoken')
             };
             console.log(data);
-            this.apiService.addData(data).subscribe((/**
+            this.apiService.signup(data).subscribe((/**
              * @param {?} response
              * @return {?}
              */

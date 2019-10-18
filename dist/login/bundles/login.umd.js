@@ -670,6 +670,28 @@
                  */function (res) { return res; })));
                 return result;
             };
+        /**
+         * @param {?} data
+         * @return {?}
+         */
+        ApiService.prototype.signup = /**
+         * @param {?} data
+         * @return {?}
+         */
+            function (data) {
+                /** @type {?} */
+                var httpOptions = {
+                    headers: new i1.HttpHeaders({
+                        'Content-Type': 'application/json'
+                    })
+                };
+                /** @type {?} */
+                var result = this._http.post(this.serverUrl + this.addendpointUrl, data, httpOptions).pipe(operators.map(( /**
+                 * @param {?} res
+                 * @return {?}
+                 */function (res) { return res; })));
+                return result;
+            };
         ApiService.decorators = [
             { type: i0.Injectable, args: [{
                         providedIn: 'root'
@@ -1065,6 +1087,7 @@
      */
     var SignUpComponent = /** @class */ (function () {
         function SignUpComponent(fb, http, router$$1, dialog$$1, apiService, cookieService) {
+            var _this = this;
             this.fb = fb;
             this.http = http;
             this.router = router$$1;
@@ -1333,6 +1356,19 @@
             }, {
                 validator: matchingPasswords('password', 'confirmpassword')
             });
+            /** @type {?} */
+            var endpoint = 'gettemptoken';
+            this.http.get(this.serverUrlValue + endpoint).subscribe(( /**
+             * @param {?} res
+             * @return {?}
+             */function (res) {
+                /** @type {?} */
+                var result = {};
+                result = res;
+                if (result.status == "success") {
+                    _this.cookieService.set('jwttoken', result.token);
+                }
+            }));
             // this.openDialog();
         }
         Object.defineProperty(SignUpComponent.prototype, "userType", {
@@ -1421,7 +1457,6 @@
          * @return {?}
          */
             function () {
-                var _this = this;
                 this.apiService.clearServerUrl(); //  Clear the server url
                 // setTimeout(() => {
                 this.apiService.setServerUrl(this.serverUrlValue); //  set the server url
@@ -1430,20 +1465,7 @@
                 this.apiService.clearaddEndpoint(); //  Clear the endpoint
                 // setTimeout(() => {
                 this.apiService.setaddEndpoint(this.addEndpointValue.endpoint); //  set the endpoint
-                //  set the endpoint
                 // }, 50);
-                /** @type {?} */
-                var endpoint = 'temptoken';
-                this.apiService.getToken(endpoint).subscribe(( /**
-                 * @param {?} res
-                 * @return {?}
-                 */function (res) {
-                    /** @type {?} */
-                    var result = {};
-                    result = res;
-                    _this.cookieService.set('jwttoken', result.token);
-                    console.log(res);
-                }));
             };
         /********* Sign Up Form Submit start here*********/
         /**
@@ -1472,10 +1494,11 @@
                     /** @type {?} */
                     var data = {
                         'data': allData,
-                        "source": this.addEndpointValue.source
+                        "source": this.addEndpointValue.source,
+                        "token": this.cookieService.get('jwttoken')
                     };
                     console.log(data);
-                    this.apiService.addData(data).subscribe(( /**
+                    this.apiService.signup(data).subscribe(( /**
                      * @param {?} response
                      * @return {?}
                      */function (response) {
