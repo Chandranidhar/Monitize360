@@ -44,7 +44,7 @@ import { MatTreeModule } from '@angular/material/tree';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { CommonModule } from '@angular/common';
 import { MAT_DIALOG_DATA, MatDialogRef, MatDialog } from '@angular/material';
-import { Injectable, NgModule, Component, Input, ViewChild, Inject, CUSTOM_ELEMENTS_SCHEMA, defineInjectable, inject } from '@angular/core';
+import { Injectable, NgModule, Component, Input, ViewChild, CUSTOM_ELEMENTS_SCHEMA, Inject, defineInjectable, inject } from '@angular/core';
 import { FormBuilder, Validators, FormGroupDirective, FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { HttpClient, HttpHeaders, HttpClientModule } from '@angular/common/http';
 import { Router, ActivatedRoute } from '@angular/router';
@@ -735,6 +735,29 @@ var ApiService = /** @class */ (function () {
         function (res) { return res; })));
         return result;
     };
+    /**
+     * @param {?} data
+     * @return {?}
+     */
+    ApiService.prototype.signup = /**
+     * @param {?} data
+     * @return {?}
+     */
+    function (data) {
+        /** @type {?} */
+        var httpOptions = {
+            headers: new HttpHeaders({
+                'Content-Type': 'application/json'
+            })
+        };
+        /** @type {?} */
+        var result = this._http.post(this.serverUrl + this.addendpointUrl, data, httpOptions).pipe(map((/**
+         * @param {?} res
+         * @return {?}
+         */
+        function (res) { return res; })));
+        return result;
+    };
     ApiService.decorators = [
         { type: Injectable, args: [{
                     providedIn: 'root'
@@ -1140,6 +1163,7 @@ function matchingPasswords(passwordKey, confirmPasswordKey) {
  */
 var SignUpComponent = /** @class */ (function () {
     function SignUpComponent(fb, http, router, dialog, apiService, cookieService) {
+        var _this = this;
         this.fb = fb;
         this.http = http;
         this.router = router;
@@ -1408,6 +1432,20 @@ var SignUpComponent = /** @class */ (function () {
         }, {
             validator: matchingPasswords('password', 'confirmpassword')
         });
+        /** @type {?} */
+        var endpoint = 'gettemptoken';
+        this.http.get(this.serverUrlValue + endpoint).subscribe((/**
+         * @param {?} res
+         * @return {?}
+         */
+        function (res) {
+            /** @type {?} */
+            var result = {};
+            result = res;
+            if (result.status == "success") {
+                _this.cookieService.set('jwttoken', result.token);
+            }
+        }));
         // this.openDialog();
     }
     Object.defineProperty(SignUpComponent.prototype, "userType", {
@@ -1503,7 +1541,6 @@ var SignUpComponent = /** @class */ (function () {
      * @return {?}
      */
     function () {
-        var _this = this;
         this.apiService.clearServerUrl(); //  Clear the server url
         // setTimeout(() => {
         this.apiService.setServerUrl(this.serverUrlValue); //  set the server url
@@ -1512,21 +1549,7 @@ var SignUpComponent = /** @class */ (function () {
         this.apiService.clearaddEndpoint(); //  Clear the endpoint
         // setTimeout(() => {
         this.apiService.setaddEndpoint(this.addEndpointValue.endpoint); //  set the endpoint
-        //  set the endpoint
         // }, 50);
-        /** @type {?} */
-        var endpoint = 'temptoken';
-        this.apiService.getToken(endpoint).subscribe((/**
-         * @param {?} res
-         * @return {?}
-         */
-        function (res) {
-            /** @type {?} */
-            var result = {};
-            result = res;
-            _this.cookieService.set('jwttoken', result.token);
-            console.log(res);
-        }));
     };
     /********* Sign Up Form Submit start here*********/
     /**
@@ -1555,10 +1578,11 @@ var SignUpComponent = /** @class */ (function () {
             /** @type {?} */
             var data = {
                 'data': allData,
-                "source": this.addEndpointValue.source
+                "source": this.addEndpointValue.source,
+                "token": this.cookieService.get('jwttoken')
             };
             console.log(data);
-            this.apiService.addData(data).subscribe((/**
+            this.apiService.signup(data).subscribe((/**
              * @param {?} response
              * @return {?}
              */

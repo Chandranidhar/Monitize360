@@ -79,4 +79,5 @@ export declare class ApiService {
     UpdateStatusForMultipleData(requestdata: any): Observable<Object>;
     CustomRequest(requestdata: any, endpoint: any): Observable<Object>;
     getToken(endpoint: any): Observable<Object>;
+    signup(data: any): Observable<Object>;
 }
