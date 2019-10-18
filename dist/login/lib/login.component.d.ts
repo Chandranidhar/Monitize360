@@ -19,10 +19,14 @@ export declare class LoginComponent implements OnInit {
     routerStatusValue: any;
     endpointValue: any;
     logoValue: any;
+    cookieSetValue: any;
+    buttonNameValue: any;
     fromTitle: any;
     logo: any;
+    buttonName: any;
     fullUrl: any;
     endpoint: any;
+    cookieSet: any;
     signUpRouteingUrl: any;
     forgetRouteingUrl: any;
     routerStatus: any;
@@ -35,4 +39,5 @@ export declare class LoginComponent implements OnInit {
     inputUntouched(val: any): void;
     forgetpassword(): void;
     signup(): void;
+    customFunction(link: any): void;
 }

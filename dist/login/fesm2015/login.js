@@ -619,6 +619,8 @@ class LoginComponent {
         this.forgetRouteingUrlValue = '';
         this.routerStatusValue = '';
         this.logoValue = '';
+        this.cookieSetValue = '';
+        this.buttonNameValue = '';
         this.project_name = '';
         this.loginForm = this.fb.group({
             email: ['', Validators.compose([Validators.required, Validators.pattern(/^\s*[\w\-\+_]+(\.[\w\-\+_]+)*\@[\w\-\+_]+\.[\w\-\+_]+(\.[\w\-\+_]+)*\s*$/)])],
@@ -641,6 +643,14 @@ class LoginComponent {
         this.logoValue = logoVal;
     }
     /**
+     * @param {?} buttonNameVal
+     * @return {?}
+     */
+    set buttonName(buttonNameVal) {
+        this.buttonNameValue = (buttonNameVal) || '<no name set>';
+        this.buttonNameValue = buttonNameVal;
+    }
+    /**
      * @param {?} fullUrlVal
      * @return {?}
      */
@@ -656,12 +666,24 @@ class LoginComponent {
         this.endpointValue = endpointVal;
     }
     /**
+     * @param {?} v
+     * @return {?}
+     */
+    set cookieSet(v) {
+        this.cookieSetValue = v;
+        // console.log(this.cookieSetValue.cookie);
+        // for (const key in this.cookieSetValue.cookie) {
+        //   console.log(this.cookieSetValue.cookie[key]);
+        // }
+    }
+    /**
      * @param {?} routeingUrlval
      * @return {?}
      */
     set signUpRouteingUrl(routeingUrlval) {
         this.signUpRouteingUrlValue = (routeingUrlval) || '<no name set>';
         this.signUpRouteingUrlValue = routeingUrlval;
+        console.log(this.signUpRouteingUrlValue);
     }
     /**
      * @param {?} routeingUrlval
@@ -670,6 +692,7 @@ class LoginComponent {
     set forgetRouteingUrl(routeingUrlval) {
         this.forgetRouteingUrlValue = (routeingUrlval) || '<no name set>';
         this.forgetRouteingUrlValue = routeingUrlval;
+        console.log(this.forgetRouteingUrlValue);
     }
     /**
      * @param {?} routerStatusval
@@ -678,8 +701,8 @@ class LoginComponent {
     set routerStatus(routerStatusval) {
         this.routerStatusValue = (routerStatusval) || '<no name set>';
         this.routerStatusValue = routerStatusval;
-        console.log(this.routerStatusValue);
-        console.log(this.routerStatusValue.data.length);
+        // console.log(this.routerStatusValue);
+        // console.log(this.routerStatusValue.data.length);
     }
     /**
      * @return {?}
@@ -721,21 +744,30 @@ class LoginComponent {
              * @return {?}
              */
             (response) => {
-                //console.log(response);
+                // console.log(response);
                 /** @type {?} */
                 let result = {};
                 result = response;
                 if (result.status == "success") {
-                    this.cookieService.set('userdetails', JSON.stringify(result.item));
+                    this.cookieService.set('user_details', JSON.stringify(result.item[0]));
                     this.cookieService.set('jwttoken', result.token);
+                    setTimeout((/**
+                     * @return {?}
+                     */
+                    () => {
+                        // console.log(this.cookieService.getAll());
+                    }), 1000);
+                    // console.log('result')
+                    // console.log(result.item[0].type)
                     for (const key in this.routerStatusValue.data) {
-                        //console.log(this.routerStatusValue.data[key].type);
-                        if (result.type === this.routerStatusValue.data[key].type) {
+                        // console.log(this.routerStatusValue.data[key].type);
+                        if (result.item[0].type === this.routerStatusValue.data[key].type) {
                             this.router.navigateByUrl('/' + this.routerStatusValue.data[key].routerNav); // navigate to dashboard url 
                         }
                     }
                     // this is use for reset the from
                     this.formDirective.resetForm();
+                    this.message = '';
                 }
                 else {
                     // display error message on html
@@ -756,20 +788,27 @@ class LoginComponent {
      * @return {?}
      */
     forgetpassword() {
-        this.router.navigateByUrl('/' + this.forgetRouteingUrlValue);
+        this.router.navigateByUrl('/' + this.forgetRouteingUrlValue.path);
     }
     // This is use for navigate this component to sign-Up component 
     /**
      * @return {?}
      */
     signup() {
-        this.router.navigateByUrl('/' + this.signUpRouteingUrlValue);
+        this.router.navigateByUrl('/' + this.signUpRouteingUrlValue.path);
+    }
+    /**
+     * @param {?} link
+     * @return {?}
+     */
+    customFunction(link) {
+        this.router.navigateByUrl('/' + link);
     }
 }
 LoginComponent.decorators = [
     { type: Component, args: [{
                 selector: 'lib-login',
-                template: "<div class=\"main-div\">\r\n\r\n    <mat-card class=\"from\">\r\n            <span class=\"logowrapper\" *ngIf=\"logoValue != ''\" >\r\n                    <img  [src]=\"logoValue\">\r\n                </span>\r\n\r\n        <h2 *ngIf=\"fromTitleValue != ''\"> {{fromTitleValue}}</h2>\r\n\r\n        <form class=\"example-container\" [formGroup]=\"loginForm\" (ngSubmit)=\"loginFormSubmit()\" novalidate>\r\n<mat-error class=\"error\" *ngIf=\"message !=''\">{{message}}</mat-error>\r\n\r\n            <mat-form-field>\r\n                <input matInput type=\"text\" placeholder=\"Username\" formControlName=\"email\" (blur)=\"inputUntouched('email')\">\r\n                <mat-error\r\n                    *ngIf=\"!loginForm.controls['email'].valid && loginForm.controls['email'].errors.required && loginForm.controls['email'].touched\">\r\n                    email field can not be blank</mat-error>\r\n            </mat-form-field>\r\n\r\n\r\n            <mat-form-field>\r\n                <input matInput placeholder=\"Password\" type=\"password\" formControlName=\"password\" (blur)=\"inputUntouched('password')\">\r\n                <mat-error\r\n                    *ngIf=\"!loginForm.controls['password'].valid && loginForm.controls['password'].errors.required && loginForm.controls['password'].touched\">\r\n                    Password field can not be blank</mat-error>\r\n            </mat-form-field>\r\n\r\n\r\n            <button mat-raised-button color=\"primary\">Login</button>\r\n            <span class=\"signupfooter\">\r\n                <a (click)=\"forgetpassword()\">Forgot password</a>\r\n                <a (click)=\"signup()\">Sign Up</a>\r\n            </span>\r\n        </form>\r\n\r\n    </mat-card>\r\n\r\n</div>",
+                template: "<div class=\"main-div\">\r\n\r\n    <mat-card class=\"from\">\r\n            <span class=\"logowrapper\" *ngIf=\"logoValue != ''\" >\r\n                    <img  [src]=\"logoValue\">\r\n                </span>\r\n\r\n        <h2 *ngIf=\"fromTitleValue != ''\"> {{fromTitleValue}}</h2>\r\n\r\n        <form class=\"example-container\" [formGroup]=\"loginForm\" (ngSubmit)=\"loginFormSubmit()\" novalidate>\r\n<mat-error class=\"error\" *ngIf=\"message !=''\">{{message}}</mat-error>\r\n\r\n            <mat-form-field>\r\n                <input matInput type=\"text\" placeholder=\"Email\" formControlName=\"email\" (blur)=\"inputUntouched('email')\">\r\n                <mat-error\r\n                    *ngIf=\"!loginForm.controls['email'].valid && loginForm.controls['email'].errors.required && loginForm.controls['email'].touched\">\r\n                    Email field can not be blank</mat-error>\r\n            </mat-form-field>\r\n\r\n\r\n            <mat-form-field>\r\n                <input matInput placeholder=\"Password\" type=\"password\" formControlName=\"password\" (blur)=\"inputUntouched('password')\">\r\n                <mat-error\r\n                    *ngIf=\"!loginForm.controls['password'].valid && loginForm.controls['password'].errors.required && loginForm.controls['password'].touched\">\r\n                    Password field can not be blank</mat-error>\r\n            </mat-form-field>\r\n\r\n\r\n   \r\n            <button mat-raised-button *ngIf=\"buttonNameValue != ''\" color=\"primary\">{{buttonNameValue}}</button>\r\n            <button mat-raised-button *ngIf=\"buttonNameValue == ''\" color=\"primary\">Login</button>\r\n            \r\n            \r\n            \r\n            <span class=\"signupfooter\">\r\n  <a *ngIf=\"signUpRouteingUrlValue.buttonName !='' && signUpRouteingUrlValue.customLink =='' && signUpRouteingUrlValue.customURl =='' \" (click)=\"signup()\">{{signUpRouteingUrlValue.buttonName}}</a>\r\n\r\n                <a *ngIf=\"signUpRouteingUrlValue.buttonName !='' && signUpRouteingUrlValue.customLink !='' && signUpRouteingUrlValue.path =='' \" (click)=\"customFunction(signUpRouteingUrlValue.customLink)\">{{signUpRouteingUrlValue.buttonName}}</a>\r\n\r\n<a *ngIf=\"signUpRouteingUrlValue.customURl !='' && signUpRouteingUrlValue.buttonName !='' && signUpRouteingUrlValue.customLink ==''  && signUpRouteingUrlValue.path ==''\" [attr.href]=\"signUpRouteingUrlValue.customURl\">{{signUpRouteingUrlValue.buttonName}}</a>\r\n\r\n                <a *ngIf=\"signUpRouteingUrlValue.buttonName =='' && signUpRouteingUrlValue.customLink ==''\" (click)=\"signup()\">Sign Up</a>\r\n\r\n                    <a *ngIf=\"forgetRouteingUrlValue.buttonName !='' && forgetRouteingUrlValue.customLink =='' && forgetRouteingUrlValue.customURl ==''\" (click)=\"forgetpassword()\">{{forgetRouteingUrlValue.buttonName}}</a>\r\n\r\n                <a *ngIf=\"forgetRouteingUrlValue.buttonName !='' && forgetRouteingUrlValue.customLink !='' && forgetRouteingUrlValue.path =='' \" (click)=\"customFunction(forgetRouteingUrlValue.customLink)\">{{forgetRouteingUrlValue.buttonName}}</a>\r\n\r\n                <a *ngIf=\"forgetRouteingUrlValue.customURl !='' && forgetRouteingUrlValue.customLink =='' && forgetRouteingUrlValue.path ==''\" [href]=\"forgetRouteingUrlValue.customURl\">{{forgetRouteingUrlValue.buttonName}}</a>\r\n\r\n\r\n                <a *ngIf=\"forgetRouteingUrlValue.buttonName =='' && forgetRouteingUrlValue.customLink ==''\" (click)=\"forgetpassword()\">Forget Password</a> \r\n\r\n            </span>\r\n        </form>\r\n\r\n    </mat-card>\r\n\r\n</div>",
                 styles: [".example-container{display:flex;flex-direction:column}.example-container>*{width:100%}.from{width:30%;margin:0 auto}.from h2{text-align:center;background-color:#00f;color:#fff;padding:15px}.from a{padding-right:30px}.main-div{height:100vh;display:flex;justify-content:center;align-items:center}.signupfooter{margin-top:12px;display:flex;justify-content:space-between;align-items:center}.signupfooter a{cursor:pointer}.error{text-align:center}.logowrapper{margin:0 auto;display:block;text-align:center}"]
             }] }
 ];
@@ -785,8 +824,10 @@ LoginComponent.propDecorators = {
     formDirective: [{ type: ViewChild, args: [FormGroupDirective,] }],
     fromTitle: [{ type: Input }],
     logo: [{ type: Input }],
+    buttonName: [{ type: Input }],
     fullUrl: [{ type: Input }],
     endpoint: [{ type: Input }],
+    cookieSet: [{ type: Input }],
     signUpRouteingUrl: [{ type: Input }],
     forgetRouteingUrl: [{ type: Input }],
     routerStatus: [{ type: Input }]

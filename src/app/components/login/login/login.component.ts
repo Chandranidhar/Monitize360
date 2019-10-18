@@ -12,24 +12,23 @@ export class LoginComponent implements OnInit {
    
   public endpoint: any = "login";
   public fullUrl: any = this.apiService.api_url; // server url
-  public signUpRouteingUrl: any = '/sign-up';
-  public forgetRouteingUrl: any = '/forget';
   public routerStatus: any;
-  // public cookieSet: any = {
-  //   "cookie": [
-  //     {
-  //       "type": "token",
-  //       "name": "jwtToken"
-  //     },
-  //     {
-  //       "type": "email",
-  //       "name": "Username"
-  //     },
-  //     {
-  //       "type": "_id",
-  //       "name": "_id"
-  //     }]
-  // };
+  public buttonName:any= 'Login';
+  public signUpRouteingUrl: any = { 
+    // "path":"sign-up",
+    "path":"sign-up",
+    "buttonName":"sign-up",
+    "customLink":"",
+    "customURl":""
+  };
+
+  public forgetRouteingUrl: any = {
+    // "path":"forget-password",
+    "path":"forget",
+    "buttonName":"forget-password",
+    "customLink":"",
+    "customURl":""
+  };
   constructor(public apiService: ApiService,public cook:CookieService) {
     this.routerStatus = {           // this is use for if login succcess then navigate which page 
       "data": [
@@ -39,7 +38,7 @@ export class LoginComponent implements OnInit {
         },
         {
           "type": "user",
-          "routerNav": "user-dashbord"
+          "routerNav": "user-dashboard"
         },
         {
           "type": "model",
@@ -51,7 +50,7 @@ export class LoginComponent implements OnInit {
   }
 
   ngOnInit() {
-    this.cook.set('jwttoken',this.token);
+    
   }
 
 }

@@ -28,8 +28,7 @@ import { ListingModule } from 'listing-angular7';
 import { NgxUploaderModule } from 'ngx-uploader';
 import { Resolveservice } from './services/resolve-service';
 
-import { AddadminComponent } from './components/addadmin/addadmin.component';
-import {ModaleComponent} from './components/addadmin/addadmin.component';
+import {AddadminComponent, ModaleComponent} from './components/addadmin/addadmin.component';
 
 @NgModule({
   declarations: [
@@ -44,13 +43,9 @@ import {ModaleComponent} from './components/addadmin/addadmin.component';
     EditprofileComponent,
     commonModalComponent,
     SupportComponent,
-<<<<<<< HEAD
     AddadminComponent,
-    ModaleComponent
-=======
+    ModaleComponent,
     UserDashboardComponent,
-    AddadminComponent
->>>>>>> e9b1a62a262d04d38e10cabd3e2cd999d6ced75c
   ],
   imports: [
     BrowserModule.withServerTransition({ appId: 'serverApp' }),

@@ -23,7 +23,7 @@ export class ApiService {
                 // public jwtHelper: JwtHelperService,
                 // private loggedinService: LoggedinService
     ) {
-        this.jwttoken=this.cookieService.get('jwtToken');
+        this.jwttoken=this.cookieService.get('jwttoken');
     }
 
 
