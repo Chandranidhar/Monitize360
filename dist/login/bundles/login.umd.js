@@ -648,6 +648,28 @@
                  */function (res) { return res; })));
                 return result;
             };
+        /**
+         * @param {?} endpoint
+         * @return {?}
+         */
+        ApiService.prototype.getToken = /**
+         * @param {?} endpoint
+         * @return {?}
+         */
+            function (endpoint) {
+                /** @type {?} */
+                var httpOptions = {
+                    headers: new i1.HttpHeaders({
+                        'Content-Type': 'application/json'
+                    })
+                };
+                /** @type {?} */
+                var result = this._http.post(this.serverUrl + endpoint, httpOptions).pipe(operators.map(( /**
+                 * @param {?} res
+                 * @return {?}
+                 */function (res) { return res; })));
+                return result;
+            };
         ApiService.decorators = [
             { type: i0.Injectable, args: [{
                         providedIn: 'root'
@@ -1042,12 +1064,13 @@
      * @suppress {checkTypes,constantProperty,extraRequire,missingOverride,missingReturn,unusedPrivateMembers,uselessCode} checked by tsc
      */
     var SignUpComponent = /** @class */ (function () {
-        function SignUpComponent(fb, http, router$$1, dialog$$1, apiService) {
+        function SignUpComponent(fb, http, router$$1, dialog$$1, apiService, cookieService) {
             this.fb = fb;
             this.http = http;
             this.router = router$$1;
             this.dialog = dialog$$1;
             this.apiService = apiService;
+            this.cookieService = cookieService;
             this.message = '';
             this.state_usss = [
                 {
@@ -1305,7 +1328,8 @@
                 state: [null, forms.Validators.required],
                 companyname: [null],
                 designation: [null],
-                companywebsite: [null]
+                companywebsite: [null],
+                status: 1
             }, {
                 validator: matchingPasswords('password', 'confirmpassword')
             });
@@ -1399,18 +1423,27 @@
             function () {
                 var _this = this;
                 this.apiService.clearServerUrl(); //  Clear the server url
-                setTimeout(( /**
-                 * @return {?}
-                 */function () {
-                    _this.apiService.setServerUrl(_this.serverUrlValue); //  set the server url
-                }), 50);
+                // setTimeout(() => {
+                this.apiService.setServerUrl(this.serverUrlValue); //  set the server url
+                // }, 50);
                 // console.log(this.serverURL);
                 this.apiService.clearaddEndpoint(); //  Clear the endpoint
-                setTimeout(( /**
+                // setTimeout(() => {
+                this.apiService.setaddEndpoint(this.addEndpointValue.endpoint); //  set the endpoint
+                //  set the endpoint
+                // }, 50);
+                /** @type {?} */
+                var endpoint = 'temptoken';
+                this.apiService.getToken(endpoint).subscribe(( /**
+                 * @param {?} res
                  * @return {?}
-                 */function () {
-                    _this.apiService.setaddEndpoint(_this.addEndpointValue.endpoint); //  set the endpoint
-                }), 50);
+                 */function (res) {
+                    /** @type {?} */
+                    var result = {};
+                    result = res;
+                    _this.cookieService.set('jwttoken', result.token);
+                    console.log(res);
+                }));
             };
         /********* Sign Up Form Submit start here*********/
         /**
@@ -1541,7 +1574,8 @@
                 { type: i1.HttpClient },
                 { type: router.Router },
                 { type: material.MatDialog },
-                { type: ApiService }
+                { type: ApiService },
+                { type: i2.CookieService }
             ];
         };
         SignUpComponent.propDecorators = {

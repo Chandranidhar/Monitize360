@@ -4,6 +4,7 @@ import { HttpClient } from '@angular/common/http';
 import { Router } from '@angular/router';
 import { MatDialogRef, MatDialog } from '@angular/material';
 import { ApiService } from '../api.service';
+import { CookieService } from 'ngx-cookie-service';
 export interface DialogData {
     animal: string;
     name: string;
@@ -14,6 +15,7 @@ export declare class SignUpComponent implements OnInit {
     router: Router;
     dialog: MatDialog;
     apiService: ApiService;
+    cookieService: CookieService;
     message: any;
     animal: string;
     name: string;
@@ -34,7 +36,7 @@ export declare class SignUpComponent implements OnInit {
     forgetRouteingUrl: any;
     loginRouteingUrl: any;
     signUpForm: FormGroup;
-    constructor(fb: FormBuilder, http: HttpClient, router: Router, dialog: MatDialog, apiService: ApiService);
+    constructor(fb: FormBuilder, http: HttpClient, router: Router, dialog: MatDialog, apiService: ApiService, cookieService: CookieService);
     ngOnInit(): void;
     /********* Sign Up Form Submit start here*********/
     signUpFormSubmit(): void;

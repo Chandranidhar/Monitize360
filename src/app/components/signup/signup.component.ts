@@ -12,8 +12,8 @@ export class SignupComponent implements OnInit {
 
   public forgetRouteingUrl: any = '/forget';
   public loginRouteingUrl: any = '/login';
-  public logo: any = '../../assets/favicon.ico';
-  public modaleLogo: any = '../../assets/favicon.ico';
+  public logo: any = '';
+  public modaleLogo: any = '';
   public formTitle: any = 'Sign Up';
   // public serverUrl: any = 'https://y1qujk78ic.execute-api.us-east-1.amazonaws.com/dev/api/';
   public serverUrl: any = this.apiService.api_url;

@@ -44,7 +44,7 @@ import { MatTreeModule } from '@angular/material/tree';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { CommonModule } from '@angular/common';
 import { MAT_DIALOG_DATA, MatDialogRef, MatDialog } from '@angular/material';
-import { Injectable, NgModule, Component, Input, ViewChild, Inject, CUSTOM_ELEMENTS_SCHEMA, defineInjectable, inject } from '@angular/core';
+import { Injectable, NgModule, Component, Input, ViewChild, CUSTOM_ELEMENTS_SCHEMA, Inject, defineInjectable, inject } from '@angular/core';
 import { FormBuilder, Validators, FormGroupDirective, FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { HttpClient, HttpHeaders, HttpClientModule } from '@angular/common/http';
 import { Router, ActivatedRoute } from '@angular/router';
@@ -580,6 +580,25 @@ class ApiService {
         res => res)));
         return result;
     }
+    /**
+     * @param {?} endpoint
+     * @return {?}
+     */
+    getToken(endpoint) {
+        /** @type {?} */
+        const httpOptions = {
+            headers: new HttpHeaders({
+                'Content-Type': 'application/json'
+            })
+        };
+        /** @type {?} */
+        var result = this._http.post(this.serverUrl + endpoint, httpOptions).pipe(map((/**
+         * @param {?} res
+         * @return {?}
+         */
+        res => res)));
+        return result;
+    }
 }
 ApiService.decorators = [
     { type: Injectable, args: [{
@@ -926,13 +945,15 @@ class SignUpComponent {
      * @param {?} router
      * @param {?} dialog
      * @param {?} apiService
+     * @param {?} cookieService
      */
-    constructor(fb, http, router, dialog, apiService) {
+    constructor(fb, http, router, dialog, apiService, cookieService) {
         this.fb = fb;
         this.http = http;
         this.router = router;
         this.dialog = dialog;
         this.apiService = apiService;
+        this.cookieService = cookieService;
         this.message = '';
         this.state_usss = [
             {
@@ -1190,7 +1211,8 @@ class SignUpComponent {
             state: [null, Validators.required],
             companyname: [null],
             designation: [null],
-            companywebsite: [null]
+            companywebsite: [null],
+            status: 1
         }, {
             validator: matchingPasswords('password', 'confirmpassword')
         });
@@ -1259,20 +1281,28 @@ class SignUpComponent {
      */
     ngOnInit() {
         this.apiService.clearServerUrl(); //  Clear the server url
-        setTimeout((/**
-         * @return {?}
-         */
-        () => {
-            this.apiService.setServerUrl(this.serverUrlValue); //  set the server url
-        }), 50);
+        // setTimeout(() => {
+        this.apiService.setServerUrl(this.serverUrlValue); //  set the server url
+        // }, 50);
         // console.log(this.serverURL);
         this.apiService.clearaddEndpoint(); //  Clear the endpoint
-        setTimeout((/**
+        // setTimeout(() => {
+        this.apiService.setaddEndpoint(this.addEndpointValue.endpoint); //  set the endpoint
+        //  set the endpoint
+        // }, 50);
+        /** @type {?} */
+        let endpoint = 'temptoken';
+        this.apiService.getToken(endpoint).subscribe((/**
+         * @param {?} res
          * @return {?}
          */
-        () => {
-            this.apiService.setaddEndpoint(this.addEndpointValue.endpoint); //  set the endpoint
-        }), 50);
+        (res) => {
+            /** @type {?} */
+            let result = {};
+            result = res;
+            this.cookieService.set('jwttoken', result.token);
+            console.log(res);
+        }));
     }
     /**
      * ****** Sign Up Form Submit start here********
@@ -1379,7 +1409,8 @@ SignUpComponent.ctorParameters = () => [
     { type: HttpClient },
     { type: Router },
     { type: MatDialog },
-    { type: ApiService }
+    { type: ApiService },
+    { type: CookieService }
 ];
 SignUpComponent.propDecorators = {
     formDirective: [{ type: ViewChild, args: [FormGroupDirective,] }],

@@ -712,6 +712,29 @@ var ApiService = /** @class */ (function () {
         function (res) { return res; })));
         return result;
     };
+    /**
+     * @param {?} endpoint
+     * @return {?}
+     */
+    ApiService.prototype.getToken = /**
+     * @param {?} endpoint
+     * @return {?}
+     */
+    function (endpoint) {
+        /** @type {?} */
+        var httpOptions = {
+            headers: new HttpHeaders({
+                'Content-Type': 'application/json'
+            })
+        };
+        /** @type {?} */
+        var result = this._http.post(this.serverUrl + endpoint, httpOptions).pipe(map((/**
+         * @param {?} res
+         * @return {?}
+         */
+        function (res) { return res; })));
+        return result;
+    };
     ApiService.decorators = [
         { type: Injectable, args: [{
                     providedIn: 'root'
@@ -1116,12 +1139,13 @@ function matchingPasswords(passwordKey, confirmPasswordKey) {
  * @suppress {checkTypes,constantProperty,extraRequire,missingOverride,missingReturn,unusedPrivateMembers,uselessCode} checked by tsc
  */
 var SignUpComponent = /** @class */ (function () {
-    function SignUpComponent(fb, http, router, dialog, apiService) {
+    function SignUpComponent(fb, http, router, dialog, apiService, cookieService) {
         this.fb = fb;
         this.http = http;
         this.router = router;
         this.dialog = dialog;
         this.apiService = apiService;
+        this.cookieService = cookieService;
         this.message = '';
         this.state_usss = [
             {
@@ -1379,7 +1403,8 @@ var SignUpComponent = /** @class */ (function () {
             state: [null, Validators.required],
             companyname: [null],
             designation: [null],
-            companywebsite: [null]
+            companywebsite: [null],
+            status: 1
         }, {
             validator: matchingPasswords('password', 'confirmpassword')
         });
@@ -1480,20 +1505,28 @@ var SignUpComponent = /** @class */ (function () {
     function () {
         var _this = this;
         this.apiService.clearServerUrl(); //  Clear the server url
-        setTimeout((/**
-         * @return {?}
-         */
-        function () {
-            _this.apiService.setServerUrl(_this.serverUrlValue); //  set the server url
-        }), 50);
+        // setTimeout(() => {
+        this.apiService.setServerUrl(this.serverUrlValue); //  set the server url
+        // }, 50);
         // console.log(this.serverURL);
         this.apiService.clearaddEndpoint(); //  Clear the endpoint
-        setTimeout((/**
+        // setTimeout(() => {
+        this.apiService.setaddEndpoint(this.addEndpointValue.endpoint); //  set the endpoint
+        //  set the endpoint
+        // }, 50);
+        /** @type {?} */
+        var endpoint = 'temptoken';
+        this.apiService.getToken(endpoint).subscribe((/**
+         * @param {?} res
          * @return {?}
          */
-        function () {
-            _this.apiService.setaddEndpoint(_this.addEndpointValue.endpoint); //  set the endpoint
-        }), 50);
+        function (res) {
+            /** @type {?} */
+            var result = {};
+            result = res;
+            _this.cookieService.set('jwttoken', result.token);
+            console.log(res);
+        }));
     };
     /********* Sign Up Form Submit start here*********/
     /**
@@ -1626,7 +1659,8 @@ var SignUpComponent = /** @class */ (function () {
         { type: HttpClient },
         { type: Router },
         { type: MatDialog },
-        { type: ApiService }
+        { type: ApiService },
+        { type: CookieService }
     ]; };
     SignUpComponent.propDecorators = {
         formDirective: [{ type: ViewChild, args: [FormGroupDirective,] }],
