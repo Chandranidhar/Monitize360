@@ -648,6 +648,28 @@
                  */function (res) { return res; })));
                 return result;
             };
+        /**
+         * @param {?} endpoint
+         * @return {?}
+         */
+        ApiService.prototype.getToken = /**
+         * @param {?} endpoint
+         * @return {?}
+         */
+            function (endpoint) {
+                /** @type {?} */
+                var httpOptions = {
+                    headers: new i1.HttpHeaders({
+                        'Content-Type': 'application/json'
+                    })
+                };
+                /** @type {?} */
+                var result = this._http.post(this.serverUrl + endpoint, httpOptions).pipe(operators.map(( /**
+                 * @param {?} res
+                 * @return {?}
+                 */function (res) { return res; })));
+                return result;
+            };
         ApiService.decorators = [
             { type: i0.Injectable, args: [{
                         providedIn: 'root'
@@ -683,6 +705,8 @@
             this.forgetRouteingUrlValue = '';
             this.routerStatusValue = '';
             this.logoValue = '';
+            this.cookieSetValue = '';
+            this.buttonNameValue = '';
             this.project_name = '';
             this.loginForm = this.fb.group({
                 email: ['', forms.Validators.compose([forms.Validators.required, forms.Validators.pattern(/^\s*[\w\-\+_]+(\.[\w\-\+_]+)*\@[\w\-\+_]+\.[\w\-\+_]+(\.[\w\-\+_]+)*\s*$/)])],
@@ -710,6 +734,17 @@
             enumerable: true,
             configurable: true
         });
+        Object.defineProperty(LoginComponent.prototype, "buttonName", {
+            set: /**
+             * @param {?} buttonNameVal
+             * @return {?}
+             */ function (buttonNameVal) {
+                this.buttonNameValue = (buttonNameVal) || '<no name set>';
+                this.buttonNameValue = buttonNameVal;
+            },
+            enumerable: true,
+            configurable: true
+        });
         Object.defineProperty(LoginComponent.prototype, "fullUrl", {
             set: /**
              * @param {?} fullUrlVal
@@ -731,6 +766,20 @@
             enumerable: true,
             configurable: true
         });
+        Object.defineProperty(LoginComponent.prototype, "cookieSet", {
+            set: /**
+             * @param {?} v
+             * @return {?}
+             */ function (v) {
+                this.cookieSetValue = v;
+                // console.log(this.cookieSetValue.cookie);
+                // for (const key in this.cookieSetValue.cookie) {
+                //   console.log(this.cookieSetValue.cookie[key]);
+                // }
+            },
+            enumerable: true,
+            configurable: true
+        });
         Object.defineProperty(LoginComponent.prototype, "signUpRouteingUrl", {
             set: /**
              * @param {?} routeingUrlval
@@ -738,6 +787,7 @@
              */ function (routeingUrlval) {
                 this.signUpRouteingUrlValue = (routeingUrlval) || '<no name set>';
                 this.signUpRouteingUrlValue = routeingUrlval;
+                console.log(this.signUpRouteingUrlValue);
             },
             enumerable: true,
             configurable: true
@@ -749,6 +799,7 @@
              */ function (routeingUrlval) {
                 this.forgetRouteingUrlValue = (routeingUrlval) || '<no name set>';
                 this.forgetRouteingUrlValue = routeingUrlval;
+                console.log(this.forgetRouteingUrlValue);
             },
             enumerable: true,
             configurable: true
@@ -760,8 +811,8 @@
              */ function (routerStatusval) {
                 this.routerStatusValue = (routerStatusval) || '<no name set>';
                 this.routerStatusValue = routerStatusval;
-                console.log(this.routerStatusValue);
-                console.log(this.routerStatusValue.data.length);
+                // console.log(this.routerStatusValue);
+                // console.log(this.routerStatusValue.data.length);
             },
             enumerable: true,
             configurable: true
@@ -813,21 +864,29 @@
                      * @param {?} response
                      * @return {?}
                      */function (response) {
-                        //console.log(response);
+                        // console.log(response);
                         /** @type {?} */
                         var result = {};
                         result = response;
                         if (result.status == "success") {
-                            _this.cookieService.set('userdetails', JSON.stringify(result.item));
+                            _this.cookieService.set('user_details', JSON.stringify(result.item[0]));
                             _this.cookieService.set('jwttoken', result.token);
+                            setTimeout(( /**
+                             * @return {?}
+                             */function () {
+                                // console.log(this.cookieService.getAll());
+                            }), 1000);
+                            // console.log('result')
+                            // console.log(result.item[0].type)
                             for (var key in _this.routerStatusValue.data) {
-                                //console.log(this.routerStatusValue.data[key].type);
-                                if (result.type === _this.routerStatusValue.data[key].type) {
+                                // console.log(this.routerStatusValue.data[key].type);
+                                if (result.item[0].type === _this.routerStatusValue.data[key].type) {
                                     _this.router.navigateByUrl('/' + _this.routerStatusValue.data[key].routerNav); // navigate to dashboard url 
                                 }
                             }
                             // this is use for reset the from
                             _this.formDirective.resetForm();
+                            _this.message = '';
                         }
                         else {
                             // display error message on html
@@ -858,7 +917,7 @@
              * @return {?}
              */
             function () {
-                this.router.navigateByUrl('/' + this.forgetRouteingUrlValue);
+                this.router.navigateByUrl('/' + this.forgetRouteingUrlValue.path);
             };
         // This is use for navigate this component to sign-Up component 
         // This is use for navigate this component to sign-Up component 
@@ -871,12 +930,23 @@
              * @return {?}
              */
             function () {
-                this.router.navigateByUrl('/' + this.signUpRouteingUrlValue);
+                this.router.navigateByUrl('/' + this.signUpRouteingUrlValue.path);
+            };
+        /**
+         * @param {?} link
+         * @return {?}
+         */
+        LoginComponent.prototype.customFunction = /**
+         * @param {?} link
+         * @return {?}
+         */
+            function (link) {
+                this.router.navigateByUrl('/' + link);
             };
         LoginComponent.decorators = [
             { type: i0.Component, args: [{
                         selector: 'lib-login',
-                        template: "<div class=\"main-div\">\r\n\r\n    <mat-card class=\"from\">\r\n            <span class=\"logowrapper\" *ngIf=\"logoValue != ''\" >\r\n                    <img  [src]=\"logoValue\">\r\n                </span>\r\n\r\n        <h2 *ngIf=\"fromTitleValue != ''\"> {{fromTitleValue}}</h2>\r\n\r\n        <form class=\"example-container\" [formGroup]=\"loginForm\" (ngSubmit)=\"loginFormSubmit()\" novalidate>\r\n<mat-error class=\"error\" *ngIf=\"message !=''\">{{message}}</mat-error>\r\n\r\n            <mat-form-field>\r\n                <input matInput type=\"text\" placeholder=\"Username\" formControlName=\"email\" (blur)=\"inputUntouched('email')\">\r\n                <mat-error\r\n                    *ngIf=\"!loginForm.controls['email'].valid && loginForm.controls['email'].errors.required && loginForm.controls['email'].touched\">\r\n                    email field can not be blank</mat-error>\r\n            </mat-form-field>\r\n\r\n\r\n            <mat-form-field>\r\n                <input matInput placeholder=\"Password\" type=\"password\" formControlName=\"password\" (blur)=\"inputUntouched('password')\">\r\n                <mat-error\r\n                    *ngIf=\"!loginForm.controls['password'].valid && loginForm.controls['password'].errors.required && loginForm.controls['password'].touched\">\r\n                    Password field can not be blank</mat-error>\r\n            </mat-form-field>\r\n\r\n\r\n            <button mat-raised-button color=\"primary\">Login</button>\r\n            <span class=\"signupfooter\">\r\n                <a (click)=\"forgetpassword()\">Forgot password</a>\r\n                <a (click)=\"signup()\">Sign Up</a>\r\n            </span>\r\n        </form>\r\n\r\n    </mat-card>\r\n\r\n</div>",
+                        template: "<div class=\"main-div\">\r\n\r\n    <mat-card class=\"from\">\r\n            <span class=\"logowrapper\" *ngIf=\"logoValue != ''\" >\r\n                    <img  [src]=\"logoValue\">\r\n                </span>\r\n\r\n        <h2 *ngIf=\"fromTitleValue != ''\"> {{fromTitleValue}}</h2>\r\n\r\n        <form class=\"example-container\" [formGroup]=\"loginForm\" (ngSubmit)=\"loginFormSubmit()\" novalidate>\r\n<mat-error class=\"error\" *ngIf=\"message !=''\">{{message}}</mat-error>\r\n\r\n            <mat-form-field>\r\n                <input matInput type=\"text\" placeholder=\"Email\" formControlName=\"email\" (blur)=\"inputUntouched('email')\">\r\n                <mat-error\r\n                    *ngIf=\"!loginForm.controls['email'].valid && loginForm.controls['email'].errors.required && loginForm.controls['email'].touched\">\r\n                    Email field can not be blank</mat-error>\r\n            </mat-form-field>\r\n\r\n\r\n            <mat-form-field>\r\n                <input matInput placeholder=\"Password\" type=\"password\" formControlName=\"password\" (blur)=\"inputUntouched('password')\">\r\n                <mat-error\r\n                    *ngIf=\"!loginForm.controls['password'].valid && loginForm.controls['password'].errors.required && loginForm.controls['password'].touched\">\r\n                    Password field can not be blank</mat-error>\r\n            </mat-form-field>\r\n\r\n\r\n   \r\n            <button mat-raised-button *ngIf=\"buttonNameValue != ''\" color=\"primary\">{{buttonNameValue}}</button>\r\n            <button mat-raised-button *ngIf=\"buttonNameValue == ''\" color=\"primary\">Login</button>\r\n            \r\n            \r\n            \r\n            <span class=\"signupfooter\">\r\n  <a *ngIf=\"signUpRouteingUrlValue.buttonName !='' && signUpRouteingUrlValue.customLink =='' && signUpRouteingUrlValue.customURl =='' \" (click)=\"signup()\">{{signUpRouteingUrlValue.buttonName}}</a>\r\n\r\n                <a *ngIf=\"signUpRouteingUrlValue.buttonName !='' && signUpRouteingUrlValue.customLink !='' && signUpRouteingUrlValue.path =='' \" (click)=\"customFunction(signUpRouteingUrlValue.customLink)\">{{signUpRouteingUrlValue.buttonName}}</a>\r\n\r\n<a *ngIf=\"signUpRouteingUrlValue.customURl !='' && signUpRouteingUrlValue.buttonName !='' && signUpRouteingUrlValue.customLink ==''  && signUpRouteingUrlValue.path ==''\" [attr.href]=\"signUpRouteingUrlValue.customURl\">{{signUpRouteingUrlValue.buttonName}}</a>\r\n\r\n                <a *ngIf=\"signUpRouteingUrlValue.buttonName =='' && signUpRouteingUrlValue.customLink ==''\" (click)=\"signup()\">Sign Up</a>\r\n\r\n                    <a *ngIf=\"forgetRouteingUrlValue.buttonName !='' && forgetRouteingUrlValue.customLink =='' && forgetRouteingUrlValue.customURl ==''\" (click)=\"forgetpassword()\">{{forgetRouteingUrlValue.buttonName}}</a>\r\n\r\n                <a *ngIf=\"forgetRouteingUrlValue.buttonName !='' && forgetRouteingUrlValue.customLink !='' && forgetRouteingUrlValue.path =='' \" (click)=\"customFunction(forgetRouteingUrlValue.customLink)\">{{forgetRouteingUrlValue.buttonName}}</a>\r\n\r\n                <a *ngIf=\"forgetRouteingUrlValue.customURl !='' && forgetRouteingUrlValue.customLink =='' && forgetRouteingUrlValue.path ==''\" [href]=\"forgetRouteingUrlValue.customURl\">{{forgetRouteingUrlValue.buttonName}}</a>\r\n\r\n\r\n                <a *ngIf=\"forgetRouteingUrlValue.buttonName =='' && forgetRouteingUrlValue.customLink ==''\" (click)=\"forgetpassword()\">Forget Password</a> \r\n\r\n            </span>\r\n        </form>\r\n\r\n    </mat-card>\r\n\r\n</div>",
                         styles: [".example-container{display:flex;flex-direction:column}.example-container>*{width:100%}.from{width:30%;margin:0 auto}.from h2{text-align:center;background-color:#00f;color:#fff;padding:15px}.from a{padding-right:30px}.main-div{height:100vh;display:flex;justify-content:center;align-items:center}.signupfooter{margin-top:12px;display:flex;justify-content:space-between;align-items:center}.signupfooter a{cursor:pointer}.error{text-align:center}.logowrapper{margin:0 auto;display:block;text-align:center}"]
                     }] }
         ];
@@ -894,8 +964,10 @@
             formDirective: [{ type: i0.ViewChild, args: [forms.FormGroupDirective,] }],
             fromTitle: [{ type: i0.Input }],
             logo: [{ type: i0.Input }],
+            buttonName: [{ type: i0.Input }],
             fullUrl: [{ type: i0.Input }],
             endpoint: [{ type: i0.Input }],
+            cookieSet: [{ type: i0.Input }],
             signUpRouteingUrl: [{ type: i0.Input }],
             forgetRouteingUrl: [{ type: i0.Input }],
             routerStatus: [{ type: i0.Input }]
@@ -992,12 +1064,13 @@
      * @suppress {checkTypes,constantProperty,extraRequire,missingOverride,missingReturn,unusedPrivateMembers,uselessCode} checked by tsc
      */
     var SignUpComponent = /** @class */ (function () {
-        function SignUpComponent(fb, http, router$$1, dialog$$1, apiService) {
+        function SignUpComponent(fb, http, router$$1, dialog$$1, apiService, cookieService) {
             this.fb = fb;
             this.http = http;
             this.router = router$$1;
             this.dialog = dialog$$1;
             this.apiService = apiService;
+            this.cookieService = cookieService;
             this.message = '';
             this.state_usss = [
                 {
@@ -1255,7 +1328,8 @@
                 state: [null, forms.Validators.required],
                 companyname: [null],
                 designation: [null],
-                companywebsite: [null]
+                companywebsite: [null],
+                status: 1
             }, {
                 validator: matchingPasswords('password', 'confirmpassword')
             });
@@ -1349,18 +1423,27 @@
             function () {
                 var _this = this;
                 this.apiService.clearServerUrl(); //  Clear the server url
-                setTimeout(( /**
-                 * @return {?}
-                 */function () {
-                    _this.apiService.setServerUrl(_this.serverUrlValue); //  set the server url
-                }), 50);
+                // setTimeout(() => {
+                this.apiService.setServerUrl(this.serverUrlValue); //  set the server url
+                // }, 50);
                 // console.log(this.serverURL);
                 this.apiService.clearaddEndpoint(); //  Clear the endpoint
-                setTimeout(( /**
+                // setTimeout(() => {
+                this.apiService.setaddEndpoint(this.addEndpointValue.endpoint); //  set the endpoint
+                //  set the endpoint
+                // }, 50);
+                /** @type {?} */
+                var endpoint = 'temptoken';
+                this.apiService.getToken(endpoint).subscribe(( /**
+                 * @param {?} res
                  * @return {?}
-                 */function () {
-                    _this.apiService.setaddEndpoint(_this.addEndpointValue.endpoint); //  set the endpoint
-                }), 50);
+                 */function (res) {
+                    /** @type {?} */
+                    var result = {};
+                    result = res;
+                    _this.cookieService.set('jwttoken', result.token);
+                    console.log(res);
+                }));
             };
         /********* Sign Up Form Submit start here*********/
         /**
@@ -1491,7 +1574,8 @@
                 { type: i1.HttpClient },
                 { type: router.Router },
                 { type: material.MatDialog },
-                { type: ApiService }
+                { type: ApiService },
+                { type: i2.CookieService }
             ];
         };
         SignUpComponent.propDecorators = {

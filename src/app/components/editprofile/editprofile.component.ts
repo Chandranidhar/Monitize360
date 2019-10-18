@@ -275,23 +275,23 @@ export class EditprofileComponent implements OnInit {
   ngOnInit() {
   }
   genarateupdateform() {
-    let userdetails = this.cook.get('userdetails');
+    let userdetails = this.cook.get('user_details');
     let cookie: any;
     cookie = JSON.parse(userdetails);
-    // console.log(cookie[0].email);
+    console.log(cookie._id);
 
     this.UpdateForm.patchValue({
-      id: cookie[0]._id,
-      email: cookie[0].email,
-      firstname: cookie[0].firstname,
-      lastname: cookie[0].lastname,
-      phone: cookie[0].phone,
-      zip: cookie[0].zip,
-      city: cookie[0].city,
-      state: cookie[0].state,
-      companyname: cookie[0].companyname,
-      designation: cookie[0].designation,
-      companywebsite: cookie[0].companywebsite,
+      id: cookie._id,
+      email: cookie.email,
+      firstname: cookie.firstname,
+      lastname: cookie.lastname,
+      phone: cookie.phone,
+      zip: cookie.zip,
+      city: cookie.city,
+      state: cookie.state,
+      companyname: cookie.companyname,
+      designation: cookie.designation,
+      companywebsite: cookie.companywebsite,
     });
   }
 
@@ -354,12 +354,12 @@ export class commonModalComponent {
   public resetForm: FormGroup;
   constructor(public dialogRef: MatDialogRef<commonModalComponent>, public fbb: FormBuilder, public cook: CookieService, public apiService: ApiService,
     public _snackBar: MatSnackBar) {
-    let userdetails = this.cook.get('userdetails');
+    let userdetails = this.cook.get('user_details');
     let cookie: any;
     cookie = JSON.parse(userdetails);
 
     this.resetForm = this.fbb.group({
-      id: [cookie[0]._id, null],
+      id: [cookie._id, null],
       oldpass: [null, Validators.required],
       newpass: [null, Validators.required],
       conpass: [null, Validators.required],
