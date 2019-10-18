@@ -7,7 +7,7 @@ import { CookieService } from 'ngx-cookie-service';
   styleUrls: ['./login.component.css']
 })
 export class LoginComponent implements OnInit {
-  public token='eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJmb28iOiJiYXIiLCJleHAiOjE1NzEzNzMxNzUsImlhdCI6MTU3MTI4Njc3NX0._sFpeRI9l-mKUcavYQtJ5p6At9xFarqPPzYxilX_4Ho';
+  public token='eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJmb28iOiJiYXIiLCJleHAiOjE1NzE0MDY5OTcsImlhdCI6MTU3MTMyMDU5N30.9w6ZhkRTrqs7ypjkU7rWeTDNdYiT9u2EJdr7eJslYEA';
   public logo: any = '';
   public fromTitle: any = "Login Form";    // This is a From Title 
    

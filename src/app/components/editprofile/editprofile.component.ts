@@ -1,4 +1,4 @@
-import { Component, OnInit,Inject } from '@angular/core';
+import { Component, OnInit, Inject } from '@angular/core';
 import { FormGroup, FormBuilder, Validators, FormGroupDirective } from '@angular/forms';
 import { ApiService } from '../../services/api-service';
 import { Router } from '@angular/router';
@@ -11,7 +11,10 @@ import { MAT_DIALOG_DATA, MatDialogRef, MatDialog } from '@angular/material';
   templateUrl: './editprofile.component.html',
   styleUrls: ['./editprofile.component.css']
 })
+
 export class EditprofileComponent implements OnInit {
+
+  // public msg:any='';
   public UpdateForm: FormGroup;
   public state_usss: any = [
     {
@@ -251,22 +254,22 @@ export class EditprofileComponent implements OnInit {
       "abbreviation": "WY"
     }
   ];
-  constructor(public fb: FormBuilder, public router: Router, public dialog: MatDialog,public apiService: ApiService, public cook: CookieService) {
+  constructor(public fb: FormBuilder, public router: Router, public dialog: MatDialog, public apiService: ApiService, public cook: CookieService) {
     this.UpdateForm = this.fb.group({
       id: [null, null],
-    email: [null, Validators.compose([Validators.required, Validators.pattern(/^\s*[\w\-\+_]+(\.[\w\-\+_]+)*\@[\w\-\+_]+\.[\w\-\+_]+(\.[\w\-\+_]+)*\s*$/)])],
-    firstname: [null, Validators.required],
-    lastname: [null, Validators.required],
-    phone: [null, Validators.required],
-    zip:[null,Validators.required],
-    city:[null,Validators.required],
-    state:[null,Validators.required],
-    companyname:[null],
-    designation:[null],
-    companywebsite:[null]
-  });
-    
-  this.genarateupdateform();
+      email: [null, Validators.compose([Validators.required, Validators.pattern(/^\s*[\w\-\+_]+(\.[\w\-\+_]+)*\@[\w\-\+_]+\.[\w\-\+_]+(\.[\w\-\+_]+)*\s*$/)])],
+      firstname: [null, Validators.required],
+      lastname: [null, Validators.required],
+      phone: [null, Validators.required],
+      zip: [null, Validators.required],
+      city: [null, Validators.required],
+      state: [null, Validators.required],
+      companyname: [null],
+      designation: [null],
+      companywebsite: [null]
+    });
+
+    this.genarateupdateform();
   }
 
   ngOnInit() {
@@ -276,9 +279,9 @@ export class EditprofileComponent implements OnInit {
     let cookie: any;
     cookie = JSON.parse(userdetails);
     // console.log(cookie[0].email);
-    
+
     this.UpdateForm.patchValue({
-      id:cookie[0]._id,
+      id: cookie[0]._id,
       email: cookie[0].email,
       firstname: cookie[0].firstname,
       lastname: cookie[0].lastname,
@@ -310,13 +313,13 @@ export class EditprofileComponent implements OnInit {
       this.UpdateForm.controls[x].markAsTouched();
     }
 
-    if (this.UpdateForm.valid) { 
+    if (this.UpdateForm.valid) {
       console.log(this.UpdateForm.value);
-      let data: any = { 'source': 'user',  'data': this.UpdateForm.value };
+      let data: any = { 'source': 'user', 'data': this.UpdateForm.value };
       this.apiService.postData('addorupdatedata', data).subscribe((data) => {
         console.log(data);
       });
-     }
+    }
 
   }
 
@@ -328,12 +331,12 @@ export class EditprofileComponent implements OnInit {
   openDialog(): void {
     const dialogRef = this.dialog.open(commonModalComponent, {
       width: '250px',
-      
+
     });
 
     dialogRef.afterClosed().subscribe(result => {
       console.log('The dialog was closed');
-      
+
     });
   }
 
@@ -341,38 +344,74 @@ export class EditprofileComponent implements OnInit {
 
 
 
-
+import { MatSnackBar } from '@angular/material/snack-bar';
 @Component({
   selector: 'commonModal',
   templateUrl: '../commonModal/commonModal.html',
 })
 export class commonModalComponent {
-  public resetForm:FormGroup;
-  constructor(public dialogRef: MatDialogRef<commonModalComponent>,  public fbb: FormBuilder,public cook: CookieService,public apiService: ApiService) {
+  public msg: any = '';
+  public resetForm: FormGroup;
+  constructor(public dialogRef: MatDialogRef<commonModalComponent>, public fbb: FormBuilder, public cook: CookieService, public apiService: ApiService,
+    public _snackBar: MatSnackBar) {
     let userdetails = this.cook.get('userdetails');
-        let cookie: any;
-        cookie = JSON.parse(userdetails);
-        
+    let cookie: any;
+    cookie = JSON.parse(userdetails);
+
     this.resetForm = this.fbb.group({
       id: [cookie[0]._id, null],
       oldpass: [null, Validators.required],
       newpass: [null, Validators.required],
       conpass: [null, Validators.required],
+      
+    },{
+      validator: this.machpassword('newpass', 'conpass')
   });
-   }
+  }
+  machpassword(passwordkye: string, confirmpasswordkye: string) {
+    return (group: FormGroup) => {
+      let passwordInput = group.controls[passwordkye],
+        confirmpasswordInput = group.controls[confirmpasswordkye];
+      if (passwordInput.value !== confirmpasswordInput.value) {
+        return confirmpasswordInput.setErrors({ notEquivalent: true });
+      }
+      else {
+        return confirmpasswordInput.setErrors(null);
+      }
+    };
+  }
 
-  resetFormSubmit(){
+  resetFormSubmit() {
     for (let x in this.resetForm.controls) {
       this.resetForm.controls[x].markAsTouched();
     }
-    if(this.resetForm.valid){
-      if(this.resetForm.value.conpass!=null){
+    if (this.resetForm.valid) {
+      console.log(this.resetForm.value);
+      if (this.resetForm.value.conpass != null) {
         delete this.resetForm.value.conpass;
-        delete this.resetForm.value.oldpass;
-        //let data: any = { 'source': 'user',  'data': {"password":this.resetForm.value.password,"id":this.resetForm.value.id} };
-      //   this.apiService.postData('addorupdatedata', data).subscribe((data) => {
-      //     console.log(data);
-      // })
+        let data: any = {
+          "_id": this.resetForm.value.id,
+          "oldPassword": this.resetForm.value.oldpass,
+          "newPassword": this.resetForm.value.newpass
+        };
+        this.apiService.postDatawithoutToken('changepassword', data).subscribe((data) => {
+          let d: any = data;
+          if (d.Status == "true") {
+            this._snackBar.open(d.message, '', {
+              duration: 3000
+            });
+            setTimeout(()=>{
+              this.dialogRef.close();
+            },3000);
+          }
+          else {
+            this._snackBar.open(d.message, '', {
+              duration: 3000
+            });
+           
+          }
+
+        })
       }
     }
   }
