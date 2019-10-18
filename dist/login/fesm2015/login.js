@@ -44,7 +44,7 @@ import { MatTreeModule } from '@angular/material/tree';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { CommonModule } from '@angular/common';
 import { MAT_DIALOG_DATA, MatDialogRef, MatDialog } from '@angular/material';
-import { Injectable, NgModule, Component, Input, ViewChild, Inject, CUSTOM_ELEMENTS_SCHEMA, defineInjectable, inject } from '@angular/core';
+import { Injectable, NgModule, Component, Input, ViewChild, CUSTOM_ELEMENTS_SCHEMA, Inject, defineInjectable, inject } from '@angular/core';
 import { FormBuilder, Validators, FormGroupDirective, FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { HttpClient, HttpHeaders, HttpClientModule } from '@angular/common/http';
 import { Router, ActivatedRoute } from '@angular/router';
@@ -1235,20 +1235,6 @@ class SignUpComponent {
         }, {
             validator: matchingPasswords('password', 'confirmpassword')
         });
-        /** @type {?} */
-        let endpoint = 'gettemptoken';
-        this.http.get(this.serverUrlValue + endpoint).subscribe((/**
-         * @param {?} res
-         * @return {?}
-         */
-        res => {
-            /** @type {?} */
-            let result = {};
-            result = res;
-            if (result.status == "success") {
-                this.cookieService.set('jwttoken', result.token);
-            }
-        }));
         // this.openDialog();
     }
     /**
@@ -1321,7 +1307,22 @@ class SignUpComponent {
         this.apiService.clearaddEndpoint(); //  Clear the endpoint
         // setTimeout(() => {
         this.apiService.setaddEndpoint(this.addEndpointValue.endpoint); //  set the endpoint
+        //  set the endpoint
         // }, 50);
+        /** @type {?} */
+        let endpoint = 'gettemptoken';
+        this.http.get(this.serverUrlValue + endpoint).subscribe((/**
+         * @param {?} res
+         * @return {?}
+         */
+        res => {
+            /** @type {?} */
+            let result = {};
+            result = res;
+            if (result.status == "success") {
+                this.cookieService.set('jwttoken', result.token);
+            }
+        }));
     }
     /**
      * ****** Sign Up Form Submit start here********
