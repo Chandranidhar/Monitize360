@@ -22,11 +22,13 @@ import { AdmindashboardComponent } from './components/admindashboard/admindashbo
 import { AdminheaderComponent } from './components/adminheader/adminheader.component';
 import { EditprofileComponent,commonModalComponent } from './components/editprofile/editprofile.component';
 import { SupportComponent } from './components/support/support.component';
+
 import { UserDashboardComponent } from '../app/components/user-dashboard/user-dashboard.component';
 import { ListingModule } from 'listing-angular7';
 import { NgxUploaderModule } from 'ngx-uploader';
 import { Resolveservice } from './services/resolve-service';
 
+import { AddadminComponent } from './components/addadmin/addadmin.component';
 
 @NgModule({
   declarations: [
@@ -41,7 +43,8 @@ import { Resolveservice } from './services/resolve-service';
     EditprofileComponent,
     commonModalComponent,
     SupportComponent,
-    UserDashboardComponent
+    UserDashboardComponent,
+    AddadminComponent
   ],
   imports: [
     BrowserModule.withServerTransition({ appId: 'serverApp' }),

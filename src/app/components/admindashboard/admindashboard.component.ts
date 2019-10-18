@@ -1,4 +1,6 @@
 import { Component, OnInit } from '@angular/core';
+import { AddadminComponent } from '../addadmin/addadmin.component';
+
 
 @Component({
   selector: 'app-admindashboard',
@@ -6,10 +8,14 @@ import { Component, OnInit } from '@angular/core';
   styleUrls: ['./admindashboard.component.css']
 })
 export class AdmindashboardComponent implements OnInit {
+  
+  
 
-  constructor() { }
+  constructor() { 
+  }
 
   ngOnInit() {
   }
 
+  
 }

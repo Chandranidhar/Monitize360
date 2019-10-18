@@ -11,6 +11,7 @@ import { SupportComponent } from './components/support/support.component';
 import { UserDashboardComponent } from '../app/components/user-dashboard/user-dashboard.component';
 import { AuthGuard } from './services/auth.guard';
 import { Resolveservice } from './services/resolve-service';
+import { AddadminComponent } from './components/addadmin/addadmin.component';
 
 const routes: Routes = [
   {path: '', component: LoginComponent},
@@ -23,7 +24,8 @@ const routes: Routes = [
   {path:'editprofile',component:EditprofileComponent},
   {path:'support', component:SupportComponent},
   // {path:'user-dashboard', component:UserDashboardComponent},
-  { path: "user-dashboard", component: UserDashboardComponent, resolve: {results: Resolveservice}, data: {source: 'user'}},
+  { path: "user-dashboard", component: UserDashboardComponent, resolve: {results: Resolveservice}, data: {source: 'user'}, canActivate:[AuthGuard]},
+  {path:'addadmin',component:AddadminComponent}
 ];
 
 @NgModule({
