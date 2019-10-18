@@ -14,12 +14,12 @@ export class SupportComponent implements OnInit {
     
   }
   supportFormgenarate(){
-    let userdetails = this.cook.get('userdetails');
+    let userdetails = this.cook.get('user_details');
     let cookie: any;
     cookie = JSON.parse(userdetails);
      
     this.SupportForm = this.fb.group({
-      clientemail:[cookie[0].email,null],
+      clientemail:[cookie.email,null],
       subject:[null,[Validators.required]],
       description:[null,[Validators.required]]
     });

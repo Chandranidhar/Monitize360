@@ -19,7 +19,7 @@ const routes: Routes = [
   {path:'forget', component:ForgetComponent},
   {path:'sign-up', component:SignupComponent},
   {path:'resetpassword', component:ResetpasswordComponent},
-  {path:'clientdashboard', component:ClientdashboardComponent},
+  {path:'clientdashboard', component:ClientdashboardComponent,resolve: {results: Resolveservice}, data: {source: 'user'}},
   {path:'admindashboard', component:AdmindashboardComponent},
   {path:'editprofile',component:EditprofileComponent},
   {path:'support', component:SupportComponent},

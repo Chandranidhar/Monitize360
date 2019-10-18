@@ -1,9 +1,19 @@
 <app-adminheader>
 
-
-
-<p>WElcome</p>
-    
+<p>User liste testing</p>
+<lib-listing *ngIf="pendingmodelapplicationarray!=null && pendingmodelapplicationarray.length>0" 
+        [datasource]="pendingmodelapplicationarray"
+        [skip]="pendingmodelapplicationarray_skip" 
+        [modify_header_array]="modify_header_array" 
+        [apiurl]="apiService.api_url" 
+        [deleteendpoint]="deleteendpoint" 
+        [updateendpoint]="updateendpoint" 
+        [jwttoken]="apiService.jwttoken" 
+        [editroute]="editroute"
+        [sourcedata]="tablename"  
+        [statusarr]="statusarray" 
+        [detail_skip_array]="pendingmodelapplicationarray_detail_skip" 
+        [searchendpoint]="searchendpoint"></lib-listing>
       
 </app-adminheader>
 
