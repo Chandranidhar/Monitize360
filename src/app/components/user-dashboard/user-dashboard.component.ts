@@ -27,6 +27,7 @@ contactUsAllDataHeaderSkipValue: any = [];
     // deleteendpoint is use for data delete endpoint
     deleteendpoint = 'deletesingledata';
 
+    
     // this is a database collection name
     tablename = 'user';
 

@@ -9,7 +9,7 @@ import { CookieService } from 'ngx-cookie-service';
 export class LoginComponent implements OnInit {
   public logo: any = '';
   public fromTitle: any = "Login";    // This is a From Title 
-   
+   public token:any;
   public endpoint: any = "login";
   public fullUrl: any = this.apiService.api_url; // server url
   public signUpRouteingUrl: any = '/sign-up';

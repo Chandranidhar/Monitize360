@@ -69,7 +69,7 @@ export class AddadminComponent implements OnInit {
      
       let data:any={};
       data={
-        "source": "usermanagement",
+        "source": "user",
         "data": this.addadminform.value,
         "token": this.cookieservice.get('jwttoken')
     };

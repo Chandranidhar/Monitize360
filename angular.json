@@ -54,11 +54,7 @@
                 }
               ]
             },
-<<<<<<< HEAD
-            "development":{
-=======
             "development": { 
->>>>>>> e9b1a62a262d04d38e10cabd3e2cd999d6ced75c
               "fileReplacements": [
                 {
                   "replace": "src/environments/environment.ts",
