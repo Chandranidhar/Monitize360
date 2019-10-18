@@ -46,10 +46,6 @@ import {AddadminComponent, ModaleComponent} from './components/addadmin/addadmin
     AddadminComponent,
     ModaleComponent,
     UserDashboardComponent,
-<<<<<<< HEAD
-    AddadminComponent
-=======
->>>>>>> a7acbff79b442d1fd55f63ea80ad78295a8b8d7f
   ],
   imports: [
     BrowserModule.withServerTransition({ appId: 'serverApp' }),
