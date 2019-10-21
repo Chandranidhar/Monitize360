@@ -21,7 +21,7 @@ const routes: Routes = [
   {path:'resetpassword', component:ResetpasswordComponent},
 
   {path:'clientdashboard', component:ClientdashboardComponent},
-  {path:'admindashboard', component:AdmindashboardComponent, resolve:{results:Resolveservice}, data:{source:'user',"condition":{"type":"admin"}}, canActivate:[AuthGuard]},
+  {path:'admin-dashboard', component:AdmindashboardComponent, resolve:{results:Resolveservice}, data:{source:'user',"condition":{"type":"admin"}}, canActivate:[AuthGuard]},
 
   {path:'editprofile',component:EditprofileComponent},
   {path:'support', component:SupportComponent},

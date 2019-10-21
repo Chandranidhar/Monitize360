@@ -17,10 +17,10 @@
         </mat-form-field>
         
         <mat-form-field>
-            <input matInput type="email" placeholder="Email" formControlName="emailaddress" (blur)="inputBlur('emailaddress')">
+            <input matInput type="email" placeholder="Email" formControlName="email" (blur)="inputBlur('email')">
             <mat-error
-                    *ngIf="!addadminform.controls['emailaddress'].touched && addadminform.controls['emailaddress'].errors">
-                Email Address is required</mat-error>
+                    *ngIf="!addadminform.controls['email'].touched && addadminform.controls['email'].errors">
+                Email is required</mat-error>
         </mat-form-field>
         
         <mat-form-field>
@@ -30,14 +30,14 @@
                 Phone Number name is required</mat-error> 
         </mat-form-field>
         
-        <mat-form-field>
+        <mat-form-field *ngIf="router.url == '/addadmin'">
             <input matInput  type="password" formControlName="password" (blur)="inputBlur('password')"  placeholder="Enter Password" >
             <mat-error
                     *ngIf="!addadminform.controls['password'].touched && addadminform.controls['password'].errors">
                 Password is required</mat-error>
         </mat-form-field>
         
-        <mat-form-field>
+        <mat-form-field *ngIf="router.url == '/addadmin'">
             <input matInput  type="password" formControlName="confirmpassword" (blur)="inputBlur('confirmpassword')"  placeholder="Enter Confirm Password" >
             <mat-error
                     *ngIf="!addadminform.controls['confirmpassword'].touched && addadminform.controls['confirmpassword'].errors">
