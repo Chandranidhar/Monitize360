@@ -4,7 +4,6 @@ import { LoginComponent } from './components/login/login/login.component';
 import{ ForgetComponent } from './components/forget/forget/forget.component';
 import { SignupComponent } from './components/signup/signup.component';
 import { ResetpasswordComponent } from './components/resetpassword/resetpassword.component';
-import { ClientdashboardComponent } from './components/clientdashboard/clientdashboard.component';
 import { AdmindashboardComponent } from './components/admindashboard/admindashboard.component'; 
 import { EditprofileComponent } from './components/editprofile/editprofile.component';
 import { SupportComponent } from './components/support/support.component';
@@ -24,8 +23,7 @@ const routes: Routes = [
   {path:'sign-up', component:SignupComponent},
   {path:'resetpassword', component:ResetpasswordComponent},
 
-  {path:'clientdashboard', component:ClientdashboardComponent},
-  {path:'admin-dashboard', component:AdmindashboardComponent, canActivate:[AuthGuard]},
+  {path:'admindashboard', component:AdmindashboardComponent,canActivate:[AuthGuard]},
 
   {path:'editprofile',component:EditprofileComponent},
   {path:'support', component:SupportComponent},

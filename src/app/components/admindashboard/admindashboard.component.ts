@@ -13,12 +13,11 @@ export class AdmindashboardComponent implements OnInit {
  
 
   constructor(public apiService: ApiService, public activatedRoute: ActivatedRoute,public router : Router) { 
-  // console.log(this.router.url);
+
   }
 
   ngOnInit() {
-    
-   
+ 
   }
 
 

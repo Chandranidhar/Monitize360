@@ -54,6 +54,11 @@ if (endpoint.condition != '_id' && endpoint.condition != null) {
 
 
         return new Promise((resolve) => {
+            let userdetails = this.cookieService.get('user_details');
+            let cookie: any;
+            cookie = JSON.parse(userdetails);
+            console.log("Resoleve Data ID    "+cookie._id);
+
            
             console.log('route.data --  in resolve ');
             console.log(route.data);
