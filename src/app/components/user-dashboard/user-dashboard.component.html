@@ -1,18 +1,14 @@
 <app-adminheader>
+    <mat-card>
+        <mat-label>Name :</mat-label><mat-label>{{name}}</mat-label><br>
+        <mat-label>Phone Number :</mat-label><mat-label>{{phone}}</mat-label><br>
+        <mat-label>Address :</mat-label><mat-label>{{address}}</mat-label><br>
+        <mat-label>Company Name :</mat-label><mat-label>{{company}}</mat-label>
+        <mat-label>Select an option</mat-label><mat-label>Select an option</mat-label>
+        
 
-<lib-listing *ngIf="pendingmodelapplicationarray!=null && pendingmodelapplicationarray.length>0" 
-    [datasource]="pendingmodelapplicationarray"
-    [skip]="pendingmodelapplicationarray_skip" 
-    [modify_header_array]="modify_header_array" 
-    [apiurl]="apiService.api_url" 
-    [deleteendpoint]="deleteendpoint" 
-    [updateendpoint]="updateendpoint" 
-    [jwttoken]="apiService.jwttoken" 
-    [editroute]="editroute"
-    [sourcedata]="tablename"  
-    [statusarr]="statusarray" 
-    
-    [searchendpoint]="searchendpoint"></lib-listing>
+    </mat-card>
 
-
+    <mat-card>Simple card2</mat-card>
+    <mat-card>Simple card3</mat-card>
 </app-adminheader>

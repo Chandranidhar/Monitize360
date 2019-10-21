@@ -29,6 +29,8 @@ import { NgxUploaderModule } from 'ngx-uploader';
 import { Resolveservice } from './services/resolve-service';
 
 import {AddadminComponent, ModaleComponent} from './components/addadmin/addadmin.component';
+import { AdminlistComponent } from './components/adminlist/adminlist.component';
+import { UserlistComponent } from './components/userlist/userlist.component';
 
 @NgModule({
   declarations: [
@@ -46,6 +48,8 @@ import {AddadminComponent, ModaleComponent} from './components/addadmin/addadmin
     AddadminComponent,
     ModaleComponent,
     UserDashboardComponent,
+    AdminlistComponent,
+    UserlistComponent,
   ],
   imports: [
     BrowserModule.withServerTransition({ appId: 'serverApp' }),
