@@ -24,9 +24,9 @@
         </mat-form-field>
         
         <mat-form-field>
-            <input matInput  type="text" formControlName="phonenumber" (blur)="inputBlur('phonenumber')"  placeholder="Enter Phone Number" >
+            <input matInput  type="text" formControlName="phone" (blur)="inputBlur('phone')"  placeholder="Enter Phone Number" >
             <mat-error
-                    *ngIf="!addadminform.controls['phonenumber'].touched && addadminform.controls['phonenumber'].errors">
+                    *ngIf="!addadminform.controls['phone'].touched && addadminform.controls['phone'].errors">
                 Phone Number name is required</mat-error> 
         </mat-form-field>
         
@@ -65,9 +65,9 @@
         </mat-form-field>
         
         <mat-form-field>
-            <input matInput  type="text" formControlName="zipcode" (blur)="inputBlur('zipcode')" placeholder="Enter Zip Code" >
+            <input matInput  type="text" formControlName="zip" (blur)="inputBlur('zip')" placeholder="Enter Zip Code" >
             <mat-error
-                    *ngIf="!addadminform.controls['zipcode'].touched && addadminform.controls['zipcode'].errors">
+                    *ngIf="!addadminform.controls['zip'].touched && addadminform.controls['zip'].errors">
                 Zipcode is required</mat-error>
         </mat-form-field>
         <br>
