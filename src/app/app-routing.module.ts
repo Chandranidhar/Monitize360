@@ -12,6 +12,10 @@ import { UserDashboardComponent } from '../app/components/user-dashboard/user-da
 import { AuthGuard } from './services/auth.guard';
 import { Resolveservice } from './services/resolve-service';
 import { AddadminComponent } from './components/addadmin/addadmin.component';
+import{AdminlistComponent} from './components/adminlist/adminlist.component'
+import{UserlistComponent} from './components/userlist/userlist.component'
+
+
 
 const routes: Routes = [
   {path: '', component: LoginComponent},
@@ -21,14 +25,17 @@ const routes: Routes = [
   {path:'resetpassword', component:ResetpasswordComponent},
 
   {path:'clientdashboard', component:ClientdashboardComponent},
-  {path:'admin-dashboard', component:AdmindashboardComponent, resolve:{results:Resolveservice}, data:{source:'user',"condition":{"type":"admin"}}, canActivate:[AuthGuard]},
+  {path:'admin-dashboard', component:AdmindashboardComponent, canActivate:[AuthGuard]},
 
   {path:'editprofile',component:EditprofileComponent},
   {path:'support', component:SupportComponent},
   // {path:'user-dashboard', component:UserDashboardComponent},
-  { path: "user-dashboard", component: UserDashboardComponent, resolve: {results: Resolveservice}, data: {source: 'user',"condition":{"type":"user"}}, canActivate:[AuthGuard]},
+  { path: "user-dashboard", component: UserDashboardComponent, canActivate:[AuthGuard]},
   {path:'addadmin',component:AddadminComponent},
-  {path:'editadmin/:id',component:AddadminComponent}
+  {path:'editadmin/:id',component:AddadminComponent},
+  {path:'adminlist',component:AdminlistComponent,resolve:{results:Resolveservice}, data:{source:'user',"condition":{"type":"admin"}}, canActivate:[AuthGuard]},
+  {path:'userlist',component:UserlistComponent,resolve:{results:Resolveservice}, data:{source:'user',"condition":{"type":"user"}}, canActivate:[AuthGuard]}
+
 ];
 
 @NgModule({
