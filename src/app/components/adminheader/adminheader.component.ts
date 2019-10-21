@@ -1,7 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { CookieService } from 'ngx-cookie-service';
 import { Router } from '@angular/router';
-import { cpus } from 'os';
 @Component({
   selector: 'app-adminheader',
   templateUrl: './adminheader.component.html',
