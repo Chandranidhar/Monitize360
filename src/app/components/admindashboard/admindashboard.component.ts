@@ -14,11 +14,11 @@ export class AdmindashboardComponent implements OnInit {
   public contactUsAllData: any;
 contactUsAllDataHeaderSkipValue: any = [];
   contactUsAllDataModifyHeaderValue: any = {};
+  admin_datalist:any=[];
    ServiceListArray:any;
   statusarray: any = [{val: 1, name: 'Active'}, {val: 2, name: 'Inactive'}]; 
   
-  pendingmodelapplicationarray: any = [];
-  pendingmodelapplicationarray_skip: any = ['_id', 'type', 'password','confirmpassword','zipcode','status'];
+  admin_datalist_skip: any = ['_id', 'type', 'password','confirmpassword','zipcode','status'];
   
   // updateendpoint is use for data update endpoint
   updateendpoint = 'addorupdatedata';
@@ -33,7 +33,7 @@ contactUsAllDataHeaderSkipValue: any = [];
   // searchendpoint is use for data search endpoint
   searchendpoint = 'datalist';
 // public serverURL: any = '';
-editroute: any = 'editroute';
+editroute: any = 'editadmin';
   // use for Table Header modification 
 // Like Table head name is " firstname" => "First Name"
 modify_header_array: any = {
@@ -69,10 +69,9 @@ search_settings:any={
       let result:any;
       result=data;
       console.log(result.res);
-      this.pendingmodelapplicationarray = result.results.res;
+      this.admin_datalist = result.results.res;
       
     })
   }
 
-   
 }
