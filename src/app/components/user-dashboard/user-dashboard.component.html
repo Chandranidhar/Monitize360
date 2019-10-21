@@ -1,1 +1,63 @@
-<app-adminheader></app-adminheader>
+<app-adminheader>
+    <mat-card>
+        <mat-card-header>
+            <mat-card-title>Account Details</mat-card-title>
+        </mat-card-header>
+        <mat-divider></mat-divider>
+        <mat-divider></mat-divider>
+        <mat-card-content>
+            <mat-label>Name :</mat-label>
+            <mat-label>{{name}}</mat-label><br>
+            
+            <mat-label>Phone Number :</mat-label>
+            <mat-label>{{phone}}</mat-label><br>
+            
+            <mat-label>Email :</mat-label>
+            <mat-label>{{email}}</mat-label><br>
+            
+            <mat-label>Address :</mat-label>
+            <mat-label>{{address}}</mat-label><br>
+            
+            <mat-label>Company Name :</mat-label>
+            <mat-label>{{company}}</mat-label><br>
+            
+            <mat-label>Designation :</mat-label>
+            <mat-label>{{designation}}</mat-label><br>
+            
+            <mat-label>Company Website :</mat-label>
+            <mat-label>{{website}}</mat-label>
+        </mat-card-content>
+        <button mat-button color="primary" type="button" [routerLink]="['/editprofile']">Edit Profile</button>
+    </mat-card>
+
+    <mat-card>
+        <mat-card-header>
+            <mat-card-title>My Order</mat-card-title>
+            <mat-card class="example-card">
+            <img mat-card-image src="https://material.angular.io/assets/img/examples/shiba2.jpg" alt="Photo of a Shiba Inu">
+                    <mat-card-content>
+                      <p>
+                        The Shiba Inu is the smallest of the six original and distinct spitz breeds of dog from Japan.
+                        A small, agile dog that copes very well with mountainous terrain, the Shiba Inu was originally
+                        bred for hunting.
+                      </p>
+                    </mat-card-content>
+                    <mat-card-actions>
+                      <button mat-button>LIKE</button>
+                      <button mat-button>SHARE</button>
+                    </mat-card-actions>
+                  </mat-card>
+        </mat-card-header>
+    </mat-card>
+
+
+
+    <mat-card> 
+        <mat-card-header>
+            <mat-card-title>Purchase Data</mat-card-title>
+            <button mat-button type="button">purchase</button>
+        </mat-card-header>
+    
+</mat-card>
+
+</app-adminheader>

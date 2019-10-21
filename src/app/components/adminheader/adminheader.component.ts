@@ -7,13 +7,13 @@ import { Router } from '@angular/router';
   styleUrls: ['./adminheader.component.css']
 })
 export class AdminheaderComponent implements OnInit {
-  public userdetails:any;
+  public userdetails:any;public username:any;
 
   constructor(public cookieService: CookieService,public router: Router) {
-    console.log('this.cookieService.getAll()');
-    console.log(this.cookieService.getAll());
+  
+    //console.log(this.cookieService.getAll());
     this.userdetails = JSON.parse(this.cookieService.get('user_details'));
-    console.log(this.userdetails);
+    this.username=this.userdetails.firstname+' '+this.userdetails.lastname;
    }
 
   ngOnInit() {
