@@ -4,6 +4,8 @@ import { matchingPasswords } from '../../_helpers/must-match.validator';
 import {ApiService} from '../../services/api-service';
 import { CookieService } from 'ngx-cookie-service';
 import {MatDialogRef, MAT_DIALOG_DATA, MatDialog} from "@angular/material";
+import { THIS_EXPR } from '@angular/compiler/src/output/output_ast';
+import {ActivatedRoute, Router} from '@angular/router'
 
 export interface DialogData {
   data: any;
@@ -21,7 +23,7 @@ export class AddadminComponent implements OnInit {
   public user_data:any=[];
   public data:any=[];
 
-  constructor(public formbuilder:FormBuilder, public apiservice:ApiService,public cookieservice:CookieService, public dialog: MatDialog) {
+  constructor(public formbuilder:FormBuilder, public apiservice:ApiService, public cookieservice:CookieService, public dialog: MatDialog, public router:Router, public activatedRouter:ActivatedRoute) {
 
     this.getStateList();
     this.addadminform = this.formbuilder.group({
@@ -69,7 +71,7 @@ export class AddadminComponent implements OnInit {
      
       let data:any={};
       data={
-        "source": "usermanagement",
+        "source": "user",
         "data": this.addadminform.value,
         "token": this.cookieservice.get('jwttoken')
     };
@@ -82,7 +84,11 @@ export class AddadminComponent implements OnInit {
         this.openDialog();
         setTimeout(()=>{
           this.dialog.closeAll();
-        },4000);
+        },2000);
+        setTimeout(() => {
+          this.router.navigateByUrl('/admindashboard');
+
+        }, 2200);
       }
       
     })
@@ -92,6 +98,8 @@ export class AddadminComponent implements OnInit {
     else{
       
     }
+
+
   }
   
 

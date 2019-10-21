@@ -16,7 +16,7 @@ contactUsAllDataHeaderSkipValue: any = [];
 
 
 
-  statusarray: any = [{val: 1, name: 'Approve'}, {val: 4, name: 'Decline'}, {val: 3, name: 'Lock'}]; 
+  statusarray: any = [{val: 1, name: 'Active'}, {val: 2, name: 'Inactive'}]; 
   
   pendingmodelapplicationarray: any = [];
   pendingmodelapplicationarray_skip: any = ['_id', 'type', 'password', 'id', 'created_at', 'accesscode'];
@@ -27,6 +27,7 @@ contactUsAllDataHeaderSkipValue: any = [];
     // deleteendpoint is use for data delete endpoint
     deleteendpoint = 'deletesingledata';
 
+    
     // this is a database collection name
     tablename = 'user';
 
@@ -53,7 +54,7 @@ contactUsAllDataHeaderSkipValue: any = [];
       textsearch:[{label:"Search By email",field:'email'},{label:"Search By Full name",field:'name'}],  // this is use for  text search
 
       search:[{label:"Search By autocomplete",field:'name'}]     // this is use for  Autocomplete search
-  }
+  };
 
 
   constructor(public apiService: ApiService, public activatedRoute: ActivatedRoute) {
@@ -64,7 +65,7 @@ contactUsAllDataHeaderSkipValue: any = [];
     this.activatedRoute.data.forEach(data=>{
       let result:any;
       result=data;
-      console.log(result.results.res);
+      // console.log(result.results.res);
       this.pendingmodelapplicationarray = result.results.res;
       // this.ServiceListArray=result;
       // console.log("ojjjjjjjjhgdfhgdf",result);   

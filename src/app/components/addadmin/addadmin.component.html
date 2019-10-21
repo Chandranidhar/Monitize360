@@ -1,5 +1,6 @@
 <app-adminheader>
-    <form [formGroup]="addadminform" (ngSubmit)="register()">
+    <div class="addadminform_wrapper">
+    <form [formGroup]="addadminform" (ngSubmit)="register()" class="addadmin_registerform" >
         <mat-form-field>
             <input matInput  type="text" formControlName="firstname" (blur)="inputBlur('firstname')"  placeholder="Enter First Name" >
             <mat-error
@@ -7,35 +8,35 @@
                 First name is required</mat-error>
         </mat-form-field>
        
-        <br>
+        
         <mat-form-field>
             <input matInput  type="text" formControlName="lastname" (blur)="inputBlur('lastname')" placeholder="Enter Last Name" >
             <mat-error
                     *ngIf="!addadminform.controls['lastname'].touched && addadminform.controls['lastname'].errors">
                 Last name is required</mat-error>
         </mat-form-field>
-        <br>
+        
         <mat-form-field>
             <input matInput type="email" placeholder="Email" formControlName="emailaddress" (blur)="inputBlur('emailaddress')">
             <mat-error
                     *ngIf="!addadminform.controls['emailaddress'].touched && addadminform.controls['emailaddress'].errors">
                 Email Address is required</mat-error>
         </mat-form-field>
-        <br>
+        
         <mat-form-field>
             <input matInput  type="text" formControlName="phonenumber" (blur)="inputBlur('phonenumber')"  placeholder="Enter Phone Number" >
             <mat-error
                     *ngIf="!addadminform.controls['phonenumber'].touched && addadminform.controls['phonenumber'].errors">
                 Phone Number name is required</mat-error> 
         </mat-form-field>
-        <br>
+        
         <mat-form-field>
             <input matInput  type="password" formControlName="password" (blur)="inputBlur('password')"  placeholder="Enter Password" >
             <mat-error
                     *ngIf="!addadminform.controls['password'].touched && addadminform.controls['password'].errors">
                 Password is required</mat-error>
         </mat-form-field>
-        <br>
+        
         <mat-form-field>
             <input matInput  type="password" formControlName="confirmpassword" (blur)="inputBlur('confirmpassword')"  placeholder="Enter Confirm Password" >
             <mat-error
@@ -43,7 +44,7 @@
                 Confirm Password is required</mat-error>
         </mat-form-field>
         <div style="color: red;" *ngIf="addadminform.hasError('mismatchedPasswords')">Passwords does not match</div>
-        <br>
+        
         <mat-form-field>
             <!-- <input matInput  type="text" formControlName="state" (blur)="inputBlur('state')"  placeholder="Enter State" > -->
             <mat-label>Select State</mat-label>
@@ -55,14 +56,14 @@
                 State is required</mat-error>
         </mat-form-field>
         
-        <br>
+    
         <mat-form-field>
             <input matInput  type="text" formControlName="city" (blur)="inputBlur('city')"  placeholder="Enter City" >
             <mat-error
                     *ngIf="!addadminform.controls['city'].touched && addadminform.controls['city'].errors">
                 City is required</mat-error>
         </mat-form-field>
-        <br>
+        
         <mat-form-field>
             <input matInput  type="text" formControlName="zipcode" (blur)="inputBlur('zipcode')" placeholder="Enter Zip Code" >
             <mat-error
@@ -73,4 +74,5 @@
         <button mat-raised-button color="primary" type="submit" >Submit</button>
 
     </form>
+</div>
 </app-adminheader>
