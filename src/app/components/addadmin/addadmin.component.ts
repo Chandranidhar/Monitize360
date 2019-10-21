@@ -26,14 +26,17 @@ export class AddadminComponent implements OnInit {
   constructor(public formbuilder:FormBuilder, public apiservice:ApiService, public cookieservice:CookieService, public dialog: MatDialog, public router:Router, public activatedRouter:ActivatedRoute) {
 
     this.getStateList();
+    if (router.url != '/addadmin') {
+      this.editform();
+    }
     this.addadminform = this.formbuilder.group({
       firstname:['',Validators.required],
       lastname:['',Validators.required],
-      emailaddress:['',Validators.required],
-      phonenumber:['',Validators.required],
+      email:['',Validators.required],
+      phone:['',Validators.required],
       password:['',Validators.required],
       confirmpassword:['',Validators.required],
-      zipcode:['',Validators.required],
+      zip:['',Validators.required],
       city:['',Validators.required],
       state:['',Validators.required],
       type:['admin'],
@@ -70,6 +73,7 @@ export class AddadminComponent implements OnInit {
     {
      
       let data:any={};
+      delete this.addadminform.value.confirmpassword;
       data={
         "source": "user",
         "data": this.addadminform.value,
@@ -88,7 +92,7 @@ export class AddadminComponent implements OnInit {
         setTimeout(() => {
           this.router.navigateByUrl('/admindashboard');
 
-        }, 2200);
+        }, 2100);
       }
       
     })
@@ -101,8 +105,43 @@ export class AddadminComponent implements OnInit {
 
 
   }
+
   
 
+  editform(){
+    let data:any={};
+    data={
+      source: "user",
+      
+      condition: {
+        _id: this.activatedRouter.snapshot.params.id,
+      
+      },
+      "token": this.cookieservice.get('jwttoken')
+  };
+  
+  this.apiservice.postDatawithoutToken('datalist',data).subscribe(res=>{
+    let result:any = {};
+    result = res;
+    // console.log(result.res)
+
+    this.addadminform.patchValue({
+      firstname:result.res[0].firstname,
+      lastname:result.res[0].lastname,
+      email:result.res[0].email,
+      phone:result.res[0].phone,
+      // password:result.res[0].password,
+      // confirmpassword:result.res[0].confirmpassword,
+      zip:result.res[0].zip,
+      city:result.res[0].city,
+      state:result.res[0].state
+
+    })
+
+  });
+
+  
+}
   
   
   inputBlur(val:any){

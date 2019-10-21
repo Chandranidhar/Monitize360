@@ -1,15 +1,15 @@
 <app-adminheader>
     <button  mat-raised-button color="primary" type="button" [routerLink]="['/addadmin']">Add Admin</button>
 <br>
-    <lib-listing *ngIf="pendingmodelapplicationarray!=null && pendingmodelapplicationarray.length>0"
-    [datasource]="pendingmodelapplicationarray"
-    [skip]="pendingmodelapplicationarray_skip" 
+    <lib-listing *ngIf="admin_datalist!=null && admin_datalist.length>0"
+    [datasource]="admin_datalist"
+    [skip]="admin_datalist_skip" 
     [modify_header_array]="modify_header_array" 
     [apiurl]="apiService.api_url" 
     [deleteendpoint]="deleteendpoint" 
     [updateendpoint]="updateendpoint" 
     [jwttoken]="apiService.jwttoken" 
-    [editroute]="editroute"
+    [editroute]="editroute"    
     [sourcedata]="tablename"  
     [statusarr]="statusarray" 
     
