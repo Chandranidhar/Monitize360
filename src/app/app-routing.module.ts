@@ -24,7 +24,7 @@ const routes: Routes = [
   {path:'editprofile',component:EditprofileComponent},
   {path:'support', component:SupportComponent},
   // {path:'user-dashboard', component:UserDashboardComponent},
-  { path: "user-dashboard", component: UserDashboardComponent, resolve: {results: Resolveservice}, data: {source: 'user'}, canActivate:[AuthGuard]},
+  { path: "user-dashboard", component: UserDashboardComponent, resolve: {results: Resolveservice}, data: {source: 'user',"condition":{"type":"user"}}, canActivate:[AuthGuard]},
   {path:'addadmin',component:AddadminComponent},
   {path:'editadmin/:id',component:AddadminComponent}
 ];

@@ -69,6 +69,7 @@
 
         <mat-nav-list>
 <<<<<<< HEAD
+<<<<<<< HEAD
             <!-- <a mat-list-item [routerLink]="'/clientdashboard'"  routerLinkActive="active"> Dashboard </a> -->
             <a mat-list-item [routerLink]="'/admindashboard'" routerLinkActive="active"> Admin Dashboard </a>
 =======
@@ -76,6 +77,10 @@
             <a mat-list-item [routerLink]="'/admin-dashboard'" routerLinkActive="active"> Admin Dashboard </a>
 >>>>>>> 17b9f69a8aef0fb146cc7feb35b3faf538ac7998
             <a mat-list-item [routerLink]="'/user-dashboard'" routerLinkActive="active"> User Dashboard </a>
+=======
+            <a mat-list-item *ngIf="userdetails!=null && userdetails.type=='admin'" [routerLink]="'/admin-dashboard'" routerLinkActive="active"> Admin Dashboard </a>
+            <a mat-list-item *ngIf="userdetails!=null && userdetails.type=='user'" [routerLink]="'/user-dashboard'" routerLinkActive="active"> User Dashboard </a>
+>>>>>>> 804a7183e7daf960ea880fa1466d254db164c350
             <a mat-list-item [routerLink]="'/support'" routerLinkActive="active"> Support </a>
              
 

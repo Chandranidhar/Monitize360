@@ -71,7 +71,8 @@
                 Zipcode is required</mat-error>
         </mat-form-field>
         <br>
-        <button mat-raised-button color="primary" type="submit" >Submit</button>
+        <button *ngIf="router.url != '/addadmin'" mat-raised-button color="primary" type="submit" >Update</button>
+        <button *ngIf="router.url == '/addadmin'" mat-raised-button color="primary" type="submit" >Submit</button>
 
     </form>
 </div>
