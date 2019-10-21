@@ -1,7 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { AddadminComponent } from '../addadmin/addadmin.component';
 import { ApiService } from 'src/app/services/api-service';
-import { ActivatedRoute } from '@angular/router';
+import { ActivatedRoute,Router } from '@angular/router';
 import { Condition } from 'selenium-webdriver';
 
 
@@ -59,7 +59,8 @@ search_settings:any={
 };
 
 
-  constructor(public apiService: ApiService, public activatedRoute: ActivatedRoute) { 
+  constructor(public apiService: ApiService, public activatedRoute: ActivatedRoute,public router : Router) { 
+  //console.log(this.router.url);
   }
 
   ngOnInit() {

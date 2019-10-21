@@ -4,7 +4,6 @@ import { LoginComponent } from './components/login/login/login.component';
 import{ ForgetComponent } from './components/forget/forget/forget.component';
 import { SignupComponent } from './components/signup/signup.component';
 import { ResetpasswordComponent } from './components/resetpassword/resetpassword.component';
-import { ClientdashboardComponent } from './components/clientdashboard/clientdashboard.component';
 import { AdmindashboardComponent } from './components/admindashboard/admindashboard.component'; 
 import { EditprofileComponent } from './components/editprofile/editprofile.component';
 import { SupportComponent } from './components/support/support.component';
@@ -19,8 +18,9 @@ const routes: Routes = [
   {path:'forget', component:ForgetComponent},
   {path:'sign-up', component:SignupComponent},
   {path:'resetpassword', component:ResetpasswordComponent},
-  {path:'clientdashboard', component:ClientdashboardComponent,resolve: {results: Resolveservice}, data: {source: 'user'}},
-  {path:'admindashboard', component:AdmindashboardComponent},
+
+  {path:'admindashboard', component:AdmindashboardComponent, resolve:{results:Resolveservice}, data:{source:'user',"condition":{"type":"admin"}}, canActivate:[AuthGuard]},
+
   {path:'editprofile',component:EditprofileComponent},
   {path:'support', component:SupportComponent},
   // {path:'user-dashboard', component:UserDashboardComponent},
