@@ -9,21 +9,24 @@ import { CookieService } from 'ngx-cookie-service';
   styleUrls: ['./user-dashboard.component.css']
 })
 export class UserDashboardComponent implements OnInit {
-  public name: any;public phone: any;public address: any;public company: any;
-
-  constructor(public apiService: ApiService, public activatedRoute: ActivatedRoute,public CookieService:CookieService) {
+  public name: any; public phone: any; public address: any; public company: any;
+  public designation: any; public website: any;public email: any;
+  constructor(public apiService: ApiService, public activatedRoute: ActivatedRoute, public CookieService: CookieService) {
     // this.serverURL = apiService.api_url;
     this.userdetails();
-   }
+  }
 
   ngOnInit() {
   }
   /**fetch userdetails form cooki */
-  userdetails(){
+  userdetails() {
     let userdetails = JSON.parse(this.CookieService.get('user_details'));
-    this.name = userdetails.firstname+' '+userdetails.lastname;
-    this.phone=userdetails.phone;
-    this.address=userdetails.city+' '+userdetails.state+' '+userdetails.zip;
-    this.company=userdetails.companyname;
+    this.name = userdetails.firstname + ' ' + userdetails.lastname;
+    this.phone = userdetails.phone;
+    this.address = userdetails.city + ' ' + userdetails.state + ' ' + userdetails.zip;
+    this.company = userdetails.companyname;
+    this.designation = userdetails.designation;
+    this.website = userdetails.companywebsite;
+    this.email=userdetails.email;
   }
 }

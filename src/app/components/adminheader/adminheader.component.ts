@@ -10,10 +10,10 @@ export class AdminheaderComponent implements OnInit {
   public userdetails:any;
 
   constructor(public cookieService: CookieService,public router: Router) {
-    console.log('this.cookieService.getAll()');
-    console.log(this.cookieService.getAll());
+  
+    //console.log(this.cookieService.getAll());
     this.userdetails = JSON.parse(this.cookieService.get('user_details'));
-    console.log(this.userdetails);
+    //console.log(this.userdetails);
    }
 
   ngOnInit() {
