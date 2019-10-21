@@ -60,7 +60,7 @@ search_settings:any={
 
 
   constructor(public apiService: ApiService, public activatedRoute: ActivatedRoute,public router : Router) { 
-  // console.log(this.router.url);
+
   }
 
   ngOnInit() {
@@ -68,7 +68,7 @@ search_settings:any={
     this.activatedRoute.data.forEach(data=>{
       let result:any;
       result=data;
-      // console.log(result.res);
+     
       this.admin_datalist = result.results.res;
       
     })
