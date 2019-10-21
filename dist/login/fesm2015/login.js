@@ -44,7 +44,7 @@ import { MatTreeModule } from '@angular/material/tree';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { CommonModule } from '@angular/common';
 import { MAT_DIALOG_DATA, MatDialogRef, MatDialog } from '@angular/material';
-import { Injectable, NgModule, Component, Input, ViewChild, CUSTOM_ELEMENTS_SCHEMA, Inject, defineInjectable, inject } from '@angular/core';
+import { Injectable, NgModule, Component, Input, ViewChild, Inject, CUSTOM_ELEMENTS_SCHEMA, defineInjectable, inject } from '@angular/core';
 import { FormBuilder, Validators, FormGroupDirective, FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { HttpClient, HttpHeaders, HttpClientModule } from '@angular/common/http';
 import { Router, ActivatedRoute } from '@angular/router';
@@ -445,7 +445,6 @@ class ApiService {
                 'Content-Type': 'application/json',
             })
         };
-        console.log(this.serverUrl, requestdata);
         /** @type {?} */
         var result = this._http.post(this.serverUrl + this.addendpointUrl, JSON.stringify(requestdata), httpOptions).pipe(map((/**
          * @param {?} res
@@ -709,10 +708,6 @@ class LoginComponent {
      */
     set cookieSet(v) {
         this.cookieSetValue = v;
-        // console.log(this.cookieSetValue.cookie);
-        // for (const key in this.cookieSetValue.cookie) {
-        //   console.log(this.cookieSetValue.cookie[key]);
-        // }
     }
     /**
      * @param {?} routeingUrlval
@@ -789,19 +784,15 @@ class LoginComponent {
                 if (result.status == "success") {
                     this.cookieService.set('user_details', JSON.stringify(result.item[0]));
                     this.cookieService.set('jwttoken', result.token);
-                    setTimeout((/**
-                     * @return {?}
-                     */
-                    () => {
-                        // console.log(this.cookieService.getAll());
-                    }), 1000);
-                    // console.log('result')
-                    // console.log(result.item[0].type)
                     for (const key in this.routerStatusValue.data) {
-                        // console.log(this.routerStatusValue.data[key].type);
-                        if (result.item[0].type === this.routerStatusValue.data[key].type) {
-                            this.router.navigateByUrl('/' + this.routerStatusValue.data[key].routerNav); // navigate to dashboard url 
-                        }
+                        setTimeout((/**
+                         * @return {?}
+                         */
+                        () => {
+                            if (result.item[0].type === this.routerStatusValue.data[key].type) {
+                                this.router.navigateByUrl('/' + this.routerStatusValue.data[key].routerNav); // navigate to dashboard url 
+                            }
+                        }), 500);
                     }
                     // this is use for reset the from
                     this.formDirective.resetForm();

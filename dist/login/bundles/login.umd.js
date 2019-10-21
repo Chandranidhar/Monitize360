@@ -489,7 +489,6 @@
                         'Content-Type': 'application/json',
                     })
                 };
-                console.log(this.serverUrl, requestdata);
                 /** @type {?} */
                 var result = this._http.post(this.serverUrl + this.addendpointUrl, JSON.stringify(requestdata), httpOptions).pipe(operators.map(( /**
                  * @param {?} res
@@ -794,10 +793,6 @@
              * @return {?}
              */ function (v) {
                 this.cookieSetValue = v;
-                // console.log(this.cookieSetValue.cookie);
-                // for (const key in this.cookieSetValue.cookie) {
-                //   console.log(this.cookieSetValue.cookie[key]);
-                // }
             },
             enumerable: true,
             configurable: true
@@ -893,18 +888,17 @@
                         if (result.status == "success") {
                             _this.cookieService.set('user_details', JSON.stringify(result.item[0]));
                             _this.cookieService.set('jwttoken', result.token);
-                            setTimeout(( /**
-                             * @return {?}
-                             */function () {
-                                // console.log(this.cookieService.getAll());
-                            }), 1000);
-                            // console.log('result')
-                            // console.log(result.item[0].type)
+                            var _loop_1 = function (key) {
+                                setTimeout(( /**
+                                 * @return {?}
+                                 */function () {
+                                    if (result.item[0].type === _this.routerStatusValue.data[key].type) {
+                                        _this.router.navigateByUrl('/' + _this.routerStatusValue.data[key].routerNav); // navigate to dashboard url 
+                                    }
+                                }), 500);
+                            };
                             for (var key in _this.routerStatusValue.data) {
-                                // console.log(this.routerStatusValue.data[key].type);
-                                if (result.item[0].type === _this.routerStatusValue.data[key].type) {
-                                    _this.router.navigateByUrl('/' + _this.routerStatusValue.data[key].routerNav); // navigate to dashboard url 
-                                }
+                                _loop_1(key);
                             }
                             // this is use for reset the from
                             _this.formDirective.resetForm();
