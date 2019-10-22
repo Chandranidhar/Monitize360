@@ -31,6 +31,7 @@ import { Resolveservice } from './services/resolve-service';
 import {AddadminComponent, ModaleComponent} from './components/addadmin/addadmin.component';
 import { AdminlistComponent } from './components/adminlist/adminlist.component';
 import { UserlistComponent } from './components/userlist/userlist.component';
+import { PurchasedataComponent } from './components/purchasedata/purchasedata.component';
 
 @NgModule({
   declarations: [
@@ -50,6 +51,7 @@ import { UserlistComponent } from './components/userlist/userlist.component';
     UserDashboardComponent,
     AdminlistComponent,
     UserlistComponent,
+    PurchasedataComponent,
   ],
   imports: [
     BrowserModule.withServerTransition({ appId: 'serverApp' }),
