@@ -1,63 +1,96 @@
 <app-adminheader>
-    <mat-card>
-        <mat-card-header>
-            <mat-card-title>Account Details</mat-card-title>
-        </mat-card-header>
-        <mat-divider></mat-divider>
-        <mat-divider></mat-divider>
-        <mat-card-content>
-            <mat-label>Name :</mat-label>
-            <mat-label>{{name}}</mat-label><br>
-            
-            <mat-label>Phone Number :</mat-label>
-            <mat-label>{{phone}}</mat-label><br>
-            
-            <mat-label>Email :</mat-label>
-            <mat-label>{{email}}</mat-label><br>
-            
-            <mat-label>Address :</mat-label>
-            <mat-label>{{address}}</mat-label><br>
-            
-            <mat-label>Company Name :</mat-label>
-            <mat-label>{{company}}</mat-label><br>
-            
-            <mat-label>Designation :</mat-label>
-            <mat-label>{{designation}}</mat-label><br>
-            
-            <mat-label>Company Website :</mat-label>
-            <mat-label>{{website}}</mat-label>
-        </mat-card-content>
-        <button mat-button color="primary" type="button" [routerLink]="['/editprofile']">Edit Profile</button>
-    </mat-card>
-
-    <mat-card>
-        <mat-card-header>
-            <mat-card-title>My Order</mat-card-title>
-            <mat-card class="example-card">
-            <img mat-card-image src="https://material.angular.io/assets/img/examples/shiba2.jpg" alt="Photo of a Shiba Inu">
-                    <mat-card-content>
-                      <p>
-                        The Shiba Inu is the smallest of the six original and distinct spitz breeds of dog from Japan.
-                        A small, agile dog that copes very well with mountainous terrain, the Shiba Inu was originally
-                        bred for hunting.
-                      </p>
-                    </mat-card-content>
-                    <mat-card-actions>
-                      <button mat-button>LIKE</button>
-                      <button mat-button>SHARE</button>
-                    </mat-card-actions>
-                  </mat-card>
-        </mat-card-header>
-    </mat-card>
-
-
-
-    <mat-card> 
-        <mat-card-header>
-            <mat-card-title>Purchase Data</mat-card-title>
-            <button mat-button type="button">purchase</button>
-        </mat-card-header>
     
-</mat-card>
+    <mat-card class="as_mainwrapper">
+      <mat-list role="list">
+        <mat-list-item role="listitem">
+          <mat-card-title>Account Details</mat-card-title>
+          <mat-card-content class="">
+              <span class="blockimgwrapper">
+                <a>
+                  <img src="https://material.angular.io/assets/img/examples/shiba2.jpg">
+                </a>
+              </span>
+              <mat-card-subtitle>
+                <p class="name">{{name}}</p>
+                <p class="Designation">{{designation}}</p>
+                <p><i class="material-icons">phone</i> {{phone}}</p>
+                <p><i class="material-icons">email</i> {{email}}</p>
+                <p><i class="material-icons">account_balance</i> {{address}}</p>
+                <p><i class="material-icons">location_city</i> {{company}}</p>
+                <p><i class="material-icons">language</i> {{website}}</p>
+              </mat-card-subtitle>
+              <mat-card-actions>
+                  <button mat-button class="editbtn" color="primary" type="button" [routerLink]="['/editprofile']">
+                    <i class="material-icons">edit</i>
+                  </button>
+              </mat-card-actions>
+          </mat-card-content>
+          <img class="accountbg" src="../../../assets/images/accountbg.jpg">
+        </mat-list-item>
+       
+        <mat-list-item class="aslist2">
+            <mat-card-title>Purchase Data</mat-card-title>
+            <mat-card-content class="">
+                <span class="blockimgwrapper">
+                  <a>
+                    <img src="https://material.angular.io/assets/img/examples/shiba2.jpg">
+                  </a>
+                </span>
+                <mat-card-subtitle>
+                  <p class="name">{{name}}</p>
+                  <p class="Designation">{{designation}}</p>
+                  <p><i class="material-icons">phone</i> {{phone}}</p>
+                  <p><i class="material-icons">email</i> {{email}}</p>
+                  <p><i class="material-icons">account_balance</i> {{address}}</p>
+                  <p><i class="material-icons">location_city</i> {{company}}</p>
+                  <p><i class="material-icons">language</i> {{website}}</p>
+                </mat-card-subtitle>
+                <mat-card-actions>
+                    <button mat-button class="editbtn" color="primary" type="button" [routerLink]="['/editprofile']">
+                      <i class="material-icons">edit</i>
+                    </button>
+                </mat-card-actions>
+            </mat-card-content>
+            <img class="accountbg" src="../../../assets/images/accountbg.jpg">
+          </mat-list-item>
+
+          <mat-list-item class="aslist3">
+              <mat-card-title>My Order</mat-card-title>
+              <mat-card-content class="">
+                  <table mat-table [dataSource]="dataSource" class="mat-elevation-z8">
+
+                      <ng-container matColumnDef="position">
+                        <th mat-header-cell *matHeaderCellDef> No. </th>
+                        <td mat-cell *matCellDef="let element"> fghfh </td>
+                      </ng-container>
+                    
+                      <!-- Name Column -->
+                      <ng-container matColumnDef="name">
+                        <th mat-header-cell *matHeaderCellDef> Name </th>
+                        <td mat-cell *matCellDef="let element"> dfdhd </td>
+                      </ng-container>
+                    
+                      <!-- Weight Column -->
+                      <ng-container matColumnDef="weight">
+                        <th mat-header-cell *matHeaderCellDef> Weight </th>
+                        <td mat-cell *matCellDef="let element"> dfhdh </td>
+                      </ng-container>
+                    
+                      <!-- Symbol Column -->
+                      <ng-container matColumnDef="symbol">
+                        <th mat-header-cell *matHeaderCellDef> Symbol </th>
+                        <td mat-cell *matCellDef="let element"> dfhh </td>
+                      </ng-container>
+                    
+                      <tr mat-header-row *matHeaderRowDef="displayedColumns"></tr>
+                      <tr mat-row *matRowDef="let row; columns: displayedColumns;"></tr>
+                    </table>
+              </mat-card-content>
+              <img class="accountbg" src="../../../assets/images/accountbg.jpg">
+            </mat-list-item>
+
+      </mat-list>
+    </mat-card>
+  
 
 </app-adminheader>

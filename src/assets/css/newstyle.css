@@ -1,0 +1,111 @@
+
+  /*--------------------- avijit css start ----------------- */
+  body{overflow-y: hidden;}
+  .as_mainwrapper {box-shadow: none !important;}
+  .as_mainwrapper mat-list mat-list-item{height: auto;}
+  .as_mainwrapper .mat-list-base .mat-list-item .mat-list-item-content{flex-wrap: wrap;padding: 0;}
+  .as_mainwrapper mat-list mat-list-item mat-card-title{
+    display: block;
+    width: 100%;
+    background: #242a2b;
+    color: #fff;
+    padding: 10px 0;
+    text-align: center;
+    margin: 0 !important;
+    margin-bottom: 20px !important;
+    text-transform: uppercase;
+  }
+  .as_mainwrapper mat-list mat-list-item.aslist2  mat-card-title{background: #946805;}
+  .as_mainwrapper mat-list mat-list-item.aslist2 mat-card-content{background: #c18500;}
+  .as_mainwrapper mat-list mat-list-item.aslist2 mat-card-content mat-card-subtitle p{border-bottom: 1px solid #bfae87;}
+  .as_mainwrapper mat-list mat-list-item .blockimgwrapper a{
+    height: 65px;
+      width: 65px;
+      position: relative !important;
+      overflow: hidden;
+      border-radius: 50%;
+      margin: 0 auto;
+      background: #ada9a9;
+      display: block;
+      border: 2px solid #b3afaf;
+  }
+  .as_mainwrapper mat-list mat-list-item mat-card-content mat-card-subtitle{text-align: center;    margin: 0 !important;
+    padding: 0 30px;}
+  .as_mainwrapper mat-list mat-list-item mat-card-content mat-card-subtitle p i{margin-right: 10px;}
+  .as_mainwrapper mat-list mat-list-item mat-card-content mat-card-subtitle p.name, 
+  .as_mainwrapper mat-list mat-list-item mat-card-content mat-card-subtitle p.Designation{justify-content: center;}
+  .as_mainwrapper mat-list mat-list-item mat-card-content mat-card-subtitle p{
+    font-size: 18px;
+    margin: 0;
+    padding: 10px 0;
+    display: flex;
+    width: 100%;
+    align-items: center;
+    border-bottom: 1px solid #6d7779;
+    color: #dedede;
+  }
+  .as_mainwrapper mat-list mat-list-item mat-card-content mat-card-subtitle p.name{font-size: 21px; border: 0;padding-bottom: 0;}
+  .as_mainwrapper mat-list mat-list-item mat-card-content mat-card-subtitle p:nth-last-child(1){border: none;}
+  .as_mainwrapper mat-list mat-list-item mat-card-content mat-card-subtitle p.Designation {
+    padding-top: 5px;
+    padding-bottom: 23px;
+}
+  .accountbg{
+    position: absolute;
+    right: 46px;
+    bottom: 39px;
+    width: 220px;
+    opacity: 0.1;
+  }
+  .as_mainwrapper mat-list mat-list-item mat-card-content {
+    width: 93%;
+    background: #4a595c;
+    margin: 0 auto;
+    margin-bottom: 21px;
+    padding-top: 15px;
+    position: relative;
+  }
+  .editbtn{
+    position: absolute !important;
+    right: 0;
+    top: 10px;
+    color: #fff !important;
+    cursor: pointer !important;
+  }
+  .as_mainwrapper mat-list mat-list-item .blockimgwrapper {
+      display: inline-block; width: 100%;    text-align: center;
+  }
+  .as_mainwrapper mat-list mat-list-item .blockimgwrapper a img{
+    max-width: 100%;
+      position: absolute;
+      left: 50%;
+      top: 50%;
+      transform: translate(-50%, -50%);
+      min-width: 100%;
+      min-height: 100%;
+  }
+  .as_mainwrapper mat-list{display: flex; justify-content: space-between;    flex-wrap: wrap;}
+  .as_mainwrapper mat-list mat-list-item{
+    width: 48% !important;
+    height: auto !important;
+    box-shadow: 0px 2px 10px #ddd;
+    position: relative;
+  }
+  .as_mainwrapper mat-list mat-list-item.aslist3{
+    width: 100% !important;
+    margin-top: 37px;
+  }
+  .as_mainwrapper mat-list mat-list-item.aslist3  mat-card-title{background: #0696b1;}
+  .as_mainwrapper mat-list mat-list-item.aslist3 mat-card-content{background: #01b2d3;width: 97%;}
+  .as_mainwrapper mat-list mat-list-item.aslist3 mat-card-content table th, 
+  .as_mainwrapper mat-list mat-list-item.aslist3 mat-card-content table tr, 
+  .as_mainwrapper mat-list mat-list-item.aslist3 mat-card-content table td{color: #fff;border-color: #ccdbde;}
+  .as_mainwrapper mat-list mat-list-item.aslist3 mat-card-content table{
+    margin-top: 0;
+    margin: 0;
+    background: none !important;
+    box-shadow: none !important;
+    width: 100%;
+  }
+  /*--------------------- avijit css end ----------------- */
+    

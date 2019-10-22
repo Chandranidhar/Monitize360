@@ -33,7 +33,6 @@ export class ClientdashboardComponent implements OnInit {
 
       datesearch:[{startdatelabel:"Start Date",enddatelabel:"End Date",submit:"Search By Date",  field:"created_at"}],   // this is use for  date search 
 
-
       textsearch:[{label:"Search By email",field:'email'},{label:"Search By Full name",field:'name'}],  // this is use for  text search
 
       search:[{label:"Search By autocomplete",field:'name'}]     // this is use for  Autocomplete search
