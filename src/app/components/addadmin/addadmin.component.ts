@@ -90,7 +90,7 @@ export class AddadminComponent implements OnInit {
           this.dialog.closeAll();
         },2000);
         setTimeout(() => {
-          this.router.navigateByUrl('/admindashboard');
+          this.router.navigateByUrl('/adminlist');
 
         }, 2100);
       }

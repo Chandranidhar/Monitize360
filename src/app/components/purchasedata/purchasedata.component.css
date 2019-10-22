@@ -12,3 +12,13 @@
 
 .mat-list-base .mat-list-item .mat-list-item-content, .mat-list-base .mat-list-option .mat-list-item-content{justify-content: center !important;}
 .asnewclass mat-list mat-list-item h2{text-align: center; font-size: 24px;width: 100%;font-weight: normal;}
+
+table {
+    width: 100%;
+  }
+  
+  .mat-form-field {
+    font-size: 14px;
+    width: 100%;
+  }
+  

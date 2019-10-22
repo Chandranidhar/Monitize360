@@ -51,7 +51,7 @@ import { PurchasedataComponent } from './components/purchasedata/purchasedata.co
     UserDashboardComponent,
     AdminlistComponent,
     UserlistComponent,
-    PurchasedataComponent,
+    PurchasedataComponent
   ],
   imports: [
     BrowserModule.withServerTransition({ appId: 'serverApp' }),
@@ -65,7 +65,7 @@ import { PurchasedataComponent } from './components/purchasedata/purchasedata.co
     ReactiveFormsModule,
     LoginModule,
     ListingModule,
-    NgxUploaderModule,
+    NgxUploaderModule
     
     
   ],

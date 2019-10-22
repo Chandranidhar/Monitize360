@@ -16,7 +16,7 @@ contactUsAllDataHeaderSkipValue: any = [];
    ServiceListArray:any;
   statusarray: any = [{val: 1, name: 'Active'}, {val: 2, name: 'Inactive'}]; 
   
-  admin_datalist_skip: any = ['_id', 'type', 'password','confirmpassword','zipcode','status'];
+  admin_datalist_skip: any = ['_id', 'type', 'password','confirmpassword','zip','status','companywebsite','designation','type','accesscode','id','companyname'];
   
   // updateendpoint is use for data update endpoint
   updateendpoint = 'addorupdatedata';
@@ -37,10 +37,12 @@ editroute: any = 'editadmin';
 modify_header_array: any = {
   'firstname': "First Name",
   'lastname': 'Last Name',
-  'emailaddress': 'Email Id',
-  'phonenumber':'Phone Number',
+  'email': 'Email Id',
+  'phone':'Phone Number',
   'city':'City',
-  'state':'State'
+  'state':'State',
+  'created at': 'Created At',
+  'updated at': 'Updated At',
  
 
 };
