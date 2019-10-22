@@ -7,7 +7,8 @@ import { Router } from '@angular/router';
   styleUrls: ['./adminheader.component.css']
 })
 export class AdminheaderComponent implements OnInit {
-  public userdetails:any;public username:any;
+  public userdetails:any;
+  public username:any;
 
   constructor(public cookieService: CookieService,public router: Router) {
   
