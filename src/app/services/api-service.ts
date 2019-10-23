@@ -142,9 +142,9 @@ export class ApiService {
                 'Content-Type':  'application/json'
             })
         };
-        console.log(this.cookieService.get('jwttoken'));
-        console.log('endpoint');
-        console.log(endpoint);
+        // console.log(this.cookieService.get('jwttoken'));
+        // console.log('endpoint');
+        // console.log(endpoint);
         var result = this._http.post(this.getEndpointUrl(endpoint), JSON.stringify(data), httpOptions).pipe(map(res => res));
         return result;
     }

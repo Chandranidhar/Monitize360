@@ -20,9 +20,8 @@ public data:any={}
  public consumerdata:any;
 
  displayedColumns:string[] = ['First_Name','Last_Name'];
+ dspColumns:string[] = [];
   constructor(public apiservice:ApiService, public cookieservice:CookieService,public fb:FormBuilder) {
-
-  
   this.generateapitoken();
   this.consumarform=this.fb.group({
     First_Name:[''],
@@ -45,11 +44,8 @@ public data:any={}
     NetWorth_Code:[''],
     Donor_Capacity_Code:['']
 
-
-
   })
    }
-
    generateapitoken(){
     let data:any={};
     data={     
@@ -69,13 +65,9 @@ public data:any={}
   else{
     console.log("Null")
   }
-  
-  
     })
-    
   }
    
-
   ngOnInit() {
   }
   openConsumerPanel(){
@@ -123,19 +115,14 @@ filter(Value:any){
         {
           let result:any={};
           result=res;
-        
+      
             console.log(result.data.Response.responseDetails.SearchCount);
             console.log(typeof(result.data.Response.responseDetails.SearchCount));
             this.search_count=result.data.Response.responseDetails.SearchCount;
-
           })
-
         }
-
       console.log(this.consumarform.value)
     } 
-
-  
     showconsumerdata(){
     let data:any={};
     data={
@@ -145,21 +132,26 @@ filter(Value:any){
     this.apiservice.postDatawithoutToken('data',data).subscribe((res)=>{
       console.log('dta endpoint hit');
       let result:any;
-      
       result=res;
-      
-
       if(result.status=='200'){
         console.log(result.data.Response.responseDetails.SearchResult.searchResultRecord);
+        let datavalue:any = [];
         let consumerdatalistraw:any[] = result.data.Response.responseDetails.SearchResult.searchResultRecord;
         this.consumerdata=new MatTableDataSource(result.data.Response.responseDetails.SearchResult.searchResultRecord);
        
         for(let i in consumerdatalistraw){
           for (let j in consumerdatalistraw[i].resultFields){
             console.log(consumerdatalistraw[i].resultFields[j].fieldID);
-            this.displayedColumns.push(consumerdatalistraw[i].resultFields[j].fieldID);
-            console.log('this.displayedColumns');
-            console.log(this.displayedColumns);    
+            for(let k in this.displayedColumns){
+              if(consumerdatalistraw[i].resultFields[j].fieldID == this.displayedColumns[k]){
+                datavalue.push(consumerdatalistraw[i].resultFields[j].fieldValue);
+                console.log('datavalue');
+                console.log(datavalue);
+                console.log(this.displayedColumns); 
+                this.dataSource=datavalue;
+
+              }
+            }
           }
         }
       }
