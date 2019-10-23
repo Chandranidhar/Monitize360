@@ -141,6 +141,9 @@
 }
 .as_loginbg.as_signupbg form.example-container:before{background-image: url(../../assets/images/signup.png);}
 .as_loginbg.as_forgotpassbg form.example-container:before{background-image: url(../../assets/images/forgotpass.png);}
+
+.as_loginbg.as_forgotpassbg .from button.mat-primary{font-size: 37px;}
+
 /* ----------------- Login css end --------------- */
   
   
@@ -258,7 +261,9 @@
   /*--------------------- avijit css end ----------------- */
 
 
-
+  @media only screen and (max-width: 1440px) {
+    .as_loginbg.as_forgotpassbg .from button.mat-primary{font-size: 30px;}
+  }
   @media only screen and (max-width: 1300px) {
     .as_loginbg .from{
       width: 32% !important;
