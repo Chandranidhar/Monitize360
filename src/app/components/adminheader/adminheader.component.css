@@ -4,7 +4,7 @@
 .techdashboard_header .logo_wrapper:focus{ outline: none; border: none; }
 .techdashboard_header .logo_wrapper img{ max-width: 100%; vertical-align: middle; }
 .techdashboard_header .logo_wrapper button{ color: #fff; background: transparent; margin-left: 10px;}
-.techdashboard_header{ justify-content: space-between; padding: 0px; padding-right: 40px; box-sizing: border-box; background: #01b2d3; box-shadow: 1px 1px 0px 0px #716f6f;}
+.techdashboard_header{ justify-content: space-between; padding: 0px; padding-right: 40px; box-sizing: border-box; background: #000; box-shadow: 1px 1px 0px 0px #716f6f;}
 .techdashboard_header .quotation { margin-bottom: 0px;}
 .techdashboard_header .quotation p{ font-family: "RobotoMedium"; font-size: 30px; color: #002035; text-transform: uppercase; margin: 0; }
 .techdashboard_header .profile_section button{ padding-top: 8px; }
