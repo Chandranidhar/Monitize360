@@ -19,14 +19,11 @@ public data:any={}
  public search_count:any;
  public consumerdata:any;
 
- displayedColumns:string[];
+ displayedColumns:string[] = ['First_Name','Last_Name'];
   constructor(public apiservice:ApiService, public cookieservice:CookieService,public fb:FormBuilder) {
 
   
   this.generateapitoken();
-  this.showconsumerdata();
-
-
   this.consumarform=this.fb.group({
     First_Name:[''],
     Middle_Initial:[''],
@@ -102,27 +99,7 @@ public data:any={}
   prevStep() {
     this.step--;
   }
-  
-//   showdata(){
-
-// let data:any={};
-// data={
-//   source:"user",
-//   condition:{
-//     type:"admin"
-//   },
-//   token:this.cookieservice.get('jwttoken')
-
-// }
-// this.apiservice.postDatawithoutToken('datalist',data).subscribe(res=>{
-//   let result:any = {};
-//   result = res;
-// // console.log(result.res)
-// this.dataSource=new MatTableDataSource(result.res);
-
-//   })
-
-// }
+ 
 filter(Value:any){
   // console.log('this.dataSource while filtering');
   // console.log(this.dataSource);
@@ -147,8 +124,6 @@ filter(Value:any){
           let result:any={};
           result=res;
         
-
-
             console.log(result.data.Response.responseDetails.SearchCount);
             console.log(typeof(result.data.Response.responseDetails.SearchCount));
             this.search_count=result.data.Response.responseDetails.SearchCount;
@@ -175,6 +150,7 @@ filter(Value:any){
       
 
       if(result.status=='200'){
+        console.log(result.data.Response.responseDetails.SearchResult.searchResultRecord);
         let consumerdatalistraw:any[] = result.data.Response.responseDetails.SearchResult.searchResultRecord;
         this.consumerdata=new MatTableDataSource(result.data.Response.responseDetails.SearchResult.searchResultRecord);
        
@@ -183,18 +159,13 @@ filter(Value:any){
             console.log(consumerdatalistraw[i].resultFields[j].fieldID);
             this.displayedColumns.push(consumerdatalistraw[i].resultFields[j].fieldID);
             console.log('this.displayedColumns');
-            console.log(this.displayedColumns);
-            this.dataSource=new MatTableDataSource(this.displayedColumns);
-            
+            console.log(this.displayedColumns);    
           }
-          
         }
-        console.log(this.dataSource);
-
       }
       
     })
   }
-}
+} 
 
 
