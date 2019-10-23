@@ -99,26 +99,23 @@
 </mat-card>
 <br>
  <mat-card  *ngIf="dataType === 'business'">
+    <form [formGroup]="businessForm"  (ngSubmit)="businessFormSubmit()">
         <mat-accordion >
                 <mat-expansion-panel [expanded]="step === 0" (opened)="setStep(0)" hideToggle>
                         <mat-expansion-panel-header>
                           <mat-panel-title>
-                            Personal data
+                            Location
                           </mat-panel-title>
                           <mat-panel-description>
-                            Type your name and age
+                            Type Location
                             <mat-icon>account_circle</mat-icon>
                           </mat-panel-description>
                         </mat-expansion-panel-header>
                     
                         <mat-form-field>
-                          <input matInput placeholder="First name">
+                          <input matInput placeholder="Location_Sales_Code" formControlName="Location_Sales_Code">
                         </mat-form-field>
-                    
-                        <mat-form-field>
-                          <input matInput type="number" min="1" placeholder="Age">
-                        </mat-form-field>
-                    
+                                        
                         <mat-action-row>
                           <button mat-button color="primary" (click)="nextStep()">Next</button>
                         </mat-action-row>
@@ -127,16 +124,24 @@
                       <mat-expansion-panel [expanded]="step === 1" (opened)="setStep(1)" hideToggle>
                         <mat-expansion-panel-header>
                           <mat-panel-title>
-                            city
+                            Office
                           </mat-panel-title>
                           <mat-panel-description>
-                            country name
+                           business
                             <mat-icon>map</mat-icon>
                           </mat-panel-description>
                         </mat-expansion-panel-header>
                     
                         <mat-form-field>
-                          <input matInput placeholder="Country">
+                          <input matInput placeholder="Years_In_Business_Code" formControlName="Years_In_Business_Code">
+                        </mat-form-field>
+
+                        <mat-form-field>
+                          <input matInput placeholder="Square_Footage_Code" formControlName="Square_Footage_Code">
+                        </mat-form-field>
+
+                        <mat-form-field>
+                          <input matInput placeholder="Number_Of_PCs_Code" formControlName="Number_Of_PCs_Code">
                         </mat-form-field>
                     
                         <mat-action-row>
@@ -145,7 +150,7 @@
                         </mat-action-row>
                       </mat-expansion-panel>
                     
-                      <mat-expansion-panel [expanded]="step === 2" (opened)="setStep(2)" hideToggle>
+                      <!-- <mat-expansion-panel [expanded]="step === 2" (opened)="setStep(2)" hideToggle>
                         <mat-expansion-panel-header>
                           <mat-panel-title>
                             Day
@@ -165,13 +170,18 @@
                           <button mat-button color="warn" (click)="prevStep()">Previous</button>
                           <button mat-button color="primary" (click)="nextStep()">End</button>
                         </mat-action-row>
-                      </mat-expansion-panel>
+                      </mat-expansion-panel> -->
                 
               
-        </mat-accordion><br>
+        </mat-accordion>
+        <br>
         <button mat-raised-button color="primary">Purchase</button>
+      </form>
 </mat-card> 
-
+<mat-card *ngIf="businesssearchCount !=''">
+  <mat-label>Total Result :{{businesssearchCount}}</mat-label>
+  <button type="button" mat-raised-button color="primary" (click)="businessShowAllData()">Show All Data</button>
+</mat-card>
 <!-- <mat-card>
   
   <mat-form-field>
