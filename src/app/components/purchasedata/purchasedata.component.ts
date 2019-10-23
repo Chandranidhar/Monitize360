@@ -17,7 +17,7 @@ export class PurchasedataComponent implements OnInit {
   public businessForm: FormGroup;
   public apitoken: any = '';
   public consumarform: FormGroup;
-  public search_count: any;
+  public search_count: any=null;
   public consumerdata: any;
   public businesssearchCount: any = '';
   displayedColumns: string[];
@@ -161,6 +161,7 @@ businessFormSubmit() {
       token: this.cookieservice.get('jwttoken')
     }
     this.apiservice.postDatawithoutToken('data', data).subscribe((res) => {
+
       let result: any;
       result = res;
       if (result.status == '200') {
