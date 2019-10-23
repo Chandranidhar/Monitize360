@@ -23,8 +23,10 @@ public data:any={}
 
   
   this.generateapitoken();
+  // this.showconsumerdata();
 
-  this.purchaseform=this.fb.group({
+
+  this.consumarform=this.fb.group({
     First_Name:[''],
     Middle_Initial:[''],
     Last_Name:[''],
@@ -33,7 +35,18 @@ public data:any={}
     Physical_Address:[''],
     Physical_Zip:[''],
     Area_Code:[''],
-    Tally_County_Code:['']
+    Tally_County_Code:[''],
+    Income_Code:[''],
+    Number_Children:[''],
+    DiscretionaryIncomeCode:[''],
+    Median_HseHld_Income_Code:[''],
+    Household_Size:[''],
+    UnsecuredCreditCapacityCode:[''],
+    Vehicle_Dominate:[''],
+    Business_Owner:[''],
+    NetWorth_Code:[''],
+    Donor_Capacity_Code:['']
+
 
 
   });
@@ -55,11 +68,26 @@ public data:any={}
    this.apiservice.postDatawithoutToken('apitoken',data).subscribe(res=>{
     let result:any = {};
     result = res;
+<<<<<<< HEAD
+  // console.log(res);
+=======
+<<<<<<< HEAD
   // console.log(res);
   if(result.status=='200'){
+=======
+  console.log(res);
+>>>>>>> 108c5d97d63eee530db8b9b3aaf1096309e3b05e
+  if(result.status=='200'){
     this.apitoken=result.apitoken;
+>>>>>>> 5049db5f59ba67c27cef1b44ac8c8ec79b376d59
     this.cookieservice.set('apitoken',result.apitoken);
+<<<<<<< HEAD
     // console.log(result.apitoken)
+=======
+    
+    this.apitoken=this.cookieservice.get('apitoken');
+    console.log(this.apitoken);
+>>>>>>> 108c5d97d63eee530db8b9b3aaf1096309e3b05e
   }
   else{
     // console.log("Null")
@@ -123,23 +151,48 @@ filter(Value:any){
   this.dataSource.filter=Value.trim().toLowerCase();
     }
 
-    purchasedata(){
-      if(this.purchaseform.valid){
+    purchaseDataForConsumar(){
+      this.search_count='0';
+
+      if(this.consumarform.valid){
 
         let data:any={};
         data={
           "apitoken":this.apitoken,
           "token":this.cookieservice.get('jwttoken'),
-          "condition":this.purchaseform.value
+          "condition":this.consumarform.value
         };
         this.apiservice.postDatawithoutToken('searchwithcount',data).subscribe((res)=>
         {
           let result:any={};
           result=res;
+
+          console.log(result)
+          
+          if(result.status=='200'){
+            console.log("Search result is")
+            console.log(result)
+
         })
+
     //  console.log(this.purchaseform.value)
+         console.log(result.data.Response.responseDetails.SearchCount);
+            console.log(typeof(result.data.Response.responseDetails.SearchCount));
+            this.search_count=result.data.Response.responseDetails.SearchCount;
+
+            // if(this.search_count=='0'){
+
+            // }
+
+          }
+
+        })
+
+      console.log(this.consumarform.value)
     } 
+
   }
+
 
   /**Business form submit */
   businessFormSubmit(){
@@ -186,5 +239,36 @@ filter(Value:any){
           
         });
         
+  }
+
+  showconsumerdata(){
+    let data:any={};
+    data={
+      apitoken:this.apitoken,
+      token:this.cookieservice.get('jwttoken')
+    }
+    this.apiservice.postDatawithoutToken('data',data)
+    .subscribe((res)=>{
+      console.log('dta endpoint hit');
+      let result:any;
+      result=res;
+      if(result.status=='200'){
+        let consumerdatalistraw:any[] = result.data.Response.responseDetails.SearchResult.searchResultRecord;
+        this.consumerdata=new MatTableDataSource(result.data.Response.responseDetails.SearchResult.searchResultRecord);
+        console.log(this.consumerdata);
+        for(let i in consumerdatalistraw){
+          for (let j in consumerdatalistraw[i].resultFields){
+            console.log(consumerdatalistraw[i].resultFields[j].fieldID);
+            this.displayedColumns.push(consumerdatalistraw[i].resultFields[j].fieldID);
+            console.log('this.displayedColumns');
+            console.log(this.displayedColumns);
+          }
+          
+        }
+        
+
+      }
+      
+    })
   }
 }
