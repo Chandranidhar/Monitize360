@@ -13,15 +13,22 @@ export class PurchasedataComponent implements OnInit {
 
 public data:any={}
  public dataSource:any;
- public purchaseform:FormGroup;
+ public consumarform:FormGroup;
+ public dataType:any;
+ public apitoken:any;
+ public search_count:any;
+ public consumerdata:any = [];
 
- displayedColumns:string[]=['firstname','lastname','email','phone'];
+ displayedColumns:string[]=[];
+//  displayedColumns:string[]=['firstname','lastname','email','phone'];
   constructor(public apiservice:ApiService, public cookieservice:CookieService,public fb:FormBuilder) {
 
   this.showdata();
   this.generateapitoken();
+  // this.showconsumerdata();
 
-  this.purchaseform=this.fb.group({
+
+  this.consumarform=this.fb.group({
     First_Name:[''],
     Middle_Initial:[''],
     Last_Name:[''],
@@ -30,7 +37,18 @@ public data:any={}
     Physical_Address:[''],
     Physical_Zip:[''],
     Area_Code:[''],
-    Tally_County_Code:['']
+    Tally_County_Code:[''],
+    Income_Code:[''],
+    Number_Children:[''],
+    DiscretionaryIncomeCode:[''],
+    Median_HseHld_Income_Code:[''],
+    Household_Size:[''],
+    UnsecuredCreditCapacityCode:[''],
+    Vehicle_Dominate:[''],
+    Business_Owner:[''],
+    NetWorth_Code:[''],
+    Donor_Capacity_Code:['']
+
 
 
   })
@@ -45,9 +63,11 @@ public data:any={}
     let result:any = {};
     result = res;
   // console.log(res);
-  if(result.status=='success'){
+  if(result.status=='200'){
     this.cookieservice.set('apitoken',result.apitoken);
-    console.log(result.apitoken)
+    
+    this.apitoken=this.cookieservice.get('apitoken');
+    console.log(this.apitoken);
   }
   else{
     console.log("Null")
@@ -111,30 +131,73 @@ filter(Value:any){
   this.dataSource.filter=Value.trim().toLowerCase();
     }
 
-    purchasedata(){
-      if(this.purchaseform.valid){
+    purchaseDataForConsumar(){
+      this.search_count='0';
+
+      if(this.consumarform.valid){
 
         let data:any={};
         data={
-          "apitoken":this.cookieservice.get('apitoken'),
+          "apitoken":this.apitoken,
           "token":this.cookieservice.get('jwttoken'),
-          "condition":this.purchaseform.value
+          "condition":this.consumarform.value
         };
-        this.apiservice.postDatawithoutToken('search',data).subscribe((res)=>
+        this.apiservice.postDatawithoutToken('searchwithcount',data).subscribe((res)=>
         {
           let result:any={};
           result=res;
-          console.log(result.res)
+          console.log(result)
+          
+          if(result.status=='200'){
+            console.log("Search result is")
+            console.log(result)
+
+            console.log(result.data.Response.responseDetails.SearchCount);
+            console.log(typeof(result.data.Response.responseDetails.SearchCount));
+            this.search_count=result.data.Response.responseDetails.SearchCount;
+
+            // if(this.search_count=='0'){
+
+            // }
+
+          }
+
         })
 
-
-
-
-
-
-      console.log(this.purchaseform.value)
-
-
+      console.log(this.consumarform.value)
     } 
+
   }
+  showconsumerdata(){
+    let data:any={};
+    data={
+      apitoken:this.apitoken,
+      token:this.cookieservice.get('jwttoken')
+    }
+    this.apiservice.postDatawithoutToken('data',data)
+    .subscribe((res)=>{
+      console.log('dta endpoint hit');
+      let result:any;
+      result=res;
+      if(result.status=='200'){
+        let consumerdatalistraw:any[] = result.data.Response.responseDetails.SearchResult.searchResultRecord;
+        this.consumerdata=new MatTableDataSource(result.data.Response.responseDetails.SearchResult.searchResultRecord);
+        console.log(this.consumerdata);
+        for(let i in consumerdatalistraw){
+          for (let j in consumerdatalistraw[i].resultFields){
+            console.log(consumerdatalistraw[i].resultFields[j].fieldID);
+            this.displayedColumns.push(consumerdatalistraw[i].resultFields[j].fieldID);
+            console.log('this.displayedColumns');
+            console.log(this.displayedColumns);
+          }
+          
+        }
+        
+
+      }
+      
+    })
+  }
+
+
 }
