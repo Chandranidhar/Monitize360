@@ -10,9 +10,10 @@ import { FormGroup, FormBuilder, Validators } from '@angular/forms';
   styleUrls: ['./purchasedata.component.css']
 })
 export class PurchasedataComponent implements OnInit {
-
+public dataType:any='';
 public data:any={}
  public dataSource:any;
+<<<<<<< HEAD
  public consumarform:FormGroup;
  public dataType:any;
  public apitoken:any;
@@ -21,9 +22,15 @@ public data:any={}
 
  displayedColumns:string[]=[];
 //  displayedColumns:string[]=['firstname','lastname','email','phone'];
+=======
+ public purchaseform:FormGroup;
+ public apitoken:any='';
+
+ displayedColumns:string[]=['firstname','lastname','email','phone'];
+>>>>>>> 5049db5f59ba67c27cef1b44ac8c8ec79b376d59
   constructor(public apiservice:ApiService, public cookieservice:CookieService,public fb:FormBuilder) {
 
-  this.showdata();
+  
   this.generateapitoken();
   // this.showconsumerdata();
 
@@ -62,8 +69,14 @@ public data:any={}
    this.apiservice.postDatawithoutToken('apitoken',data).subscribe(res=>{
     let result:any = {};
     result = res;
+<<<<<<< HEAD
   // console.log(res);
   if(result.status=='200'){
+=======
+  console.log(res);
+  if(result.status=='200'){
+    this.apitoken=result.apitoken;
+>>>>>>> 5049db5f59ba67c27cef1b44ac8c8ec79b376d59
     this.cookieservice.set('apitoken',result.apitoken);
     
     this.apitoken=this.cookieservice.get('apitoken');
@@ -146,11 +159,16 @@ filter(Value:any){
         {
           let result:any={};
           result=res;
+<<<<<<< HEAD
           console.log(result)
           
           if(result.status=='200'){
             console.log("Search result is")
             console.log(result)
+=======
+        })
+
+>>>>>>> 5049db5f59ba67c27cef1b44ac8c8ec79b376d59
 
             console.log(result.data.Response.responseDetails.SearchCount);
             console.log(typeof(result.data.Response.responseDetails.SearchCount));
