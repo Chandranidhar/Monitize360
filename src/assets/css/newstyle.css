@@ -1,4 +1,131 @@
+/* ----------------- Login css start --------------- */
 
+
+.as_loginbg{
+  background-image: url(../../assets/images/loginbgnew.png) !important;
+  background-size: cover !important;
+  box-shadow: none !important;
+  margin: 0 !important;
+  border-radius: 0 !important;
+  background-repeat: no-repeat !important;
+  background-position: top center !important;
+  position: relative;
+}
+/* .as_loginbg:after {
+  content: '';
+  position: absolute;
+  left: 0;
+  top: 0;
+  height: 100%;
+  width: 100%;
+  background:rgba(0, 142, 255, 0.1);
+} */
+
+.as_loginbg .from{
+    background: url(../../assets/images/formbg.png);
+    border: 1px solid #091c58 !important;
+    z-index: 9;
+    box-shadow: 0 2px 43px #000!important;
+    margin: 0 auto 30px 12% !important;
+    padding: 57px 39px;
+    border-radius: 0 !important;
+    width: 26% !important;
+}
+.as_loginbg .from button.mat-primary {
+  background: rgba(255,255,0,1);
+  background: -moz-linear-gradient(top, rgba(255,255,0,1) 0%, rgba(255,234,1,1) 49%, rgba(255,209,2,1) 50%, rgba(255,209,2,1) 71%, rgba(255,209,2,1) 100%);
+  background: -webkit-gradient(left top, left bottom, color-stop(0%, rgba(255,255,0,1)), color-stop(49%, rgba(255,234,1,1)), color-stop(50%, rgba(255,209,2,1)), color-stop(71%, rgba(255,209,2,1)), color-stop(100%, rgba(255,209,2,1)));
+  background: -webkit-linear-gradient(top, rgba(255,255,0,1) 0%, rgba(255,234,1,1) 49%, rgba(255,209,2,1) 50%, rgba(255,209,2,1) 71%, rgba(255,209,2,1) 100%);
+  background: -o-linear-gradient(top, rgba(255,255,0,1) 0%, rgba(255,234,1,1) 49%, rgba(255,209,2,1) 50%, rgba(255,209,2,1) 71%, rgba(255,209,2,1) 100%);
+  background: -ms-linear-gradient(top, rgba(255,255,0,1) 0%, rgba(255,234,1,1) 49%, rgba(255,209,2,1) 50%, rgba(255,209,2,1) 71%, rgba(255,209,2,1) 100%);
+  background: linear-gradient(to bottom, rgba(255,255,0,1) 0%, rgba(255,234,1,1) 49%, rgba(255,209,2,1) 50%, rgba(255,209,2,1) 71%, rgba(255,209,2,1) 100%);
+  filter: progid:DXImageTransform.Microsoft.gradient( startColorstr='#ffff00', endColorstr='#ffd102', GradientType=0 );
+  color: #031021;
+  font-size: 48px;
+  text-transform: uppercase;
+  padding: 13px 5px;
+  box-shadow: 0 3px 7px #000;
+  margin-top: 20px;
+}
+.as_loginbg .from .signupfooter{
+  color: #fff;
+  padding-top: 20px;
+}
+.as_loginbg .from .signupfooter a{
+  padding-right: 0 !important;
+}
+.as_loginbg .from h2 {
+  text-align: center !important;
+  background-color: #ffffff63 !important;
+  color: #474745 !important;
+  padding: 15px !important;
+  text-transform: uppercase !important;
+  border: 1px solid #fff !important;
+  display: none;
+}
+
+.as_loginbg .from .mat-form-field-infix input{
+  background: #072347;
+    height: 55px;
+    width: 96%;
+    padding: 0 1.7%;
+    border-top: 3px solid #000000;
+    border-left: 3px solid #000000;
+    color: #fff;
+}
+.as_loginbg .from .mat-form-field-infix{
+  border-top: 0;
+}
+.as_loginbg .from .mat-form-field-label-wrapper {
+  top: -4px;
+  padding-top: 0;
+}
+.as_loginbg .from .mat-form-field-wrapper {
+  position: relative;
+  padding: 0 !important;
+}
+.as_loginbg .from .mat-focused .mat-form-field-label.ng-star-inserted.mat-empty.mat-form-field-empty {display: none !important}
+.as_loginbg .from .mat-form-field-label.ng-star-inserted.mat-empty.mat-form-field-empty {
+  display: block !important;
+    left: 2%;
+    color: #969595;
+    top: 30px;
+}
+.as_loginbg .from .mat-form-field-label.ng-star-inserted {display: none !important}
+.as_loginbg .from .mat-form-field-appearance-legacy .mat-form-field-underline {display: none !important}
+.as_loginbg .from .mat-form-field-subscript-wrapper{
+    position: relative;
+    padding-top: 0;
+    margin-top: 0;
+    padding-bottom: 10px;
+}
+.as_loginbg form.example-container{
+  position: relative;
+  padding-top: 132px;
+}
+.as_loginbg form.example-container:before{
+  content: '';
+    height: 97px;
+    width: 97px;
+    background-image: url(../../assets/images/loginlogo.png);
+    background-repeat: no-repeat;
+    background-color: #fcfcfc;
+    display: flex;
+    background-position: center center;
+    border-radius: 50%;
+    border: 2px solid #fff;
+    position: absolute;
+    left: 50%;
+    transform: translateX(-50%);
+    top: 0;
+    box-shadow: 2px 5px 16px #0000009e;
+}
+/* ----------------- Login css end --------------- */
+  
+  
+  
+  
+  
   /*--------------------- avijit css start ----------------- */
   body{overflow-y: hidden;}
   .as_mainwrapper {box-shadow: none !important;}
@@ -108,4 +235,25 @@
     width: 100%;
   }
   /*--------------------- avijit css end ----------------- */
+
+
+
+  @media only screen and (max-width: 1300px) {
+    .as_loginbg .from{
+      width: 32% !important;
+      margin: 0 auto 30px 5% !important;
+    }
+  }
+
+  @media only screen and (max-width: 991px) {
+    .as_loginbg .from{
+      width: 39% !important;
+    }
+    .as_loginbg .from {
+      width: 81% !important;
+      background-repeat: no-repeat;
+      background-size: cover;
+  }
+  }
+
     
