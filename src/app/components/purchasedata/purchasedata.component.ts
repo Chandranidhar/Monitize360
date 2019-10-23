@@ -10,7 +10,6 @@ import { FormGroup, FormBuilder, Validators } from '@angular/forms';
   styleUrls: ['./purchasedata.component.css']
 })
 export class PurchasedataComponent implements OnInit {
-<<<<<<< HEAD
 public dataType:any='';
 public data:any={}
  public dataSource:any;
@@ -44,20 +43,6 @@ public data:any={}
     Business_Owner:[''],
     NetWorth_Code:[''],
     Donor_Capacity_Code:['']
-=======
-  public dataType: any = '';
-  public data: any = {}
-  public dataSource: any;
-  public purchaseform: FormGroup;
-  public businessForm: FormGroup;
-  public apitoken: any = '';
-  public consumarform: FormGroup;
-  public search_count: any=null;
-  public consumerdata: any;
-  public businesssearchCount: any = '';
-  displayedColumns: string[];
-  constructor(public apiservice: ApiService, public cookieservice: CookieService, public fb: FormBuilder) {
->>>>>>> 386979e16e776f886721948b458625106f897ae7
 
   })
    }
@@ -144,7 +129,6 @@ filter(Value:any){
       apitoken:this.apitoken,
       token:this.cookieservice.get('jwttoken')
     }
-<<<<<<< HEAD
     this.apiservice.postDatawithoutToken('data',data).subscribe((res)=>{
       console.log('dta endpoint hit');
       let result:any;
@@ -157,18 +141,6 @@ filter(Value:any){
        
         for(let i in consumerdatalistraw){
           for (let j in consumerdatalistraw[i].resultFields){
-=======
-    this.apiservice.postDatawithoutToken('data', data).subscribe((res) => {
-
-      let result: any;
-      result = res;
-      if (result.status == '200') {
-        let consumerdatalistraw: any[] = result.data.Response.responseDetails.SearchResult.searchResultRecord;
-        this.consumerdata = new MatTableDataSource(result.data.Response.responseDetails.SearchResult.searchResultRecord);
-
-        for (let i in consumerdatalistraw) {
-          for (let j in consumerdatalistraw[i].resultFields) {
->>>>>>> 386979e16e776f886721948b458625106f897ae7
             console.log(consumerdatalistraw[i].resultFields[j].fieldID);
             for(let k in this.displayedColumns){
               if(consumerdatalistraw[i].resultFields[j].fieldID == this.displayedColumns[k]){
