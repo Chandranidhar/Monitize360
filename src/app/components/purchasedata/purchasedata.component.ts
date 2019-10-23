@@ -10,15 +10,16 @@ import { FormGroup, FormBuilder, Validators } from '@angular/forms';
   styleUrls: ['./purchasedata.component.css']
 })
 export class PurchasedataComponent implements OnInit {
-
+public dataType:any='';
 public data:any={}
  public dataSource:any;
  public purchaseform:FormGroup;
+ public apitoken:any='';
 
  displayedColumns:string[]=['firstname','lastname','email','phone'];
   constructor(public apiservice:ApiService, public cookieservice:CookieService,public fb:FormBuilder) {
 
-  this.showdata();
+  
   this.generateapitoken();
 
   this.purchaseform=this.fb.group({
@@ -44,8 +45,9 @@ public data:any={}
    this.apiservice.postDatawithoutToken('apitoken',data).subscribe(res=>{
     let result:any = {};
     result = res;
-  // console.log(res);
-  if(result.status=='success'){
+  console.log(res);
+  if(result.status=='200'){
+    this.apitoken=result.apitoken;
     this.cookieservice.set('apitoken',result.apitoken);
     console.log(result.apitoken)
   }
@@ -116,15 +118,14 @@ filter(Value:any){
 
         let data:any={};
         data={
-          "apitoken":this.cookieservice.get('apitoken'),
+          "apitoken":this.apitoken,
           "token":this.cookieservice.get('jwttoken'),
           "condition":this.purchaseform.value
         };
-        this.apiservice.postDatawithoutToken('search',data).subscribe((res)=>
+        this.apiservice.postDatawithoutToken('searchwithcount',data).subscribe((res)=>
         {
           let result:any={};
           result=res;
-          console.log(result.res)
         })
 
 
