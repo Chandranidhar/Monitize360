@@ -9,7 +9,9 @@
   border-radius: 0 !important;
   background-repeat: no-repeat !important;
   background-position: top center !important;
-  position: relative;
+  position: relative !important;
+  overflow: auto;
+  max-height: 100vh;
 }
 /* .as_loginbg:after {
   content: '';
@@ -22,14 +24,31 @@
 } */
 
 .as_loginbg .from{
-    background: url(../../assets/images/formbg.png);
-    border: 1px solid #091c58 !important;
-    z-index: 9;
-    box-shadow: 0 2px 43px #000!important;
-    margin: 0 auto 30px 12% !important;
-    padding: 57px 39px;
-    border-radius: 0 !important;
-    width: 26% !important;
+  background: url(../../assets/images/formbg.png);
+  border: 1px solid #091c58 !important;
+  z-index: 9;
+  box-shadow: 0 2px 43px #000!important;
+  margin: 0 auto 30px 12% !important;
+  padding: 57px 39px;
+  border-radius: 0 !important;
+  width: 26% !important;
+  background-repeat: no-repeat !important;
+  background-size: cover !important;
+  margin-top: 118px !important;
+}
+.as_loginbg .from:before{
+ content: '';
+ background: url(../../assets/images/logo.png);
+    width: 100%;
+    height: 94px;
+    display: block;
+    background-repeat: no-repeat;
+    background-position: center;
+    position: absolute;
+    top: -114px;
+    left: 50%;
+    transform: translateX(-50%);
+
 }
 .as_loginbg .from button.mat-primary {
   background: rgba(255,255,0,1);
@@ -64,7 +83,7 @@
   display: none;
 }
 
-.as_loginbg .from .mat-form-field-infix input{
+.as_loginbg .from .mat-form-field-infix input, .as_loginbg .from .mat-form-field-infix mat-select{
   background: #072347;
     height: 55px;
     width: 96%;
@@ -120,6 +139,8 @@
     top: 0;
     box-shadow: 2px 5px 16px #0000009e;
 }
+.as_loginbg.as_signupbg form.example-container:before{background-image: url(../../assets/images/signup.png);}
+.as_loginbg.as_forgotpassbg form.example-container:before{background-image: url(../../assets/images/forgotpass.png);}
 /* ----------------- Login css end --------------- */
   
   
