@@ -175,13 +175,10 @@ businessFormSubmit() {
             console.log('this.displayedColumns');
             console.log(this.displayedColumns);
             this.dataSource = new MatTableDataSource(this.displayedColumns);
-
           }
-
         }
         console.log(this.dataSource);
       }
     })
   }
-
 }
