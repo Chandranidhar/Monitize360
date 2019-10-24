@@ -19,7 +19,7 @@ export class SupportComponent implements OnInit {
     cookie = JSON.parse(userdetails);
      
     this.SupportForm = this.fb.group({
-      clientemail:[cookie.email,null],
+      email:[cookie.email,null],
       subject:[null,[Validators.required]],
       description:[null,[Validators.required]]
     });

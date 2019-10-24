@@ -138,7 +138,7 @@ export class PurchasedataComponent implements OnInit {
   }
 /**For business Form Submit */
 businessFormSubmit() {
-  let data: any = {};
+   let data: any = {};
   data = {
     "apitoken": this.apitoken,
     "token": this.cookieservice.get('jwttoken'),
