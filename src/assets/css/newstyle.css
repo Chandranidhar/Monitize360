@@ -380,9 +380,24 @@
   position: relative;
     z-index: 9;
     color: #3f3e3e;
+    padding-top: 20px;
 }
 .as_editprofile.as_support .example-container form{
-  width: 25%;
+  width: 40%;
+}
+.passwordchangebtn{
+  position: relative;
+    display: block;
+    width: 41%;
+    margin: 0 auto;
+    margin-bottom: 78px;
+    padding: 20px;
+    text-align: center;
+    background: #0f59a0;
+    z-index: 9;
+    color: #fff;
+    cursor: pointer;
+    box-shadow: 3px 8px 10px #ddd;
 }
 .as_editprofile.as_support .example-container form .mat-button-base.mat-warn{
     background: #0f59a0;
@@ -391,6 +406,7 @@
     margin: 0 auto;
     padding: 2px 53px;
     border-radius: 32px;
+    margin-top: 20px;
 }
 .as_editprofile.as_support .example-container{
   display: flex;
