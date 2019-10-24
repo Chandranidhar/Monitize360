@@ -19,7 +19,7 @@ public data:any={}
  public search_count:any;
  public consumerdata:any;
 public businesssearchCount:any='';
- displayedColumns:string[] = ['First_Name','Last_Name'];
+ displayedColumns:string[] = ['First_Name','Last_Name','Physical_State','Physical_City'];
  dspColumns:string[] = [];
   constructor(public apiservice:ApiService, public cookieservice:CookieService,public fb:FormBuilder) {
   this.generateapitoken();
@@ -55,7 +55,7 @@ public businesssearchCount:any='';
    }
    generateapitoken(){
     let data:any={};
-    data={     
+    data={
       token:this.cookieservice.get('jwttoken')
    }
    this.apiservice.postDatawithoutToken('apitoken',data).subscribe(res=>{
@@ -65,7 +65,7 @@ public businesssearchCount:any='';
   if(result.status=='200'){
     this.apitoken=result.apitoken;
     this.cookieservice.set('apitoken',result.apitoken);
-    
+
     this.apitoken=this.cookieservice.get('apitoken');
     console.log(this.apitoken);
   }
@@ -74,7 +74,7 @@ public businesssearchCount:any='';
   }
     })
   }
-   
+
   ngOnInit() {
   }
   openConsumerPanel(){
@@ -98,7 +98,7 @@ public businesssearchCount:any='';
   prevStep() {
     this.step--;
   }
- 
+
 filter(Value:any){
   // console.log('this.dataSource while filtering');
   // console.log(this.dataSource);
@@ -107,7 +107,7 @@ filter(Value:any){
   this.dataSource.filter=Value.trim().toLowerCase();
     }
 
- 
+
 /**For business Form Submit */
 businessFormSubmit() {
   console.log(this.businessForm.value);
@@ -127,29 +127,53 @@ businessFormSubmit() {
   })
 }
 
+  toObject(arr) {
+    var rv = {};
+    for (var i = 0; i < arr.length; ++i)
+      rv[i] = arr[i];
+    return rv;
+  }
+
     purchaseDataForConsumar(){
       this.search_count='0';
+      let conditiondata:any=[];
 
       if(this.consumarform.valid){
 
+        for(let cv in this.consumarform.value){
+          console.log(this.consumarform,cv,this.consumarform.value[cv]);
+
+          if(this.consumarform.value[cv].length>=2){
+            //let cval:any=[];
+            conditiondata[cv]=this.consumarform.value[cv];
+            //cval=Object.assign({}, cval);
+            //conditiondata.push(cval);
+          }
+        }
+        console.log(conditiondata,'cdata');
+
+        conditiondata=Object.assign({}, conditiondata);
+        console.log(conditiondata,'cdata obj');
         let data:any={};
         data={
           "apitoken":this.apitoken,
           "token":this.cookieservice.get('jwttoken'),
-          "condition":this.consumarform.value
+          "condition":conditiondata
         };
         this.apiservice.postDatawithoutToken('searchwithcount',data).subscribe((res)=>
         {
           let result:any={};
           result=res;
-      
+
             console.log(result.data.Response.responseDetails.SearchCount);
             console.log(typeof(result.data.Response.responseDetails.SearchCount));
             this.search_count=result.data.Response.responseDetails.SearchCount;
           })
         }
       console.log(this.consumarform.value)
-    } 
+    }
+
+
     showconsumerdata(){
     let data:any={};
     data={
@@ -162,31 +186,37 @@ businessFormSubmit() {
       result=res;
       if(result.status=='200'){
         console.log(result.data.Response.responseDetails.SearchResult.searchResultRecord);
+        let cdata:any=result.data.Response.responseDetails.SearchResult.searchResultRecord;
+        let sourcedata:any=[];
+        for(let b in cdata){
+          let tempdata:any=[];
+          console.log(cdata[b],b,'b');
+          for(let n in cdata[b].resultFields){
+
+            console.log(cdata[b].resultFields[n],'ddd');
+            //tempdata['First_Name']=cdata[b]['First_Name'];
+            //tempdata['Last_Name']=cdata[b]['Last_Name'];
+            if(cdata[b].resultFields[n].fieldID=='First_Name')tempdata['First_Name']=cdata[b].resultFields[n].fieldValue;
+            if(cdata[b].resultFields[n].fieldID=='Last_Name')tempdata['Last_Name']=cdata[b].resultFields[n].fieldValue;
+            if(cdata[b].resultFields[n].fieldID=='Physical_State')tempdata['Physical_State']=cdata[b].resultFields[n].fieldValue;
+            if(cdata[b].resultFields[n].fieldID=='Physical_City')tempdata['Physical_City']=cdata[b].resultFields[n].fieldValue;
+            tempdata=Object.assign({}, tempdata);
+            //conditiondata=Object.assign({}, conditiondata);
+
+          }
+          sourcedata.push(tempdata);
+
+
+        }
+        console.log(result.data.Response.responseDetails.SearchResult.searchResultRecord.length);
+        console.log('sourcedata',sourcedata);
         let datavalue:any = [];
         let consumerdatalistraw:any[] = result.data.Response.responseDetails.SearchResult.searchResultRecord;
-        this.consumerdata=new MatTableDataSource(result.data.Response.responseDetails.SearchResult.searchResultRecord);
-       
-        for(let i in consumerdatalistraw){
-          for (let j in consumerdatalistraw[i].resultFields){
-            console.log(consumerdatalistraw[i].resultFields[j].fieldID);
-            this.displayedColumns.push(consumerdatalistraw[i].resultFields[j].fieldID);
-            console.log('this.displayedColumns');
-            console.log(this.displayedColumns);
-            this.dataSource = new MatTableDataSource(this.displayedColumns);
-            for(let k in this.displayedColumns){
-              if(consumerdatalistraw[i].resultFields[j].fieldID == this.displayedColumns[k]){
-                datavalue.push(consumerdatalistraw[i].resultFields[j].fieldValue);
-                console.log('datavalue');
-                console.log(datavalue);
-                console.log(this.displayedColumns); 
-                this.dataSource=datavalue;
+        //this.consumerdata=new MatTableDataSource(result.data.Response.responseDetails.SearchResult.searchResultRecord);
+        this.consumerdata=new MatTableDataSource(sourcedata);
 
-              }
-            }
-          }
-        }
       }
-      
+
     })
   }
 }
