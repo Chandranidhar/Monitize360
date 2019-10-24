@@ -20,7 +20,6 @@ public data:any={}
  public consumerdata:any;
 public businesssearchCount:any='';
  displayedColumns:string[] = ['First_Name','Last_Name'];
- dspColumns:string[] = [];
   constructor(public apiservice:ApiService, public cookieservice:CookieService,public fb:FormBuilder) {
   this.generateapitoken();
   this.consumarform=this.fb.group({
@@ -43,7 +42,6 @@ public businesssearchCount:any='';
     Business_Owner:[''],
     NetWorth_Code:[''],
     Donor_Capacity_Code:['']
-
   });
   /**Busniss form group */
   this.businessForm=this.fb.group({
