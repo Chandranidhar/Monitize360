@@ -166,8 +166,38 @@
     margin-bottom: 20px !important;
     text-transform: uppercase;
   }
-  .as_mainwrapper mat-list mat-list-item.aslist2  mat-card-title{background: #946805;}
-  .as_mainwrapper mat-list mat-list-item.aslist2 mat-card-content{background: #c18500;}
+  .as_mainwrapper mat-list mat-list-item.aslist2  mat-card-title{background: #0f59a0;}
+  .as_mainwrapper mat-list mat-list-item.aslist2 mat-card-content{
+    background: rgba(145,202,227,1);
+    background: -moz-linear-gradient(left, rgba(145,202,227,1) 0%, rgba(1,77,153,1) 100%);
+    background: -webkit-gradient(left top, right top, color-stop(0%, rgba(145,202,227,1)), color-stop(100%, rgba(1,77,153,1)));
+    background: -webkit-linear-gradient(left, rgba(145,202,227,1) 0%, rgba(1,77,153,1) 100%);
+    background: -o-linear-gradient(left, rgba(145,202,227,1) 0%, rgba(1,77,153,1) 100%);
+    background: -ms-linear-gradient(left, rgba(145,202,227,1) 0%, rgba(1,77,153,1) 100%);
+    background: linear-gradient(to right, rgba(145,202,227,1) 0%, rgba(1,77,153,1) 100%);
+    filter: progid:DXImageTransform.Microsoft.gradient( startColorstr='#91cae3', endColorstr='#014d99', GradientType=1 );
+  }
+  .blockimg{width: 375px; margin: 0 auto; display: block;}
+  .blockimg img{max-width: 100%;}
+  .paybtn {
+    background: #fcb72b !important;
+    color: #fff !important;
+    display: block !important;
+    margin: 21px auto 0 !important;
+    border-radius: 30px !important;
+  }
+  .as_mainwrapper mat-list mat-list-item mat-card-content mat-card-subtitle span.colsubtitle{
+    color: #fff;
+    padding: 0 55px;
+    display: block;
+    line-height: 19px;
+  }
+  .as_mainwrapper mat-list mat-list-item mat-card-content mat-card-subtitle h2{
+    color: #fff;
+    text-shadow: none !important;
+    text-transform: uppercase;
+    font-weight: normal;
+  }
   .as_mainwrapper mat-list mat-list-item.aslist2 mat-card-content mat-card-subtitle p{border-bottom: 1px solid #bfae87;}
   .as_mainwrapper mat-list mat-list-item .blockimgwrapper a{
     height: 65px;
@@ -210,18 +240,30 @@
   }
   .as_mainwrapper mat-list mat-list-item mat-card-content {
     width: 93%;
-    background: #4a595c;
+    background: rgba(93,109,112,1);
+    background: -moz-linear-gradient(left, rgba(93,109,112,1) 0%, rgba(36,42,43,1) 100%);
+    background: -webkit-gradient(left top, right top, color-stop(0%, rgba(93,109,112,1)), color-stop(100%, rgba(36,42,43,1)));
+    background: -webkit-linear-gradient(left, rgba(93,109,112,1) 0%, rgba(36,42,43,1) 100%);
+    background: -o-linear-gradient(left, rgba(93,109,112,1) 0%, rgba(36,42,43,1) 100%);
+    background: -ms-linear-gradient(left, rgba(93,109,112,1) 0%, rgba(36,42,43,1) 100%);
+    background: linear-gradient(to right, rgba(93,109,112,1) 0%, rgba(36,42,43,1) 100%);
+    filter: progid:DXImageTransform.Microsoft.gradient( startColorstr='#5d6d70', endColorstr='#242a2b', GradientType=1 );
     margin: 0 auto;
     margin-bottom: 21px;
     padding-top: 15px;
     position: relative;
   }
   .editbtn{
-    position: absolute !important;
+    position: relative !important;
     right: 0;
     top: 10px;
     color: #fff !important;
     cursor: pointer !important;
+    display: block !important;
+    margin: 20px auto !important;
+    background: #879496 !important;
+    border-radius: 30px !important;
+    margin-top: 0 !important;
   }
   .as_mainwrapper mat-list mat-list-item .blockimgwrapper {
       display: inline-block; width: 100%;    text-align: center;
@@ -247,7 +289,17 @@
     margin-top: 37px;
   }
   .as_mainwrapper mat-list mat-list-item.aslist3  mat-card-title{background: #0696b1;}
-  .as_mainwrapper mat-list mat-list-item.aslist3 mat-card-content{background: #01b2d3;width: 97%;}
+  .as_mainwrapper mat-list mat-list-item.aslist3 mat-card-content{
+    background: rgba(1,179,211,1);
+    background: -moz-linear-gradient(left, rgba(1,179,211,1) 0%, rgba(3,126,148,1) 100%);
+    background: -webkit-gradient(left top, right top, color-stop(0%, rgba(1,179,211,1)), color-stop(100%, rgba(3,126,148,1)));
+    background: -webkit-linear-gradient(left, rgba(1,179,211,1) 0%, rgba(3,126,148,1) 100%);
+    background: -o-linear-gradient(left, rgba(1,179,211,1) 0%, rgba(3,126,148,1) 100%);
+    background: -ms-linear-gradient(left, rgba(1,179,211,1) 0%, rgba(3,126,148,1) 100%);
+    background: linear-gradient(to right, rgba(1,179,211,1) 0%, rgba(3,126,148,1) 100%);
+    filter: progid:DXImageTransform.Microsoft.gradient( startColorstr='#01b3d3', endColorstr='#037e94', GradientType=1 );
+    width: 97%;
+  }
   .as_mainwrapper mat-list mat-list-item.aslist3 mat-card-content table th, 
   .as_mainwrapper mat-list mat-list-item.aslist3 mat-card-content table tr, 
   .as_mainwrapper mat-list mat-list-item.aslist3 mat-card-content table td{color: #fff;border-color: #ccdbde;}
@@ -258,9 +310,69 @@
     box-shadow: none !important;
     width: 100%;
   }
+
+.as_editprofile form .mat-form-field{display: block;}
+.as_editprofile form{
+  position: relative;
+    z-index: 9;
+    width: 41%;
+    margin: 0 auto;
+    display: block;
+    background: #fff;
+    padding: 20px;
+    box-shadow: 1px 2px 10px #ddd;
+}
+.as_editprofile form .mat-button-base.mat-primary{
+  background: #0f59a0;
+    display: block;
+    margin: 0 auto;
+    padding: 3px 51px;
+    border-radius: 30px;
+}
+.as_editprofile{position: relative;}
+.as_editprofile .inner_wrapper .rightpannel{
+  background: url(../../assets/images/editprofilebg.png);
+  background-size: cover;
+  background-repeat: no-repeat;
+  background-position: center center;
+}
+.as_editprofile .editprofiletitle{
+  text-align: center;
+  width: 100%;
+  display: block;
+  text-transform: uppercase;
+  padding-bottom: 20px;
+  font-size: 30px;
+  position: relative;
+    z-index: 9;
+    color: #3f3e3e;
+}
+.as_editprofile.as_support .example-container form{
+  width: 25%;
+}
+.as_editprofile.as_support .example-container form .mat-button-base.mat-warn{
+    background: #0f59a0;
+    color: #fff;
+    display: block;
+    margin: 0 auto;
+    padding: 2px 53px;
+    border-radius: 32px;
+}
+.as_editprofile.as_support .example-container{
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  height: 100%;
+}
   /*--------------------- avijit css end ----------------- */
+  @media only screen and (max-width: 1700px) {
+    .techdashboard_header .logo_wrapper {max-width: 175px !important;}
+    .as_mainwrapper mat-list mat-list-item mat-card-content{min-height: 100vh !important;}
+  }
 
-
+  @media only screen and (max-width: 1400px) {
+    .as_editprofile form {width: 60%;}
+  }
   @media only screen and (max-width: 1440px) {
     .as_loginbg.as_forgotpassbg .from button.mat-primary{font-size: 30px;}
   }

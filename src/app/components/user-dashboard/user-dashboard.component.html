@@ -9,7 +9,7 @@
           <mat-card-content class="">
               <span class="blockimgwrapper">
                 <a>
-                  <img src="https://as01.epimg.net/en/imagenes/2019/08/21/football/1566364976_814384_noticia_normal.jpg">
+                  <img src="http://mindandculture.org/wordpress6/wp-content/uploads/2018/07/Fotolia_188161178_XS.jpg">
                 </a>
               </span>
               <mat-card-subtitle>
@@ -23,7 +23,7 @@
               </mat-card-subtitle>
               <mat-card-actions>
                   <button mat-button class="editbtn" color="primary" type="button" [routerLink]="['/editprofile']">
-                    <i class="material-icons">edit</i>
+                    Edit Profile
                   </button>
               </mat-card-actions>
           </mat-card-content>
@@ -33,27 +33,21 @@
         <mat-list-item class="aslist2">
             <mat-card-title>Purchase Data</mat-card-title>
             <mat-card-content class="">
-                <span class="blockimgwrapper">
-                  <a>
-                    <img src="https://as01.epimg.net/en/imagenes/2019/08/21/football/1566364976_814384_noticia_normal.jpg">
-                  </a>
+                <span class="blockimg">                  
+                    <img src="../../../assets/images/data-purchaseimg.png">                  
                 </span>
                 <mat-card-subtitle>
-                  <p class="name">{{name}}</p>
-                  <p class="Designation">{{designation}}</p>
-                  <p><i class="material-icons">phone</i> {{phone}}</p>
-                  <p><i class="material-icons">email</i> {{email}}</p>
-                  <p><i class="material-icons">account_balance</i> {{address}}</p>
-                  <p><i class="material-icons">location_city</i> {{company}}</p>
-                  <p><i class="material-icons">language</i> {{website}}</p>
+                  <h2>Online Payment</h2>
+                  <span class="colsubtitle">Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry's 
+                    standard dummy text ever since the 1500s,</span>
+                  <button mat-button class="paybtn" color="primary" type="button" [routerLink]="['/editprofile']">
+                    Purchase
+                  </button>
                 </mat-card-subtitle>
                 <mat-card-actions>
-                    <button mat-button class="editbtn" color="primary" type="button" [routerLink]="['/editprofile']">
-                      <i class="material-icons">edit</i>
-                    </button>
+                   
                 </mat-card-actions>
             </mat-card-content>
-            <img class="accountbg" src="../../../assets/images/accountbg.jpg">
           </mat-list-item>
 
           <mat-list-item class="aslist3">
@@ -88,7 +82,6 @@
                       <tr mat-row *matRowDef="let row; columns: displayedColumns;"></tr>
                     </table>
               </mat-card-content>
-              <img class="accountbg" src="../../../assets/images/accountbg.jpg">
             </mat-list-item>
 
       </mat-list>
