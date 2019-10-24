@@ -1,8 +1,12 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit,ViewChild } from '@angular/core';
 import { CookieService } from 'ngx-cookie-service';
 import {ApiService} from '../../services/api-service';
 import {MatTableDataSource} from '@angular/material/table';
 import { FormGroup, FormBuilder, Validators } from '@angular/forms';
+import {MatPaginator} from '@angular/material/paginator';
+import {MatSort} from '@angular/material/sort';
+
+
 
 @Component({
   selector: 'app-purchasedata',
@@ -16,10 +20,14 @@ public data:any={}
  public businessForm:FormGroup;
  public apitoken:any='';
  public consumarform:FormGroup;
- public search_count:any;
+ public search_count:any='0';
  public consumerdata:any=null;
 public businesssearchCount:any='';
- displayedColumns:string[] = ['First_Name','Last_Name','Physical_State','Physical_City'];
+public spinnerval:any = 0;
+@ViewChild(MatPaginator, {static: true}) paginator: MatPaginator;
+  @ViewChild(MatSort, {static: true}) sort: MatSort;
+
+ displayedColumns:string[] = ['First_Name','Last_Name','Ind_Gender_Code','Ind_Age','Email','Phone','Physical_Address','Physical_Zip'];
  dspColumns:string[] = [];
   constructor(public apiservice:ApiService, public cookieservice:CookieService,public fb:FormBuilder) {
   this.generateapitoken();
@@ -43,7 +51,6 @@ public businesssearchCount:any='';
     Business_Owner:[''],
     NetWorth_Code:[''],
     Donor_Capacity_Code:['']
-
   });
   /**Busniss form group */
   this.businessForm=this.fb.group({
@@ -78,6 +85,8 @@ public businesssearchCount:any='';
   }
 
   ngOnInit() {
+
+    
   }
   openConsumerPanel(){
     // console.log('consumer');
@@ -106,7 +115,11 @@ filter(Value:any){
   // console.log(this.dataSource);
   // console.log(this.dataSource.filter);
   // console.log(Value);
-  this.dataSource.filter=Value.trim().toLowerCase();
+  this.consumerdata.filter=Value.trim().toLowerCase();
+
+  if (this.consumerdata.paginator) {
+    this.consumerdata.paginator.firstPage();
+  }
     }
 
 
@@ -137,6 +150,7 @@ businessFormSubmit() {
   }
 
     purchaseDataForConsumar(){
+      this.spinnerval  = 1;
       this.search_count='0';
       let conditiondata:any=[];
 
@@ -170,6 +184,7 @@ businessFormSubmit() {
             console.log(result.data.Response.responseDetails.SearchCount);
             console.log(typeof(result.data.Response.responseDetails.SearchCount));
             this.search_count=result.data.Response.responseDetails.SearchCount;
+            this.spinnerval  = 0;
           })
         }
       console.log(this.consumarform.value)
@@ -198,10 +213,16 @@ businessFormSubmit() {
             console.log(cdata[b].resultFields[n],'ddd');
             //tempdata['First_Name']=cdata[b]['First_Name'];
             //tempdata['Last_Name']=cdata[b]['Last_Name'];
+            
             if(cdata[b].resultFields[n].fieldID=='First_Name')tempdata['First_Name']=cdata[b].resultFields[n].fieldValue;
             if(cdata[b].resultFields[n].fieldID=='Last_Name')tempdata['Last_Name']=cdata[b].resultFields[n].fieldValue;
-            if(cdata[b].resultFields[n].fieldID=='Physical_State')tempdata['Physical_State']=cdata[b].resultFields[n].fieldValue;
-            if(cdata[b].resultFields[n].fieldID=='Physical_City')tempdata['Physical_City']=cdata[b].resultFields[n].fieldValue;
+            if(cdata[b].resultFields[n].fieldID=='Ind_Gender_Code')tempdata['Ind_Gender_Code']=cdata[b].resultFields[n].fieldValue;
+            if(cdata[b].resultFields[n].fieldID=='Ind_Age')tempdata['Ind_Age']=cdata[b].resultFields[n].fieldValue;
+            if(cdata[b].resultFields[n].fieldID=='Email')tempdata['Email']=cdata[b].resultFields[n].fieldValue;
+            if(cdata[b].resultFields[n].fieldID=='Phone')tempdata['Phone']=cdata[b].resultFields[n].fieldValue;
+            if(cdata[b].resultFields[n].fieldID=='Physical_Address')tempdata['Physical_Address']=cdata[b].resultFields[n].fieldValue;
+            if(cdata[b].resultFields[n].fieldID=='Physical_Zip')tempdata['Physical_Zip']=cdata[b].resultFields[n].fieldValue;
+            
             tempdata=Object.assign({}, tempdata);
             //conditiondata=Object.assign({}, conditiondata);
 
@@ -212,7 +233,12 @@ businessFormSubmit() {
         }
         console.log(result.data.Response.responseDetails.SearchResult.searchResultRecord.length);
         console.log('sourcedata',sourcedata);
+        
         this.consumerdata=new MatTableDataSource(sourcedata);
+        this.consumerdata.paginator=this.paginator;
+        this.consumerdata.sort=this.sort;
+
+
 
       }
 

@@ -1,4 +1,14 @@
 <app-adminheader>
+  <div  *ngIf="spinnerval==1">
+      <mat-spinner></mat-spinner>
+  </div>
+    
+  <mat-toolbar color="primary">
+
+  <mat-toolbar-row>
+    <span>Purchase Data</span>
+  </mat-toolbar-row>
+  </mat-toolbar>
 
 <mat-card class="asnewclass">
 
@@ -17,18 +27,15 @@
 
 </mat-card>
 
-<mat-card  *ngIf="dataType === 'consumer'">
+<mat-card  *ngIf="dataType != '' && dataType == 'consumer' && search_count=='0'">
   <form [formGroup]="consumarform"  (ngSubmit)="purchaseDataForConsumar()">
         <mat-accordion >
-                <mat-expansion-panel [expanded]="step === 0" (opened)="setStep(0)" hideToggle>
+                <mat-expansion-panel [expanded]="step === 0" (opened)="setStep(0)" >
                         <mat-expansion-panel-header>
                           <mat-panel-title>
                             Personal Data
                           </mat-panel-title>
-                          <mat-panel-description>
-                            Type name
-                            <mat-icon>account_circle</mat-icon>
-                          </mat-panel-description>
+                        
                         </mat-expansion-panel-header>
 
                         <mat-form-field>
@@ -48,15 +55,12 @@
                         </mat-action-row>
                       </mat-expansion-panel>
 
-                      <mat-expansion-panel [expanded]="step === 1" (opened)="setStep(1)" hideToggle>
+                      <mat-expansion-panel [expanded]="step === 1" (opened)="setStep(1)" >
                         <mat-expansion-panel-header>
                           <mat-panel-title>
-                            Location
-                          </mat-panel-title>
-                          <mat-panel-description>
-                            Type Location
-                            <mat-icon>map</mat-icon>
-                          </mat-panel-description>
+                           Location
+                          </mat-panel-title>  
+                          
                         </mat-expansion-panel-header>
 
                         <mat-form-field>
@@ -82,23 +86,18 @@
                                 </mat-form-field>
 
                                 <mat-form-field>
-                                    <input matInput formControlName="Tally_County_Code"   placeholder="Country Code">
+                                    <input matInput formControlName="Tally_County_Code"   placeholder="County Code">
                                   </mat-form-field>
-
                         <mat-action-row>
                           <button mat-button color="warn" (click)="prevStep()">Previous</button>
                           <button mat-button color="primary" (click)="nextStep()">Next</button>
                         </mat-action-row>
                       </mat-expansion-panel>
-                      <mat-expansion-panel [expanded]="step === 2" (opened)="setStep(2)" hideToggle>
+                      <mat-expansion-panel [expanded]="step === 2" (opened)="setStep(2)" >
                         <mat-expansion-panel-header>
                           <mat-panel-title>
-                            Household
-                          </mat-panel-title>
-                          <mat-panel-description>
-                            Type Household Details
-                            <mat-icon>house</mat-icon>
-                          </mat-panel-description>
+                            Household                          </mat-panel-title>
+                          
                         </mat-expansion-panel-header>
 
                         <mat-form-field>
@@ -149,7 +148,10 @@
 
         </mat-accordion>
         <br>
-        <button mat-raised-button color="primary">Purchase</button>
+        
+        <button mat-raised-button color="primary"  >Search</button>
+        
+    
       </form>
 
 </mat-card>
@@ -204,7 +206,7 @@
 
                         <mat-action-row>
                           <button mat-button color="warn" (click)="prevStep()">Previous</button>
-                          <button mat-button color="primary" (click)="nextStep()">Next</button>
+                          <button mat-button color="primary" (click)="nextStep()">End</button>
                         </mat-action-row>
                       </mat-expansion-panel>
 
@@ -219,12 +221,13 @@
 
 <mat-card *ngIf="dataType === 'business' && businesssearchCount !=''">
   <mat-label>Total Result :{{businesssearchCount}}</mat-label>
+  <br>
   <button type="button" mat-raised-button color="primary">Show Sample Data</button>
 </mat-card>
 
 <br>
 
-<mat-card *ngIf="dataType ==='consumer' && search_count!=null">
+<mat-card *ngIf="dataType ==='consumer' && search_count!='0'">
 
     <h4>Total Data found : {{search_count}}</h4>
 
@@ -235,14 +238,14 @@
 
  <mat-card>
 
-<ng-container  *ngIf="search_count!='0' && dataType ==='consumer' && consumerdata!=null" >
+<ng-container  *ngIf="search_count!='0' && dataType ==='consumer' && consumerdata!=null "  >
   <mat-form-field>
     <input matInput (keyup)="filter($event.target.value)" placeholder="Filter">
   </mat-form-field>
   <table mat-table [dataSource]="consumerdata" class="mat-elevation-z8" >
 
-
-      <ng-container matColumnDef="First_Name">
+  
+      <ng-container matColumnDef="First_Name" >
         <th mat-header-cell *matHeaderCellDef>First Name </th>
         <td mat-cell *matCellDef="let i" [innerHTML]="i.First_Name" > {{i.First_Name}} </td>
       </ng-container>
@@ -251,22 +254,43 @@
         <td mat-cell *matCellDef="let i " [innerHTML]="i.Last_Name" > {{i.Last_Name}} </td>
       </ng-container>
 
-    <ng-container matColumnDef="Physical_State">
-        <th mat-header-cell *matHeaderCellDef>State </th>
-        <td mat-cell *matCellDef="let i"> {{i.Physical_State}} </td>
-      </ng-container>
-
-      <ng-container matColumnDef="Physical_City">
-          <th mat-header-cell *matHeaderCellDef> City </th>
-          <td mat-cell *matCellDef="let i"> {{i.Physical_City}} </td>
+      <ng-container matColumnDef="Ind_Gender_Code">
+          <th mat-header-cell *matHeaderCellDef> Gender</th>
+          <td mat-cell *matCellDef="let i"> {{i.Ind_Gender_Code}} </td>
         </ng-container>
 
+
+      <ng-container matColumnDef="Ind_Age">
+          <th mat-header-cell *matHeaderCellDef>Age </th>
+          <td mat-cell *matCellDef="let i " > {{i.Ind_Age}} </td>
+        </ng-container>
+
+        <ng-container matColumnDef="Email">
+            <th mat-header-cell *matHeaderCellDef>Email </th>
+            <td mat-cell *matCellDef="let i "> {{i.Email}} </td>
+          </ng-container>
+
+    <ng-container matColumnDef="Phone">
+        <th mat-header-cell *matHeaderCellDef>Phone Number </th>
+        <td mat-cell *matCellDef="let i"> {{i.Phone}} </td>
+      </ng-container>
+
+      <ng-container matColumnDef="Physical_Address">
+          <th mat-header-cell *matHeaderCellDef> Address </th>
+          <td mat-cell *matCellDef="let i"> {{i.Physical_Address}} </td>
+        </ng-container>
+
+        <ng-container matColumnDef="Physical_Zip">
+            <th mat-header-cell *matHeaderCellDef> ZipCode </th>
+            <td mat-cell *matCellDef="let i"> {{i.Physical_Zip}} </td>
+        </ng-container>
 
 
           <tr mat-header-row *matHeaderRowDef="displayedColumns"></tr>
   <tr mat-row *matRowDef="let row; columns: displayedColumns;"></tr>
 
       </table>
+      <mat-paginator [pageSizeOptions]="[5, 10, 25, 100]"></mat-paginator>
 </ng-container>
 </mat-card>
 
