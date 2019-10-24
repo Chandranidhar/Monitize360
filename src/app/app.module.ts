@@ -32,6 +32,7 @@ import {AddadminComponent, ModaleComponent} from './components/addadmin/addadmin
 import { AdminlistComponent } from './components/adminlist/adminlist.component';
 import { UserlistComponent } from './components/userlist/userlist.component';
 import { PurchasedataComponent } from './components/purchasedata/purchasedata.component';
+import { BillingDetailsComponent } from './components/billing-details/billing-details.component';
 
 @NgModule({
   declarations: [
@@ -51,7 +52,8 @@ import { PurchasedataComponent } from './components/purchasedata/purchasedata.co
     UserDashboardComponent,
     AdminlistComponent,
     UserlistComponent,
-    PurchasedataComponent
+    PurchasedataComponent,
+    BillingDetailsComponent
   ],
   imports: [
     BrowserModule.withServerTransition({ appId: 'serverApp' }),
