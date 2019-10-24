@@ -1,5 +1,6 @@
 <span class="as_editprofile as_support">
 <app-adminheader>
+        
     <div class="example-container">
         <form [formGroup]="SupportForm" (ngSubmit)="SupportFormSubmit()">
             <mat-form-field>
@@ -11,13 +12,14 @@
             </mat-form-field>
 
 
-            <mat-form-field>
-                <textarea matInput type="text" placeholder="Description" formControlName="description"
-                    (blur)="inputUntouched('description')"></textarea>
+            
+            <ckeditor formControlName="description"></ckeditor>
+                <!-- <textarea matInput type="text" placeholder="Description" formControlName="description"
+                    (blur)="inputUntouched('description')"></textarea> -->
                 <mat-error
                     *ngIf="!SupportForm.controls['description'].valid && SupportForm.controls['description'].errors.required && SupportForm.controls['description'].touched">
                     Description field can not be blank</mat-error>
-            </mat-form-field>
+           
             <button mat-button color="warn">Send</button>
         </form>
     </div>

@@ -33,7 +33,8 @@ import { AdminlistComponent } from './components/adminlist/adminlist.component';
 import { UserlistComponent } from './components/userlist/userlist.component';
 import { PurchasedataComponent } from './components/purchasedata/purchasedata.component';
 import { BillingDetailsComponent } from './components/billing-details/billing-details.component';
-
+import { CKEditorModule } from 'ckeditor4-angular';
+import {OrdersComponent} from './components/orders/orders.component';
 @NgModule({
   declarations: [
     AppComponent,
@@ -53,7 +54,8 @@ import { BillingDetailsComponent } from './components/billing-details/billing-de
     AdminlistComponent,
     UserlistComponent,
     PurchasedataComponent,
-    BillingDetailsComponent
+    BillingDetailsComponent,
+    OrdersComponent
   ],
   imports: [
     BrowserModule.withServerTransition({ appId: 'serverApp' }),
@@ -67,7 +69,8 @@ import { BillingDetailsComponent } from './components/billing-details/billing-de
     ReactiveFormsModule,
     LoginModule,
     ListingModule,
-    NgxUploaderModule
+    NgxUploaderModule,
+    CKEditorModule
     
     
   ],

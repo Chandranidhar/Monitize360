@@ -3,6 +3,7 @@ import { FormGroup, FormBuilder, Validators, FormGroupDirective } from '@angular
 import { ApiService } from '../../services/api-service';
 import { Router } from '@angular/router';
 import { CookieService } from 'ngx-cookie-service';
+import {MatSnackBar} from '@angular/material/snack-bar';
 @Component({
   selector: 'app-billing-details',
   templateUrl: './billing-details.component.html',
@@ -10,6 +11,9 @@ import { CookieService } from 'ngx-cookie-service';
 })
 export class BillingDetailsComponent implements OnInit {
 public BillingForm:FormGroup;
+public user_Id:any;
+public user_email:any;
+public user:any;
 public state_usss: any = [
   {
     "name": "Alabama",
@@ -250,7 +254,11 @@ public state_usss: any = [
 ];
 
   constructor(public fb: FormBuilder, public router: Router, public apiService: ApiService, 
-    public cookieService: CookieService) { this.genarateBillingForm()}
+    public cookieService: CookieService,public _snackBar: MatSnackBar) { this.genarateBillingForm()
+      this.user=JSON.parse(this.cookieService.get('user_details'));
+      this.user_Id=this.user._id;
+      this.user_email=this.user.email;
+    }
 
   ngOnInit() {
   }
@@ -259,6 +267,8 @@ public state_usss: any = [
   genarateBillingForm(){
 
 this.BillingForm=this.fb.group({
+  user_id:[this.user_Id],
+  user_email:[this.user_email],
   fullname:[null,[Validators.required]],
   phone:[null,[Validators.required]],
   pincode:[null,[Validators.required]],
@@ -272,15 +282,27 @@ this.BillingForm=this.fb.group({
 
   /**Billing FOrm Submit */
   BillingFormSubmit(){
+   
     for (let x in this.BillingForm.controls) {
       this.BillingForm.controls[x].markAsTouched();
     }
     if (this.BillingForm.valid) {
-      console.log(this.BillingForm.value);
-      // let data: any = { 'source': 'user', 'data': this.UpdateForm.value };
-      // this.apiService.postData('addorupdatedata', data).subscribe((data) => {
-      //   console.log(data);
-      // });
+      let allData: any = this.BillingForm.value;
+      allData.user_id =this.user_Id;
+      allData.user_email =this.user_email;
+      console.log(allData);
+      let data: any = { 'source': 'billing_details', 'data':allData};
+       this.apiService.postData('addorupdatedata', data).subscribe((data) => {
+        console.log(data);
+        let d:any={};
+        d=data;
+        if(d.status=='success'){
+          this._snackBar.open('Billing Complete', '', {
+            duration: 3000
+          });
+        }
+       
+      });
     }
     
   }
