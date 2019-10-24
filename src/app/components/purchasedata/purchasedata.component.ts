@@ -17,7 +17,7 @@ public data:any={}
  public apitoken:any='';
  public consumarform:FormGroup;
  public search_count:any;
- public consumerdata:any;
+ public consumerdata:any=null;
 public businesssearchCount:any='';
  displayedColumns:string[] = ['First_Name','Last_Name','Physical_State','Physical_City'];
  dspColumns:string[] = [];
@@ -212,9 +212,6 @@ businessFormSubmit() {
         }
         console.log(result.data.Response.responseDetails.SearchResult.searchResultRecord.length);
         console.log('sourcedata',sourcedata);
-        let datavalue:any = [];
-        let consumerdatalistraw:any[] = result.data.Response.responseDetails.SearchResult.searchResultRecord;
-        //this.consumerdata=new MatTableDataSource(result.data.Response.responseDetails.SearchResult.searchResultRecord);
         this.consumerdata=new MatTableDataSource(sourcedata);
 
       }
