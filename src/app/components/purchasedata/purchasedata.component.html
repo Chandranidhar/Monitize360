@@ -208,27 +208,7 @@
                         </mat-action-row>
                       </mat-expansion-panel>
                     
-                      <!-- <mat-expansion-panel [expanded]="step === 2" (opened)="setStep(2)" hideToggle>
-                        <mat-expansion-panel-header>
-                          <mat-panel-title>
-                            Day
-                          </mat-panel-title>
-                          <mat-panel-description>
-                            Inform
-                            <mat-icon>date_range</mat-icon>
-                          </mat-panel-description>
-                        </mat-expansion-panel-header>
-                    
-                        <mat-form-field>
-                          <input matInput placeholder="Date" [matDatepicker]="picker" (focus)="picker.open()" readonly>
-                        </mat-form-field>
-                        <mat-datepicker #picker></mat-datepicker>
-                    
-                        <mat-action-row>
-                          <button mat-button color="warn" (click)="prevStep()">Previous</button>
-                          <button mat-button color="primary" (click)="nextStep()">End</button>
-                        </mat-action-row>
-                      </mat-expansion-panel> -->
+                      
                 
               
         </mat-accordion>
@@ -237,9 +217,9 @@
       </form>
 </mat-card> 
 
-<mat-card *ngIf="businesssearchCount !=''">
+<mat-card *ngIf="dataType === 'business' && businesssearchCount !=''">
   <mat-label>Total Result :{{businesssearchCount}}</mat-label>
-  <button type="button" mat-raised-button color="primary">Show All Data</button>
+  <button type="button" mat-raised-button color="primary">Show Sample Data</button>
 </mat-card>
 
 <br>
@@ -258,23 +238,18 @@
     <input matInput (keyup)="filter($event.target.value)" placeholder="Filter">
   </mat-form-field>
 
-  <table mat-table [dataSource]="dataSource" class="mat-elevation-z8">
+  <table mat-table [dataSource]="dataSource" class="mat-elevation-z8" *ngIf="search_count!='' && dataType ==='consumer'">
 
     
-      <ng-container matColumnDef="displayedColumns">
+      <ng-container matColumnDef="First_Name">
         <th mat-header-cell *matHeaderCellDef>First Name </th>
-        <td mat-cell *matCellDef="let i"> {{i.First_Name}} </td>
+        <td mat-cell *matCellDef="let i"> {{i}} </td>
       </ng-container>
-
-      <ng-container matColumnDef="">
+      <ng-container matColumnDef="Last_Name">
           <th mat-header-cell *matHeaderCellDef>Last Name </th>
-          <td mat-cell *matCellDef="let i"> {{i.Last_Name}} </td>
-        </ng-container> 
-
-      <ng-container matColumnDef="Email">
-          <th mat-header-cell *matHeaderCellDef>Email </th>
-          <td mat-cell *matCellDef="let i"> {{i.email}} </td>
+          <td mat-cell *matCellDef="let i"> {{i}} </td>
         </ng-container>
+
 
 
           <tr mat-header-row *matHeaderRowDef="displayedColumns"></tr>
@@ -283,6 +258,5 @@
       </table>
 
 </mat-card> -->
-
 
 </app-adminheader>
