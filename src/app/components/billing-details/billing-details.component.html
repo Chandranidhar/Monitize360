@@ -1,0 +1,74 @@
+<app-adminheader>
+        <form [formGroup]="BillingForm"  (ngSubmit)="BillingFormSubmit()">
+                <!-- <mat-error class="error" *ngIf="msg != ''">{{msg}}</mat-error> -->
+              <mat-form-field>
+                <input matInput type="text" placeholder="Full Name" formControlName="fullname" (blur)="inputUntouched('fullname')">
+                <mat-error
+                  *ngIf="!BillingForm.controls['fullname'].valid && BillingForm.controls['fullname'].errors.required && BillingForm.controls['fullname'].touched">
+                  Full Name field can not be blank</mat-error>
+              </mat-form-field>
+        
+        
+              <mat-form-field>
+                <input matInput type="text" placeholder="Phone Number" formControlName="phone" (blur)="inputUntouched('phone')">
+                <mat-error
+                  *ngIf="!BillingForm.controls['phone'].valid && BillingForm.controls['phone'].errors.required && BillingForm.controls['phone'].touched">
+                  Phone Number field can not be blank</mat-error>
+              </mat-form-field>
+        
+              <mat-form-field>
+                <input matInput type="text" placeholder="Pin Code" formControlName="pincode" (blur)="inputUntouched('pincode')">
+                <mat-error
+                  *ngIf="!BillingForm.controls['pincode'].valid && BillingForm.controls['pincode'].errors.required && BillingForm.controls['pincode'].touched">
+                  Pincode field can not be blank</mat-error>
+                <mat-error *ngIf="!BillingForm.controls['pincode'].valid && !BillingForm.controls['pincode'].errors.required">pincode is
+                  not valid</mat-error>
+              </mat-form-field>
+        
+        
+        
+              <mat-form-field>
+                <input matInput type="text" placeholder="Town/City" formControlName="city" (blur)="inputUntouched('city')">
+                <mat-error
+                  *ngIf="!BillingForm.controls['city'].valid && BillingForm.controls['city'].errors.required && BillingForm.controls['city'].touched">
+                  City/Town field can not be blank</mat-error>
+              </mat-form-field>
+        
+        
+              <mat-form-field>
+                    <mat-label>State</mat-label>
+                    <mat-select formControlName="state">
+                      <mat-option *ngFor="let state of state_usss" [value]="state.abbreviation">
+                        {{state.name}}
+                      </mat-option>
+                    </mat-select>
+                  </mat-form-field>
+
+        
+              <mat-form-field>
+                <input matInput placeholder="Flat/House no." type="text" formControlName="housenumber" (blur)="inputUntouched('housenumber')">
+                <mat-error
+                  *ngIf="!BillingForm.controls['housenumber'].valid && BillingForm.controls['housenumber'].errors.required && BillingForm.controls['housenumber'].touched">
+                  Flat/Houseno can not be blank</mat-error>
+              </mat-form-field>
+         
+             
+        
+              <mat-form-field>
+                <input matInput placeholder="Area/Colony" type="text" formControlName="area" (blur)="inputUntouched('area')">
+                <mat-error
+                *ngIf="!BillingForm.controls['area'].valid && BillingForm.controls['area'].errors.required && BillingForm.controls['area'].touched">
+                Area/Colony field can not be blank</mat-error>
+              </mat-form-field>
+
+
+              <mat-form-field>
+                    <input matInput placeholder="Landmark" type="text" formControlName="landmark" (blur)="inputUntouched('landmark')">
+                    <mat-error
+                    *ngIf="!BillingForm.controls['area'].valid && BillingForm.controls['area'].errors.required && BillingForm.controls['area'].touched">
+                    Land Mark can not be blank</mat-error>
+                  </mat-form-field>
+        
+            <button mat-raised-button color="primary">Billing</button>
+          </form>
+</app-adminheader>
