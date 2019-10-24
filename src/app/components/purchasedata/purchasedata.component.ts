@@ -60,6 +60,8 @@ public spinnerval:any = 0;
     Number_Of_PCs_Code:[null]
   });
    }
+
+   /**Genarate apitoken for search api */
    generateapitoken(){
     let data:any={};
     data={
