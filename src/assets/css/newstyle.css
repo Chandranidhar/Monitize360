@@ -265,6 +265,17 @@
     border-radius: 30px !important;
     margin-top: 0 !important;
   }
+  .editbtn:after, .paybtn:after {
+    content: '';
+    position: absolute;
+    left: 50%;
+    top: 50%;
+    width: 90%;
+    height: 79%;
+    transform: translate(-50%, -50%);
+    border: 1px solid white;
+    border-radius: 30px;
+}
   .as_mainwrapper mat-list mat-list-item .blockimgwrapper {
       display: inline-block; width: 100%;    text-align: center;
   }
@@ -335,6 +346,7 @@
   background-size: cover;
   background-repeat: no-repeat;
   background-position: center center;
+  padding: 0 !important;
 }
 .as_editprofile .editprofiletitle{
   text-align: center;
