@@ -125,10 +125,11 @@ filter(Value:any){
   // console.log(this.dataSource.filter);
   // console.log(Value);
   this.consumerdata.filter=Value.trim().toLowerCase();
+  this.businessdata.filter=Value.trim().toLowerCase();
 
-  if (this.consumerdata.paginator) {
-    this.consumerdata.paginator.firstPage();
-  }
+  // if (this.consumerdata.paginator) {
+  //   this.consumerdata.paginator.firstPage();
+  // }
     }
     getStateList (){
       this.apiservice.getJsonObject('assets/json/usa-states.json').subscribe(response=>{
@@ -318,7 +319,7 @@ businessFormSubmit() {
         console.log(result.data.Response.responseDetails.SearchResult.searchResultRecord.length);
         console.log('sourcedata',sourcedata);
         
-        this.consumerdata=new MatTableDataSource(sourcedata);
+        this.businessdata=new MatTableDataSource(sourcedata);
         // this.consumerdata.paginator=this.paginator;
         // this.consumerdata.sort=this.sort;
 
