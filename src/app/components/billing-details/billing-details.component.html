@@ -1,7 +1,11 @@
 <span class="as_editprofile as_billing">
 <app-adminheader>
-    <mat-label>Total Data Count:{{search_count}}</mat-label>
-    <mat-label>Data Search:{{search_query | json}}</mat-label>
+  <span class="billingmainwrapper">
+  <mat-card class="asbillingtitle">
+      <mat-label class="title1">Total Data Count:{{search_count}}</mat-label>
+      <mat-label class="title2">Data Search:{{search_query | json}}</mat-label>
+  </mat-card>
+    
         <form [formGroup]="BillingForm"  (ngSubmit)="BillingFormSubmit()">
                 <!-- <mat-error class="error" *ngIf="msg != ''">{{msg}}</mat-error> -->
               <mat-form-field>
@@ -74,5 +78,6 @@
         
             <button mat-raised-button color="primary">Billing</button>
           </form>
+        </span>
 </app-adminheader>
 </span>
