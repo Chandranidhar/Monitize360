@@ -22,7 +22,6 @@ public data:any={}
  public consumarform:FormGroup;
  public search_count:any='0';
  public consumerdata:any=null;
-public businesssearchCount:any='';
 public spinnerval:any = 0;
 @ViewChild(MatPaginator, {static: true}) paginator: MatPaginator;
   @ViewChild(MatSort, {static: true}) sort: MatSort;
@@ -85,7 +84,11 @@ public spinnerval:any = 0;
   }
 
   ngOnInit() {
-
+    if(this.consumerdata!=null){
+      this.consumerdata.paginator = this.paginator;
+      this.consumerdata.sort = this.sort;
+    }
+    
     
   }
   openConsumerPanel(){
@@ -125,6 +128,8 @@ filter(Value:any){
 
 /**For business Form Submit */
 businessFormSubmit() {
+    this.spinnerval  = 1;
+      this.search_count='0';
   console.log(this.businessForm.value);
    let data: any = {};
   data = {
@@ -137,7 +142,8 @@ businessFormSubmit() {
     result = res;
     console.log(result.data.Response.responseDetails.SearchCount);
 
-    this.businesssearchCount = result.data.Response.responseDetails.SearchCount;
+    this.search_count = result.data.Response.responseDetails.SearchCount;
+    this.spinnerval = 0;
 
   })
 }
@@ -185,9 +191,11 @@ businessFormSubmit() {
             console.log(typeof(result.data.Response.responseDetails.SearchCount));
             this.search_count=result.data.Response.responseDetails.SearchCount;
             this.spinnerval  = 0;
+            this.cookieservice.set('search_query',conditiondata);
+            this.cookieservice.set('search_count',this.search_count);
           })
         }
-      console.log(this.consumarform.value)
+      console.log(this.consumarform.value);
     }
 
 
@@ -235,8 +243,8 @@ businessFormSubmit() {
         console.log('sourcedata',sourcedata);
         
         this.consumerdata=new MatTableDataSource(sourcedata);
-        this.consumerdata.paginator=this.paginator;
-        this.consumerdata.sort=this.sort;
+        // this.consumerdata.paginator=this.paginator;
+        // this.consumerdata.sort=this.sort;
 
 
 
