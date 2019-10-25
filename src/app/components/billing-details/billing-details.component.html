@@ -1,5 +1,7 @@
 <span class="as_editprofile as_billing">
 <app-adminheader>
+    <mat-label>Total Data Count:{{search_count}}</mat-label>
+    <mat-label>Data Search:{{search_query | json}}</mat-label>
         <form [formGroup]="BillingForm"  (ngSubmit)="BillingFormSubmit()">
                 <!-- <mat-error class="error" *ngIf="msg != ''">{{msg}}</mat-error> -->
               <mat-form-field>
