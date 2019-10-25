@@ -14,6 +14,8 @@ public BillingForm:FormGroup;
 public user_Id:any;
 public user_email:any;
 public user:any;
+public search_count:any;
+public search_query:any;
 public state_usss: any = [
   {
     "name": "Alabama",
@@ -258,6 +260,11 @@ public state_usss: any = [
       this.user=JSON.parse(this.cookieService.get('user_details'));
       this.user_Id=this.user._id;
       this.user_email=this.user.email;
+      this.search_query=this.cookieService.get('search_query');
+      this.search_count=this.cookieService.get('search_count');
+      console.log(this.search_count);
+      console.log(this.cookieService.get('search_query'));
+ 
     }
 
   ngOnInit() {

@@ -158,18 +158,15 @@
 
 <br>
 
- <mat-card  *ngIf="dataType === 'business'">
+ <mat-card  *ngIf="dataType !='' && dataType == 'business' && search_count=='0' ">
     <form [formGroup]="businessForm"  (ngSubmit)="businessFormSubmit()">
         <mat-accordion >
-                <mat-expansion-panel [expanded]="step === 0" (opened)="setStep(0)" hideToggle>
+                <mat-expansion-panel [expanded]="step === 0" (opened)="setStep(0)" >
                         <mat-expansion-panel-header>
                           <mat-panel-title>
                             Location
                           </mat-panel-title>
-                          <mat-panel-description>
-                            Type Location
-                            <mat-icon>account_circle</mat-icon>
-                          </mat-panel-description>
+                          
                         </mat-expansion-panel-header>
 
                         <mat-form-field>
@@ -181,15 +178,12 @@
                         </mat-action-row>
                       </mat-expansion-panel>
 
-                      <mat-expansion-panel [expanded]="step === 1" (opened)="setStep(1)" hideToggle>
+                      <mat-expansion-panel [expanded]="step === 1" (opened)="setStep(1)" >
                         <mat-expansion-panel-header>
                           <mat-panel-title>
                             Office
                           </mat-panel-title>
-                          <mat-panel-description>
-                           business
-                            <mat-icon>map</mat-icon>
-                          </mat-panel-description>
+                        
                         </mat-expansion-panel-header>
 
                         <mat-form-field>
@@ -215,14 +209,14 @@
 
         </mat-accordion>
         <br>
-        <button mat-raised-button color="primary">Purchase</button>
+        <button mat-raised-button color="primary">Search</button>
       </form>
 </mat-card>
 
-<mat-card *ngIf="dataType === 'business' && businesssearchCount !=''">
-  <mat-label>Total Result :{{businesssearchCount}}</mat-label>
+<mat-card *ngIf="dataType == 'business' && search_count !='0'">
+  <mat-label>Total Result :{{search_count}}</mat-label>
   <br>
-  <button type="button" mat-raised-button color="primary">Show Sample Data</button>
+  <button type="button" *ngIf="search_count!='' && search_count!='0'" mat-raised-button color="primary">Show Sample Data</button>
 </mat-card>
 
 <br>
