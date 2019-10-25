@@ -23,6 +23,8 @@ public data:any={}
  public search_count:any='0';
  public consumerdata:any=null;
 public spinnerval:any = 0;
+public stateList:any={};
+public cityList:any={};
 @ViewChild(MatPaginator, {static: true}) paginator: MatPaginator;
   @ViewChild(MatSort, {static: true}) sort: MatSort;
 
@@ -30,6 +32,8 @@ public spinnerval:any = 0;
  dspColumns:string[] = [];
   constructor(public apiservice:ApiService, public cookieservice:CookieService,public fb:FormBuilder) {
   this.generateapitoken();
+  this.getStateList();
+  this.getCityList();
   this.consumarform=this.fb.group({
     First_Name:[''],
     Middle_Initial:[''],
@@ -69,13 +73,11 @@ public spinnerval:any = 0;
    this.apiservice.postDatawithoutToken('apitoken',data).subscribe(res=>{
     let result:any = {};
     result = res;
-  console.log(res);
   if(result.status=='200'){
     this.apitoken=result.apitoken;
     this.cookieservice.set('apitoken',result.apitoken);
 
     this.apitoken=this.cookieservice.get('apitoken');
-    console.log(this.apitoken);
   }
   else{
     console.log("Null")
@@ -92,7 +94,8 @@ public spinnerval:any = 0;
     
   }
   openConsumerPanel(){
-    // console.log('consumer');
+    
+    
   }
 
   openBusinessPanel(){
@@ -124,7 +127,21 @@ filter(Value:any){
     this.consumerdata.paginator.firstPage();
   }
     }
-
+    getStateList (){
+      this.apiservice.getJsonObject('assets/json/usa-states.json').subscribe(response=>{
+        let result:any = {};
+        result = response;
+        this.stateList = result;
+        
+      })
+    }
+    getCityList(){
+      this.apiservice.getJsonObject('assets/Json/usa-cities.json').subscribe((res)=>{
+        let result:any={};
+        result=res;
+        this.cityList=result;
+      })
+    }
 
 /**For business Form Submit */
 businessFormSubmit() {
@@ -191,7 +208,8 @@ businessFormSubmit() {
             console.log(typeof(result.data.Response.responseDetails.SearchCount));
             this.search_count=result.data.Response.responseDetails.SearchCount;
             this.spinnerval  = 0;
-            this.cookieservice.set('search_query',conditiondata);
+            let s_query=JSON.stringify(conditiondata)
+            this.cookieservice.set('search_query',s_query);
             this.cookieservice.set('search_count',this.search_count);
           })
         }
