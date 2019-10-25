@@ -371,6 +371,16 @@
   background-position: center center;
   padding: 0 !important;
 }
+.as_editprofile.as_billing .inner_wrapper .rightpannel{
+  background: url(../../assets/images/editprofilebg2.png);
+  background-size: cover;
+  background-repeat: no-repeat;
+  background-position: center center;
+  padding: 0 !important;
+  display: flex;
+    align-items: center;
+}
+.as_editprofile.as_billing form{ box-shadow: 1px 2px 10px #8b8b8b;}
 .as_editprofile .editprofiletitle{
   text-align: center;
   width: 100%;
