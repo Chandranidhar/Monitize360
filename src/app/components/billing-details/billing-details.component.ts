@@ -296,12 +296,13 @@ export class BillingDetailsComponent implements OnInit {
     }
     if (this.BillingForm.valid) {
       let allData: any = this.BillingForm.value;
-      allData.user_id = this.user_Id;
+      // allData.user_id = this.user_Id;
       allData.user_email = this.user_email;
       allData.search_count = this.search_count;
       allData.search_query = this.search_query;
       // console.log(allData);
-      let data: any = { 'source': 'billing_details', 'data': allData };
+      let data: any = { 'source': 'billing_details', 'data': allData,'sourceobj':[this.user_Id] };
+      console.log(data);
       this.apiService.postData('addorupdatedata', data).subscribe((data) => {
         // console.log(data);
         let d: any = {};
