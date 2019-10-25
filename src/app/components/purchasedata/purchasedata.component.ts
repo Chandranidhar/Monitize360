@@ -70,13 +70,11 @@ public spinnerval:any = 0;
    this.apiservice.postDatawithoutToken('apitoken',data).subscribe(res=>{
     let result:any = {};
     result = res;
-  console.log(res);
   if(result.status=='200'){
     this.apitoken=result.apitoken;
     this.cookieservice.set('apitoken',result.apitoken);
 
     this.apitoken=this.cookieservice.get('apitoken');
-    console.log(this.apitoken);
   }
   else{
     console.log("Null")
@@ -125,7 +123,7 @@ filter(Value:any){
 
 /**For business Form Submit */
 businessFormSubmit() {
-  console.log(this.businessForm.value);
+  
    let data: any = {};
   data = {
     "apitoken": this.apitoken,
