@@ -74,13 +74,11 @@ public cityList:any={};
    this.apiservice.postDatawithoutToken('apitoken',data).subscribe(res=>{
     let result:any = {};
     result = res;
-  console.log(res);
   if(result.status=='200'){
     this.apitoken=result.apitoken;
     this.cookieservice.set('apitoken',result.apitoken);
 
     this.apitoken=this.cookieservice.get('apitoken');
-    console.log(this.apitoken);
   }
   else{
     console.log("Null")
