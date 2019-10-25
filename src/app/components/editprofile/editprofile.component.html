@@ -1,4 +1,8 @@
-<app-adminheader>     
+<span class="as_editprofile">
+<app-adminheader>   
+  
+
+    <mat-card-title class="editprofiletitle">edit profile</mat-card-title>
       
           <form [formGroup]="UpdateForm"  (ngSubmit)="UpdateFormSubmit()">
               <!-- <mat-error class="error" *ngIf="msg != ''">{{msg}}</mat-error> -->
@@ -95,8 +99,11 @@
       
             <button mat-raised-button color="primary">Update</button>
         </form>
-    <a (click)="openDialog()">For Password change click here</a>
+    <a (click)="openDialog()" class="passwordchangebtn">For Password change click here</a>
+    
+  
 </app-adminheader>
+</span>  
 
 
 

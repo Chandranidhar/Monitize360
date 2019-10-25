@@ -14,8 +14,13 @@ import { AddadminComponent } from './components/addadmin/addadmin.component';
 import{AdminlistComponent} from './components/adminlist/adminlist.component'
 import{UserlistComponent} from './components/userlist/userlist.component'
 import { PurchasedataComponent } from './components/purchasedata/purchasedata.component';
+<<<<<<< HEAD
 
 
+=======
+import { BillingDetailsComponent } from './components/billing-details/billing-details.component';
+import { OrdersComponent } from './components/orders/orders.component';
+>>>>>>> e0f89faf20f47493de1869c33964759464b2c1cd
 
 
 const routes: Routes = [
@@ -36,7 +41,13 @@ const routes: Routes = [
   {path:'editadmin/:id',component:AddadminComponent},
   {path:'adminlist',component:AdminlistComponent,resolve:{results:Resolveservice}, data:{source:'user',"condition":{"type":"admin"}}, canActivate:[AuthGuard]},
   {path:'userlist',component:UserlistComponent,resolve:{results:Resolveservice}, data:{source:'user',"condition":{"type":"user"}}, canActivate:[AuthGuard]},
+<<<<<<< HEAD
   {path:'purchasedata',component:PurchasedataComponent}
+=======
+  {path:'purchasedata',component:PurchasedataComponent},
+  {path:'billing',component:BillingDetailsComponent},
+  {path:'orders',component:OrdersComponent}
+>>>>>>> e0f89faf20f47493de1869c33964759464b2c1cd
 
 ];
 

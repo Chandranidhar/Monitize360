@@ -32,7 +32,13 @@ import {AddadminComponent, ModaleComponent} from './components/addadmin/addadmin
 import { AdminlistComponent } from './components/adminlist/adminlist.component';
 import { UserlistComponent } from './components/userlist/userlist.component';
 import { PurchasedataComponent } from './components/purchasedata/purchasedata.component';
+<<<<<<< HEAD
 
+=======
+import { BillingDetailsComponent } from './components/billing-details/billing-details.component';
+import { CKEditorModule } from 'ckeditor4-angular';
+import {OrdersComponent} from './components/orders/orders.component';
+>>>>>>> e0f89faf20f47493de1869c33964759464b2c1cd
 @NgModule({
   declarations: [
     AppComponent,
@@ -51,7 +57,13 @@ import { PurchasedataComponent } from './components/purchasedata/purchasedata.co
     UserDashboardComponent,
     AdminlistComponent,
     UserlistComponent,
+<<<<<<< HEAD
     PurchasedataComponent
+=======
+    PurchasedataComponent,
+    BillingDetailsComponent,
+    OrdersComponent
+>>>>>>> e0f89faf20f47493de1869c33964759464b2c1cd
   ],
   imports: [
     BrowserModule.withServerTransition({ appId: 'serverApp' }),
@@ -65,7 +77,12 @@ import { PurchasedataComponent } from './components/purchasedata/purchasedata.co
     ReactiveFormsModule,
     LoginModule,
     ListingModule,
+<<<<<<< HEAD
     NgxUploaderModule
+=======
+    NgxUploaderModule,
+    CKEditorModule
+>>>>>>> e0f89faf20f47493de1869c33964759464b2c1cd
     
     
   ],
