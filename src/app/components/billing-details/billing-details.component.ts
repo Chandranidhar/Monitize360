@@ -275,7 +275,6 @@ export class BillingDetailsComponent implements OnInit {
   genarateBillingForm() {
 
     this.BillingForm = this.fb.group({
-      user_id: [this.user_Id],
       user_email: [this.user_email],
       fullname: [null, [Validators.required]],
       phone: [null, [Validators.required]],
@@ -284,7 +283,8 @@ export class BillingDetailsComponent implements OnInit {
       area: [null, [Validators.required]],
       landmark: [null, [Validators.required]],
       state: [null, [Validators.required]],
-      housenumber: [null, [Validators.required]]
+      housenumber: [null, [Validators.required]],
+      user_id:['']
     });
   }
 
@@ -294,15 +294,15 @@ export class BillingDetailsComponent implements OnInit {
     for (let x in this.BillingForm.controls) {
       this.BillingForm.controls[x].markAsTouched();
     }
+    this.BillingForm.controls['user_id'].patchValue(this.user_Id);
     if (this.BillingForm.valid) {
       let allData: any = this.BillingForm.value;
-      // allData.user_id = this.user_Id;
       allData.user_email = this.user_email;
       allData.search_count = this.search_count;
       allData.search_query = this.search_query;
-      // console.log(allData);
-      let data: any = { 'source': 'billing_details', 'data': allData,'sourceobj':[this.user_Id] };
-      console.log(data);
+      //  console.log(allData);
+      let data: any = { 'source': 'billing_details', 'data': allData,'sourceobj':["user_id"] };
+      // console.log(data);
       this.apiService.postData('addorupdatedata', data).subscribe((data) => {
         // console.log(data);
         let d: any = {};
