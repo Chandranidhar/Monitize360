@@ -67,16 +67,21 @@
                             <input matInput formControlName="Physical_Address"  placeholder="Address">
                           </mat-form-field>
 
-                        <mat-form-field>
-                          <input matInput formControlName="Physical_State" placeholder="State">
+                        <mat-form-field >
+                          <mat-label>Select State</mat-label>
+                         <mat-select formControlName="Physical_State">
+                          <mat-option *ngFor="let state of stateList" [value]="state.name">{{state.name}}</mat-option>
+                          </mat-select>
                         </mat-form-field>
 
                         <mat-form-field>
-                            <input matInput formControlName="Physical_City"  placeholder="City">
+                            <!-- <input matInput formControlName="Physical_City"  placeholder="City"> -->
+                            <mat-label>select city</mat-label>
+                            <mat-select formControlName="Physical_City">
+                            <mat-option *ngFor="let city of cityList" [value]="city.name">{{city.name}}</mat-option>
+                            </mat-select>
                           </mat-form-field>
-
-
-
+                        
                             <mat-form-field>
                                 <input matInput formControlName="Physical_Zip"   placeholder="Zip Code">
                               </mat-form-field>
