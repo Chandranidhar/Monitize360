@@ -1,0 +1,12 @@
+[
+    {"value":"A","name":"Accountant"},
+    {"value":"B","name":"Builder"},
+    {"value":"C","name":"Contractor"},
+    {"value":"D","name":"Dealer/Retailer/Storekeeper"},
+    {"value":"E","name":"Distributor/Wholesaler"},
+    {"value":"F","name":"Funeral Director"},
+    {"value":"M","name":"Maker/Manufacturer"},
+    {"value":"O","name":"Owner"},
+    {"value":"P","name":"Partner"},
+    {"value":"S","name":"Self-Employed"}
+]

@@ -26,8 +26,16 @@ public data:any={}
 public spinnerval:any = 0;
 public stateList:any={};
 public cityList:any={};
+public homeList:any={};
 public sourcedata:any={};
+public VehicleList:any={};
+public ChildrenList :any={};
+public HouseholdList:any={};
+public BusinessownerList:any={};
 public consumer_datalist:any={};
+public NumberOfPcsList:any={};
+public squareFootageList:any={};
+public yearofbusinessList:any={};
 public contactUsAllData: any;
 contactUsAllDataHeaderSkipValue: any = [];
   contactUsAllDataModifyHeaderValue: any = {};
@@ -45,6 +53,14 @@ contactUsAllDataHeaderSkipValue: any = [];
     this.generateapitoken();
   this.getStateList();
   this.getCityList();
+  this.getHomeList();
+  this.getVehicleList();
+  this.getChildrenList();
+  this.getHouseholdList();
+  this.getBusinessownerList();
+  this.getNumberOfPcsList();
+  this. getSquarefootageList();
+  this.getyearofbusinessList();
   //consumer form group
   this.consumarform=this.fb.group({
     First_Name:[''],
@@ -141,10 +157,6 @@ filter(Value:any){
     this.businessdata.filter=Value.trim().toLowerCase();
   }
 
-
-  if (this.consumerdata.paginator) {
-    this.consumerdata.paginator.firstPage();
-  }
     }
     //state list Json
     getStateList (){
@@ -164,6 +176,65 @@ filter(Value:any){
         this.cityList=result;
       })
     }
+
+    getHomeList(){
+      this.apiservice.getJsonObject('assets/json/median-home-value.json').subscribe((res)=>{
+        let result:any={};
+        result=res;
+        this.homeList=result;
+      })
+
+    }
+    getVehicleList(){
+      this.apiservice.getJsonObject('assets/json/Vehicle_Dominate.json').subscribe((res)=>{
+        let result:any={};
+        result=res;
+        this.VehicleList=result;
+      })
+    }
+    getChildrenList(){
+      this.apiservice.getJsonObject('assets/json/number-of-children.json').subscribe((res)=>{
+        let result:any={};
+        result=res;
+        this.ChildrenList=result;
+      })
+    }
+    getHouseholdList(){
+      this.apiservice.getJsonObject('assets/json/household-size.json').subscribe((res)=>{
+        let result:any={};
+        result=res;
+        this.HouseholdList=result;
+      })
+    }
+    getBusinessownerList(){
+      this.apiservice.getJsonObject('assets/json/business-owner.json').subscribe((res)=>{
+        let result:any={};
+        result=res;
+        this.BusinessownerList=result;
+      })
+    }
+    getNumberOfPcsList(){
+      this.apiservice.getJsonObject('assets/json/number-of-pcs.json').subscribe((res)=>{
+        let result:any={};
+        result=res;
+        this.NumberOfPcsList=result;
+      })
+    }
+    getSquarefootageList(){
+      this.apiservice.getJsonObject('assets/json/square-footage.json').subscribe((res)=>{
+        let result:any={};
+        result=res;
+        this.squareFootageList=result;
+      })
+    }
+    getyearofbusinessList(){
+      this.apiservice.getJsonObject('assets/json/year-of-business.json').subscribe((res)=>{
+        let result:any={};
+        result=res;
+        this.yearofbusinessList=result;
+      })
+    }
+
 
 /**For business Form Submit */
 businessFormSubmit() {
@@ -241,6 +312,7 @@ businessFormSubmit() {
 
 // show sample data for consumer 
     showconsumerdata(){
+     this.spinnerval=1;
     let data:any={};
     data={
       apitoken:this.apitoken,
@@ -290,7 +362,7 @@ businessFormSubmit() {
           this.consumerdata.sort=this.sort;
         }, 500);
 
-      
+      this.spinnerval=0;
 
 
       }
@@ -300,7 +372,7 @@ businessFormSubmit() {
 
 // show sample data for business 
   showbusinessdata(){
-
+this.spinnerval=1;
   let data:any={};
     data={
       apitoken:this.apitoken,
@@ -349,7 +421,7 @@ businessFormSubmit() {
           this.businessdata.paginator=this.paginator;
           this.businessdata.sort=this.sort;
         }, 500);
-
+        this.spinnerval=0;
         
       }
 
@@ -358,6 +430,10 @@ businessFormSubmit() {
   }
 
 }
+
+
+
+
 
 
 
