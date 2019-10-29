@@ -5,30 +5,7 @@ import { CookieService } from 'ngx-cookie-service';
 import {MatPaginator} from '@angular/material/paginator';
 import {MatSort} from '@angular/material/sort';
 import {MatTableDataSource} from '@angular/material/table';
-export interface PeriodicElement {
-  name: string;
-  position: number;
-  weight: number;
-  symbol: string;
-}
-const ELEMENT_DATA: PeriodicElement[] = [
-  {position: 1, name: 'Hydrogen', weight: 1.0079, symbol: 'H'},
-  {position: 2, name: 'Helium', weight: 4.0026, symbol: 'He'},
-  {position: 3, name: 'Lithium', weight: 6.941, symbol: 'Li'},
-  {position: 4, name: 'Beryllium', weight: 9.0122, symbol: 'Be'},
-  {position: 5, name: 'Boron', weight: 10.811, symbol: 'B'},
-  {position: 6, name: 'Carbon', weight: 12.0107, symbol: 'C'},
-  {position: 7, name: 'Nitrogen', weight: 14.0067, symbol: 'N'},
-  {position: 8, name: 'Oxygen', weight: 15.9994, symbol: 'O'},
-  {position: 9, name: 'Fluorine', weight: 18.9984, symbol: 'F'},
-  {position: 10, name: 'Neon', weight: 20.1797, symbol: 'Ne'},
-];
-export interface UserData {
-  id: string;
-  name: string;
-  progress: string;
-  color: string;
-}
+
 
 /** Constants used to fill up our data base. */
 const COLORS: string[] = [
@@ -47,37 +24,65 @@ const NAMES: string[] = [
 })
 
 export class UserDashboardComponent implements OnInit {
-  // displayedColumns: string[] = ['position', 'name', 'weight', 'symbol'];
-  displayedColumns: string[] = ['id', 'name', 'progress', 'color'];
-  dataSource:MatTableDataSource<UserData>;
   public name: any; public phone: any; public address: any; public company: any;
   public designation: any; public website: any;public email: any;
 
   @ViewChild(MatPaginator, {static: true}) paginator: MatPaginator;
   @ViewChild(MatSort, {static: true}) sort: MatSort;
+/**liblisting code */
+  public UserAllData: any;
+  UserAllDataHeaderSkipValue: any = [];
+    UserAllDataModifyHeaderValue: any = {};
+    statusarray: any = [{val: 1, name: 'Pending'}, {val: 2, name: 'Cancelled'}, {val: 3, name: 'Delivered'}]; 
 
+    pendingmodelapplicationarray: any = [];
+  pendingmodelapplicationarray_skip: any = ['_id','user_id' ,'user_type','user_phone' ,'fullname',  'pincode','area','landmark',
+                                            'housenumber','billing_type'];
+  pendingmodelapplicationarray_detail_skip: any = ['_id','user_id','user_fullname','user_type',];
+
+    updateendpoint = 'addorupdatedata';
+    deleteendpoint = 'deletesingledata';
+    tablename = 'user';
+    searchendpoint = 'datalist';
+    editroute: any = 'editroute';
+    modify_header_array: any = {
+        'fullname': "Name",
+        'phone': "Phone Number",
+        'search count': "Data Purchase",
+        'user email':"Email ID",
+        'created at': "Created on",
+        'state':"State",
+        'city':"City"
+    };
+
+     // this is use for  All type of search 
+     search_settings:any={
+
+      datesearch:[{startdatelabel:"Start Date",enddatelabel:"End Date",submit:"Search By Date",  field:"created_at"}],   // this is use for  date search 
+
+      textsearch:[{label:"Search By email",field:'email'},{label:"Search By Full name",field:'name'}],  // this is use for  text search
+
+      search:[{label:"Search By autocomplete",field:'name'}]     // this is use for  Autocomplete search
+  }
   constructor(public apiService: ApiService, public activatedRoute: ActivatedRoute, public CookieService: CookieService) {
-    const users = Array.from({length: 100}, (_, k) => createNewUser(k + 1));
+  
 
     // Assign the data to the data source for the table to render
-    this.dataSource = new MatTableDataSource(users);
+    
     // this.serverURL = apiService.api_url;
     this.userdetails();
   }
 
   ngOnInit() {
-    this.dataSource.paginator = this.paginator;
-    this.dataSource.sort = this.sort;
+    this.activatedRoute.data.forEach(data=>{
+      let result:any;
+      result=data;
+    console.log(result.results.res);
+      this.pendingmodelapplicationarray = result.results.res;
+    
+    })
   }
 
-
-
-  applyFilter(filterValue: string) {
-    this.dataSource.filter = filterValue.trim().toLowerCase();
-    if (this.dataSource.paginator) {
-      this.dataSource.paginator.firstPage();
-    }
-  }
   /**fetch userdetails form cookie */
   userdetails() {
     let userdetails = JSON.parse(this.CookieService.get('user_details'));
@@ -90,15 +95,4 @@ export class UserDashboardComponent implements OnInit {
     this.email=userdetails.email;
   }
 }
-/** Builds and returns a new User. */
-function createNewUser(id: number): UserData {
-  const name = NAMES[Math.round(Math.random() * (NAMES.length - 1))] + ' ' +
-    NAMES[Math.round(Math.random() * (NAMES.length - 1))].charAt(0) + '.';
 
-  return {
-    id: id.toString(),
-    name: name,
-    progress: Math.round(Math.random() * 100).toString(),
-    color: COLORS[Math.round(Math.random() * (COLORS.length - 1))]
-  };
-}

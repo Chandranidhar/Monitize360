@@ -13,9 +13,9 @@ export class OrdersComponent implements OnInit {
     statusarray: any = [{val: 1, name: 'Pending'}, {val: 2, name: 'Cancelled'}, {val: 3, name: 'Delivered'}]; 
 
     pendingmodelapplicationarray: any = [];
-  pendingmodelapplicationarray_skip: any = ['_id', 'user_email','type', 'fullname', 'phone', 'pincode', 'city','area','landmark',
-                                            'housenumber','state','billing_type'];
-  pendingmodelapplicationarray_detail_skip: any = ['_id', 'user_email', 'fullname','phone'];
+  pendingmodelapplicationarray_skip: any = ['_id','user_id' ,'user_type','user_phone' ,'fullname',  'pincode','area','landmark',
+  'housenumber','billing_type'];
+  pendingmodelapplicationarray_detail_skip: any = ['_id','user_id','user_fullname','user_type',];
 
     updateendpoint = 'addorupdatedata';
     deleteendpoint = 'deletesingledata';
@@ -23,11 +23,13 @@ export class OrdersComponent implements OnInit {
     searchendpoint = 'datalist';
     editroute: any = 'editroute';
     modify_header_array: any = {
-        'billing fullname': "Name",
-        'billing phone': "Phone Number",
-        'search count': "Data Number",
-        'search query':"Data Criteria",
-        'created at': "Created on"
+      'fullname': "Name",
+      'phone': "Phone Number",
+      'search count': "Data Purchase",
+      'user email':"Email ID",
+      'created at': "Created on",
+      'state':"State",
+      'city':"City"
     };
 
      // this is use for  All type of search 
