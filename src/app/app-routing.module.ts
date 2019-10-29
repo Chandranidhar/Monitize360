@@ -36,7 +36,7 @@ const routes: Routes = [
   { path: 'userlist', component: UserlistComponent, resolve: { results: Resolveservice }, data: { source: 'user', "condition": { "type": "user" } }, canActivate: [AuthGuard] },
   { path: 'purchasedata', component: PurchasedataComponent },
   { path: 'billing', component: BillingDetailsComponent },
-  { path: 'myorders', component: OrdersComponent, resolve: { results: Resolveservice }, data: { source: 'billing_details_view'},canActivate: [AuthGuard] },
+  { path: 'myorders', component: OrdersComponent, resolve: { results: Resolveservice }, data: { source: 'billing_details_view',condition:{'user_id_object':'user_id_object'}},canActivate: [AuthGuard] },
   { path: 'orderlist', component: OrdersComponent, resolve: { results: Resolveservice }, data: { source: 'billing_details_view'},canActivate: [AuthGuard] }
 
 ];

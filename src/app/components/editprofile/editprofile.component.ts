@@ -254,7 +254,8 @@ export class EditprofileComponent implements OnInit {
       "abbreviation": "WY"
     }
   ];
-  constructor(public fb: FormBuilder, public router: Router, public dialog: MatDialog, public apiService: ApiService, public cook: CookieService) {
+  constructor(public fb: FormBuilder, public router: Router, public dialog: MatDialog, 
+    public apiService: ApiService, public cook: CookieService,public _snackBar: MatSnackBar) {
     this.UpdateForm = this.fb.group({
       id: [null, null],
       email: [null, Validators.compose([Validators.required, Validators.pattern(/^\s*[\w\-\+_]+(\.[\w\-\+_]+)*\@[\w\-\+_]+\.[\w\-\+_]+(\.[\w\-\+_]+)*\s*$/)])],
@@ -317,7 +318,15 @@ export class EditprofileComponent implements OnInit {
       console.log(this.UpdateForm.value);
       let data: any = { 'source': 'user', 'data': this.UpdateForm.value };
       this.apiService.postData('addorupdatedata', data).subscribe((data) => {
-        console.log(data);
+       // console.log(data);
+        let result:any={}
+        result=data;
+        if(result.status=='success')
+        {
+          this._snackBar.open('Update Complete', '', {
+            duration: 3000
+          });
+        }
       });
     }
 
