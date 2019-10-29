@@ -22,6 +22,7 @@ public data:any={}
  public consumarform:FormGroup;
  public search_count:any='0';
  public consumerdata:any=null;
+ public businessdata:any=null;
 public spinnerval:any = 0;
 public stateList:any={};
 public cityList:any={};
@@ -94,12 +95,14 @@ public cityList:any={};
     
   }
   openConsumerPanel(){
+    this.search_count = '0';
     
     
   }
 
   openBusinessPanel(){
     // console.log('business')
+    this.search_count = '0';
 
   }
   step = 0;
@@ -122,10 +125,11 @@ filter(Value:any){
   // console.log(this.dataSource.filter);
   // console.log(Value);
   this.consumerdata.filter=Value.trim().toLowerCase();
+  this.businessdata.filter=Value.trim().toLowerCase();
 
-  if (this.consumerdata.paginator) {
-    this.consumerdata.paginator.firstPage();
-  }
+  // if (this.consumerdata.paginator) {
+  //   this.consumerdata.paginator.firstPage();
+  // }
     }
     getStateList (){
       this.apiservice.getJsonObject('assets/json/usa-states.json').subscribe(response=>{
@@ -136,7 +140,7 @@ filter(Value:any){
       })
     }
     getCityList(){
-      this.apiservice.getJsonObject('assets/Json/usa-cities.json').subscribe((res)=>{
+      this.apiservice.getJsonObject('assets/json/usa-cities.json').subscribe((res)=>{
         let result:any={};
         result=res;
         this.cityList=result;
@@ -223,7 +227,7 @@ businessFormSubmit() {
       apitoken:this.apitoken,
       token:this.cookieservice.get('jwttoken')
     }
-    this.apiservice.postDatawithoutToken('data',data).subscribe((res)=>{
+    this.apiservice.postDatawithoutToken('dataforbusiness',data).subscribe((res)=>{
       console.log('dta endpoint hit');
       let result:any;
       result=res;
@@ -270,6 +274,63 @@ businessFormSubmit() {
 
     })
   }
+
+  showbusinessdata(){
+
+  let data:any={};
+    data={
+      apitoken:this.apitoken,
+      token:this.cookieservice.get('jwttoken')
+    }
+    this.apiservice.postDatawithoutToken('data',data).subscribe((res)=>{
+      console.log('dta endpoint hit');
+      let result:any;
+      result=res;
+      if(result.status=='200'){
+        console.log(result.data.Response.responseDetails.SearchResult.searchResultRecord);
+        let cdata:any=result.data.Response.responseDetails.SearchResult.searchResultRecord;
+        let sourcedata:any=[];
+        for(let b in cdata){
+          let tempdata:any=[];
+          console.log(cdata[b],b,'b');
+          for(let n in cdata[b].resultFields){
+
+            console.log(cdata[b].resultFields[n],'ddd');
+            //tempdata['First_Name']=cdata[b]['First_Name'];
+            //tempdata['Last_Name']=cdata[b]['Last_Name'];
+            
+            if(cdata[b].resultFields[n].fieldID=='First_Name')tempdata['First_Name']=cdata[b].resultFields[n].fieldValue;
+            if(cdata[b].resultFields[n].fieldID=='Last_Name')tempdata['Last_Name']=cdata[b].resultFields[n].fieldValue;
+            if(cdata[b].resultFields[n].fieldID=='Ind_Gender_Code')tempdata['Ind_Gender_Code']=cdata[b].resultFields[n].fieldValue;
+            if(cdata[b].resultFields[n].fieldID=='Ind_Age')tempdata['Ind_Age']=cdata[b].resultFields[n].fieldValue;
+            if(cdata[b].resultFields[n].fieldID=='Email')tempdata['Email']=cdata[b].resultFields[n].fieldValue;
+            if(cdata[b].resultFields[n].fieldID=='Phone')tempdata['Phone']=cdata[b].resultFields[n].fieldValue;
+            if(cdata[b].resultFields[n].fieldID=='Physical_Address')tempdata['Physical_Address']=cdata[b].resultFields[n].fieldValue;
+            if(cdata[b].resultFields[n].fieldID=='Physical_Zip')tempdata['Physical_Zip']=cdata[b].resultFields[n].fieldValue;
+            
+            tempdata=Object.assign({}, tempdata);
+            //conditiondata=Object.assign({}, conditiondata);
+
+          }
+          sourcedata.push(tempdata);
+
+
+        }
+        console.log(result.data.Response.responseDetails.SearchResult.searchResultRecord.length);
+        console.log('sourcedata',sourcedata);
+        
+        this.businessdata=new MatTableDataSource(sourcedata);
+        // this.consumerdata.paginator=this.paginator;
+        // this.consumerdata.sort=this.sort;
+
+
+
+      }
+
+    })
+
+  }
+
 }
 
 
