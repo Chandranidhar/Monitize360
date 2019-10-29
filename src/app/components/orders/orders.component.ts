@@ -10,11 +10,12 @@ export class OrdersComponent implements OnInit {
   public UserAllData: any;
   UserAllDataHeaderSkipValue: any = [];
     UserAllDataModifyHeaderValue: any = {};
-    statusarray: any = [{val: 1, name: 'Approve'}, {val: 4, name: 'Decline'}, {val: 3, name: 'Lock'}]; 
+    statusarray: any = [{val: 1, name: 'Pending'}, {val: 2, name: 'Cancelled'}, {val: 3, name: 'Delivered'}]; 
 
     pendingmodelapplicationarray: any = [];
-  pendingmodelapplicationarray_skip: any = ['_id', 'type', 'password', 'id', 'created_at', 'accesscode'];
-  pendingmodelapplicationarray_detail_skip: any = ['_id', 'email', 'name'];
+  pendingmodelapplicationarray_skip: any = ['_id', 'user_email','type', 'fullname', 'phone', 'pincode', 'city','area','landmark',
+                                            'housenumber','state','billing_type'];
+  pendingmodelapplicationarray_detail_skip: any = ['_id', 'user_email', 'fullname','phone'];
 
     updateendpoint = 'addorupdatedata';
     deleteendpoint = 'deletesingledata';
@@ -22,10 +23,11 @@ export class OrdersComponent implements OnInit {
     searchendpoint = 'datalist';
     editroute: any = 'editroute';
     modify_header_array: any = {
-        'firstname': "First Name",
-        'email': 'Email Id',
-        'lastname': 'Last Name',
-        'name': "Full Name"
+        'billing fullname': "Name",
+        'billing phone': "Phone Number",
+        'search count': "Data Number",
+        'search query':"Data Criteria",
+        'created at': "Created on"
     };
 
      // this is use for  All type of search 
@@ -45,7 +47,7 @@ export class OrdersComponent implements OnInit {
     this.activatedRoute.data.forEach(data=>{
       let result:any;
       result=data;
-      //console.log(result.results.res);
+    //console.log(data.results.res);
       this.pendingmodelapplicationarray = result.results.res;
     
     })

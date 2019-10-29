@@ -300,6 +300,7 @@ export class BillingDetailsComponent implements OnInit {
       allData.user_email = this.user_email;
       allData.search_count = this.search_count;
       allData.search_query = this.search_query;
+      allData.status=1;
       //  console.log(allData);
       let data: any = { 'source': 'billing_details', 'data': allData,'sourceobj':["user_id"] };
       // console.log(data);
