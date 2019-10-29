@@ -38,7 +38,7 @@ const routes: Routes = [
   {path:'userlist',component:UserlistComponent,resolve:{results:Resolveservice}, data:{source:'user',"condition":{"type":"user"}}, canActivate:[AuthGuard]},
   {path:'purchasedata',component:PurchasedataComponent},
   {path:'billing',component:BillingDetailsComponent},
-  {path:'orders',component:OrdersComponent}
+  {path:'orders',component:OrdersComponent,resolve:{results:Resolveservice}, data:{source:'user',"condition":{"type":"user"}}}
 
 ];
 
