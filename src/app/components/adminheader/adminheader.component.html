@@ -67,10 +67,10 @@
 
         <mat-nav-list>
             <ng-container *ngIf="userdetails!=null && userdetails.type=='admin'">
-            <a mat-list-item  [routerLink]="'/admin-dashboard'" routerLinkActive="active"> Dashboard </a>
-            <a mat-list-item  [routerLink]="'/adminlist'" routerLinkActive="active"> Admin List </a>
-            <a mat-list-item  [routerLink]="'/userlist'" routerLinkActive="active"> User List </a>
-            <a mat-list-item [routerLink]="'/'" routerLinkActive="active"> All Orders </a>
+            <a mat-list-item  [routerLink]="['/admin-dashboard']" routerLinkActive="active"> Dashboard </a>
+            <a mat-list-item  [routerLink]="['/adminlist']" routerLinkActive="active"> Admin List </a>
+            <a mat-list-item  [routerLink]="['/userlist']" routerLinkActive="active"> User List </a>
+            <a mat-list-item [routerLink]="['/']" routerLinkActive="active"> All Orders </a>
             
         </ng-container>
         <ng-container *ngIf="userdetails!=null && userdetails.type=='user'">

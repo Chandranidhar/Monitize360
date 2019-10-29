@@ -1,7 +1,10 @@
+<div class="spinne_main"  *ngIf="spinnerval==1">
+    <div class="spinne_wrapper">
+  <mat-spinner></mat-spinner>
+</div>
+</div>
 <app-adminheader>
-  <div  *ngIf="spinnerval==1">
-      <mat-spinner></mat-spinner>
-  </div>
+
     
   <mat-toolbar color="primary">
 
@@ -154,9 +157,15 @@
         <br>
         
         <button mat-raised-button color="primary"  >Search</button>
-        
-    
+      
       </form>
+
+</mat-card>
+<mat-card *ngIf="dataType ==='consumer' && search_count!='0'">
+
+  <h4>Total Data found : {{search_count}}</h4>
+
+  <button mat-raised-button *ngIf="search_count!='' && search_count!='0'" color="primary" (click)="showconsumerdata()" >Show Sample Data</button>
 
 </mat-card>
 
@@ -224,17 +233,8 @@
 </mat-card>
 
 <br>
-
-<mat-card *ngIf="dataType ==='consumer' && search_count!='0'">
-
-    <h4>Total Data found : {{search_count}}</h4>
-
-    <button mat-raised-button *ngIf="search_count!='' && search_count!='0'" color="primary" (click)="showconsumerdata()" >Show Sample Data</button>
-
-  </mat-card>
-  <br>
 <!-- table for consumer -->
- <mat-card>
+ <!-- <mat-card>
 
 <ng-container  *ngIf="search_count!='0' && dataType ==='consumer' && consumerdata!=null "  >
   <mat-form-field>
@@ -292,11 +292,27 @@
       <mat-paginator [pageSizeOptions]="[5, 10, 25, 100]"></mat-paginator>
     </div>
 </ng-container>
-</mat-card>
+</mat-card> -->
+
+<lib-listing *ngIf="consumer_datalist!=null && consumer_datalist.length>0"
+  [datasource]="consumer_datalist"
+  [skip]="consumer_datalist_skip" 
+  [modify_header_array]="modify_header_array" 
+  [apiurl]="apiService.api_url" 
+  [deleteendpoint]="deleteendpoint" 
+  [updateendpoint]="updateendpoint" 
+  [jwttoken]="apiService.jwttoken" 
+  [editroute]="editroute"    
+  [sourcedata]="tablename"  
+  [statusarr]="statusarray" 
+  
+  [searchendpoint]="searchendpoint">
+  
+  </lib-listing>
 
 <!-- table for business -->
 
-<mat-card>
+<!-- <mat-card>
 
   <ng-container  *ngIf="search_count!='0' && dataType ==='business' && businessdata!=null "  >
     <mat-form-field>
@@ -354,6 +370,6 @@
         <mat-paginator [pageSizeOptions]="[5, 10, 25, 100]"></mat-paginator>
       </div>
   </ng-container>
-  </mat-card>
+  </mat-card> -->
 
 </app-adminheader>

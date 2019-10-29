@@ -5,7 +5,7 @@ import {MatTableDataSource} from '@angular/material/table';
 import { FormGroup, FormBuilder, Validators } from '@angular/forms';
 import {MatPaginator} from '@angular/material/paginator';
 import {MatSort} from '@angular/material/sort';
-
+import { ActivatedRoute,Router } from '@angular/router';
 
 
 @Component({
@@ -26,13 +26,60 @@ public data:any={}
 public spinnerval:any = 0;
 public stateList:any={};
 public cityList:any={};
-@ViewChild(MatPaginator, {static: true}) paginator: MatPaginator;
-  @ViewChild(MatSort, {static: true}) sort: MatSort;
+public sourcedata:any={};
+public consumer_datalist:any={};
+public contactUsAllData: any;
+contactUsAllDataHeaderSkipValue: any = [];
+  contactUsAllDataModifyHeaderValue: any = {};
+ 
+   ServiceListArray:any;
+  statusarray: any = [{val: 1, name: 'Active'}, {val: 2, name: 'Inactive'}]; 
+// @ViewChild(MatPaginator, {static: true}) paginator: MatPaginator;
+//   @ViewChild(MatSort, {static: true}) sort: MatSort;
 
- displayedColumns:string[] = ['First_Name','Last_Name','Ind_Gender_Code','Ind_Age','Email','Phone','Physical_Address','Physical_Zip'];
+//  displayedColumns:string[] = ['First_Name','Last_Name','Ind_Gender_Code','Ind_Age','Email','Phone','Physical_Address','Physical_Zip'];
+
+ consumer_datalist_skip:[''];
+ 
+ updateendpoint = 'addorupdatedata';
+
+  // deleteendpoint is use for data delete endpoint
+  deleteendpoint = 'deletesingledata';
+  // this is a database collection name
+  tablename = 'user';
+
+  // searchendpoint is use for data search endpoint
+  searchendpoint = 'searchwithcount';
+
+  search_settings:any={
+
+    datesearch:[{startdatelabel:"Start Date",enddatelabel:"End Date",submit:"Search By Date",  field:"created_at"}],   // this is use for  date search 
+  
+  
+    textsearch:[{label:"Search By email",field:'email'},{label:"Search By Full name",field:'name'}],  // this is use for  text search
+  
+    search:[{label:"Search By autocomplete",field:'name'}]     // this is use for  Autocomplete search
+  };
+  
+modify_header_array: any = {
+  'First_Name': "First Name",
+  'Last_Name': 'Last Name',
+  'Ind_Gender_Code':'Gender',
+  'Ind_Age':'Age',
+  'Email': 'Email Id',
+  'Phone':'Phone Number',
+  'Physical_Address':'Address',
+  'Physical_Zip':'Zip',
+  'created at': 'Created At',
+  'updated at': 'Updated At',
+ 
+
+};
+
  dspColumns:string[] = [];
-  constructor(public apiservice:ApiService, public cookieservice:CookieService,public fb:FormBuilder) {
-  this.generateapitoken();
+  constructor(public apiservice:ApiService, public cookieservice:CookieService,public fb:FormBuilder,public activatedRoute:ActivatedRoute) {
+  this.spinnerval = 0;
+    this.generateapitoken();
   this.getStateList();
   this.getCityList();
   this.consumarform=this.fb.group({
@@ -87,13 +134,18 @@ public cityList:any={};
   }
 
   ngOnInit() {
-    if(this.consumerdata!=null){
-      this.consumerdata.paginator = this.paginator;
-      this.consumerdata.sort = this.sort;
-    }
+    // if(this.consumerdata.paginator){
+    //   this.consumerdata.paginator = this.paginator;
+    //   this.consumerdata.sort = this.sort;
+    // }
+    // this.activatedRoute.data.forEach(data=>{
+    //   let result:any;
+    //   result=data;
+    //   // console.log(result.res);
+    //   this.consumer_datalist = this.sourcedata;
     
-    
-  }
+  // })
+}
   openConsumerPanel(){
     this.search_count = '0';
     
@@ -124,8 +176,8 @@ filter(Value:any){
   // console.log(this.dataSource);
   // console.log(this.dataSource.filter);
   // console.log(Value);
-  this.consumerdata.filter=Value.trim().toLowerCase();
-  this.businessdata.filter=Value.trim().toLowerCase();
+  // this.consumerdata.filter=Value.trim().toLowerCase();
+  // this.businessdata.filter=Value.trim().toLowerCase();
 
   // if (this.consumerdata.paginator) {
   //   this.consumerdata.paginator.firstPage();
@@ -227,61 +279,6 @@ businessFormSubmit() {
       apitoken:this.apitoken,
       token:this.cookieservice.get('jwttoken')
     }
-    this.apiservice.postDatawithoutToken('dataforbusiness',data).subscribe((res)=>{
-      console.log('dta endpoint hit');
-      let result:any;
-      result=res;
-      if(result.status=='200'){
-        console.log(result.data.Response.responseDetails.SearchResult.searchResultRecord);
-        let cdata:any=result.data.Response.responseDetails.SearchResult.searchResultRecord;
-        let sourcedata:any=[];
-        for(let b in cdata){
-          let tempdata:any=[];
-          console.log(cdata[b],b,'b');
-          for(let n in cdata[b].resultFields){
-
-            console.log(cdata[b].resultFields[n],'ddd');
-            //tempdata['First_Name']=cdata[b]['First_Name'];
-            //tempdata['Last_Name']=cdata[b]['Last_Name'];
-            
-            if(cdata[b].resultFields[n].fieldID=='First_Name')tempdata['First_Name']=cdata[b].resultFields[n].fieldValue;
-            if(cdata[b].resultFields[n].fieldID=='Last_Name')tempdata['Last_Name']=cdata[b].resultFields[n].fieldValue;
-            if(cdata[b].resultFields[n].fieldID=='Ind_Gender_Code')tempdata['Ind_Gender_Code']=cdata[b].resultFields[n].fieldValue;
-            if(cdata[b].resultFields[n].fieldID=='Ind_Age')tempdata['Ind_Age']=cdata[b].resultFields[n].fieldValue;
-            if(cdata[b].resultFields[n].fieldID=='Email')tempdata['Email']=cdata[b].resultFields[n].fieldValue;
-            if(cdata[b].resultFields[n].fieldID=='Phone')tempdata['Phone']=cdata[b].resultFields[n].fieldValue;
-            if(cdata[b].resultFields[n].fieldID=='Physical_Address')tempdata['Physical_Address']=cdata[b].resultFields[n].fieldValue;
-            if(cdata[b].resultFields[n].fieldID=='Physical_Zip')tempdata['Physical_Zip']=cdata[b].resultFields[n].fieldValue;
-            
-            tempdata=Object.assign({}, tempdata);
-            //conditiondata=Object.assign({}, conditiondata);
-
-          }
-          sourcedata.push(tempdata);
-
-
-        }
-        console.log(result.data.Response.responseDetails.SearchResult.searchResultRecord.length);
-        console.log('sourcedata',sourcedata);
-        
-        this.consumerdata=new MatTableDataSource(sourcedata);
-        // this.consumerdata.paginator=this.paginator;
-        // this.consumerdata.sort=this.sort;
-
-
-
-      }
-
-    })
-  }
-
-  showbusinessdata(){
-
-  let data:any={};
-    data={
-      apitoken:this.apitoken,
-      token:this.cookieservice.get('jwttoken')
-    }
     this.apiservice.postDatawithoutToken('data',data).subscribe((res)=>{
       console.log('dta endpoint hit');
       let result:any;
@@ -319,17 +316,78 @@ businessFormSubmit() {
         console.log(result.data.Response.responseDetails.SearchResult.searchResultRecord.length);
         console.log('sourcedata',sourcedata);
         
-        this.businessdata=new MatTableDataSource(sourcedata);
+        // this.consumerdata=new MatTableDataSource(sourcedata);
         // this.consumerdata.paginator=this.paginator;
         // this.consumerdata.sort=this.sort;
+        this.activatedRoute.data.forEach(data=>{
+          let result:any;
+          result=data;
+          // console.log(result.res);
+          this.consumer_datalist = result.sourcedata;
+        })    
 
+      
 
 
       }
 
     })
-
   }
+
+  // showbusinessdata(){
+
+  // let data:any={};
+  //   data={
+  //     apitoken:this.apitoken,
+  //     token:this.cookieservice.get('jwttoken')
+  //   }
+  //   this.apiservice.postDatawithoutToken('dataforbusiness',data).subscribe((res)=>{
+  //     console.log('dta endpoint hit');
+  //     let result:any;
+  //     result=res;
+  //     if(result.status=='200'){
+  //       console.log(result.data.Response.responseDetails.SearchResult.searchResultRecord);
+  //       let cdata:any=result.data.Response.responseDetails.SearchResult.searchResultRecord;
+  //       let sourcedata:any=[];
+  //       for(let b in cdata){
+  //         let tempdata:any=[];
+  //         console.log(cdata[b],b,'b');
+  //         for(let n in cdata[b].resultFields){
+
+  //           console.log(cdata[b].resultFields[n],'ddd');
+  //           //tempdata['First_Name']=cdata[b]['First_Name'];
+  //           //tempdata['Last_Name']=cdata[b]['Last_Name'];
+            
+  //           if(cdata[b].resultFields[n].fieldID=='First_Name')tempdata['First_Name']=cdata[b].resultFields[n].fieldValue;
+  //           if(cdata[b].resultFields[n].fieldID=='Last_Name')tempdata['Last_Name']=cdata[b].resultFields[n].fieldValue;
+  //           if(cdata[b].resultFields[n].fieldID=='Ind_Gender_Code')tempdata['Ind_Gender_Code']=cdata[b].resultFields[n].fieldValue;
+  //           if(cdata[b].resultFields[n].fieldID=='Ind_Age')tempdata['Ind_Age']=cdata[b].resultFields[n].fieldValue;
+  //           if(cdata[b].resultFields[n].fieldID=='Email')tempdata['Email']=cdata[b].resultFields[n].fieldValue;
+  //           if(cdata[b].resultFields[n].fieldID=='Phone')tempdata['Phone']=cdata[b].resultFields[n].fieldValue;
+  //           if(cdata[b].resultFields[n].fieldID=='Physical_Address')tempdata['Physical_Address']=cdata[b].resultFields[n].fieldValue;
+  //           if(cdata[b].resultFields[n].fieldID=='Physical_Zip')tempdata['Physical_Zip']=cdata[b].resultFields[n].fieldValue;
+            
+  //           tempdata=Object.assign({}, tempdata);
+  //           //conditiondata=Object.assign({}, conditiondata);
+
+  //         }
+  //         sourcedata.push(tempdata);
+
+
+  //       }
+  //       console.log(result.data.Response.responseDetails.SearchResult.searchResultRecord.length);
+  //       console.log('sourcedata',sourcedata);
+        
+  //       // this.businessdata=new MatTableDataSource(sourcedata);
+  //       
+  //       
+
+        
+  //     }
+
+  //   })
+
+  // }
 
 }
 
