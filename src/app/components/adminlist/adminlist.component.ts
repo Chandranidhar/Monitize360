@@ -1,7 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { ApiService } from 'src/app/services/api-service';
 import { ActivatedRoute,Router } from '@angular/router';
-
+import { CookieService } from 'ngx-cookie-service';
 @Component({
   selector: 'app-adminlist',
   templateUrl: './adminlist.component.html',
@@ -10,13 +10,18 @@ import { ActivatedRoute,Router } from '@angular/router';
 export class AdminlistComponent implements OnInit {
 
   public contactUsAllData: any;
+  public jwttoken:any;
 contactUsAllDataHeaderSkipValue: any = [];
   contactUsAllDataModifyHeaderValue: any = {};
   admin_datalist:any=[];
    ServiceListArray:any;
   statusarray: any = [{val: 1, name: 'Active'}, {val: 2, name: 'Inactive'}]; 
   
+ 
+
   admin_datalist_skip: any = ['_id', 'type', 'password','confirmpassword','zip','status','companywebsite','designation','type','accesscode','id','companyname'];
+  
+
   
   // updateendpoint is use for data update endpoint
   updateendpoint = 'addorupdatedata';
@@ -30,6 +35,8 @@ contactUsAllDataHeaderSkipValue: any = [];
 
   // searchendpoint is use for data search endpoint
   searchendpoint = 'datalist';
+
+
 // public serverURL: any = '';
 editroute: any = 'editadmin';
   // use for Table Header modification 
@@ -59,16 +66,24 @@ search_settings:any={
 };
 
 
-  constructor(public apiService: ApiService, public activatedRoute: ActivatedRoute,public router : Router) { }
+  constructor(public apiService: ApiService,
+     public activatedRoute: ActivatedRoute,public router : Router,public cookieService: CookieService) { 
+      this.jwttoken=this.cookieService.get('jwttoken');
+
+     }
 
   ngOnInit() {
+    
     this.activatedRoute.data.forEach(data=>{
       let result:any;
       result=data;
-      // console.log(result.res);
-      this.admin_datalist = result.results.res;
+
+        this.admin_datalist = result.results.res;
+        
+      
       
     })
   }
+
 
 }

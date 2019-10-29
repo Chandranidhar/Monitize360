@@ -1,15 +1,19 @@
+<!-- mat spinner for data search -->
+<div class="spinne_main"  *ngIf="spinnerval==1">
+    <div class="spinne_wrapper">
+  <mat-spinner></mat-spinner>
+</div>
+</div>
 <app-adminheader>
-  <div  *ngIf="spinnerval==1">
-      <mat-spinner></mat-spinner>
-  </div>
-    
+
+    <!-- header text-->
   <mat-toolbar color="primary">
 
   <mat-toolbar-row>
     <span>Purchase Data</span>
   </mat-toolbar-row>
   </mat-toolbar>
-
+<!-- consumer panel and business panel -->
 <mat-card class="asnewclass">
 
     <mat-list role="list">
@@ -26,9 +30,9 @@
     </mat-list>
 
 </mat-card>
-
+<!-- form group for consumer data -->
 <mat-card  *ngIf="dataType != '' && dataType == 'consumer' && search_count=='0'">
-  <form [formGroup]="consumarform"  (ngSubmit)="purchaseDataForConsumar()">
+  <form [formGroup]="consumarform" >
         <mat-accordion >
                 <mat-expansion-panel [expanded]="step === 0" (opened)="setStep(0)" >
                         <mat-expansion-panel-header>
@@ -153,17 +157,87 @@
         </mat-accordion>
         <br>
         
-        <button mat-raised-button color="primary"  >Search</button>
-        
-    
+        <button mat-raised-button color="primary"  (click)="purchaseDataForConsumar()">Search</button>
+      
       </form>
+
+</mat-card>
+<!-- search count for consumer data -->
+<mat-card *ngIf="dataType ==='consumer' && search_count!='0'">
+
+  <h4>Total Data found : {{search_count}}</h4>
+
+  <button mat-raised-button *ngIf="search_count!='' && search_count!='0'" color="primary" (click)="showconsumerdata()" >Show Sample Data</button>
 
 </mat-card>
 
 <br>
+<!-- table for consumer data -->
+<mat-card *ngIf="search_count!='0' && dataType ==='consumer' && consumerdata!=null ">
+    <div  *ngIf="search_count!='0' && dataType ==='consumer' && consumerdata!=null ">
+        <button mat-raised-button color="primary" [routerLink]="'/billing'">Purchase Now!</button>
+      <mat-form-field>
+        <input matInput (keyup)="filter($event.target.value)" placeholder="Filter">
+      </mat-form-field>
+      <div class="mat-elevation-z8">
+      <table mat-table [dataSource]="consumerdata" matSort>
+    
+      
+          <ng-container matColumnDef="First_Name" >
+            <th mat-header-cell *matHeaderCellDef>First Name </th>
+            <td mat-cell *matCellDef="let i" [innerHTML]="i.First_Name" > {{i.First_Name}} </td>
+          </ng-container>
+        <ng-container matColumnDef="Last_Name">
+            <th mat-header-cell *matHeaderCellDef>Last Name </th>
+            <td mat-cell *matCellDef="let i " [innerHTML]="i.Last_Name" > {{i.Last_Name}} </td>
+          </ng-container>
+    
+          <ng-container matColumnDef="Ind_Gender_Code">
+              <th mat-header-cell *matHeaderCellDef> Gender</th>
+              <td mat-cell *matCellDef="let i"> {{i.Ind_Gender_Code}} </td>
+            </ng-container>
+    
+    
+          <ng-container matColumnDef="Ind_Age">
+              <th mat-header-cell *matHeaderCellDef>Age </th>
+              <td mat-cell *matCellDef="let i " > {{i.Ind_Age}} </td>
+            </ng-container>
+    
+            <ng-container matColumnDef="Email">
+                <th mat-header-cell *matHeaderCellDef>Email </th>
+                <td mat-cell *matCellDef="let i "> {{i.Email}} </td>
+              </ng-container>
+    
+        <ng-container matColumnDef="Phone">
+            <th mat-header-cell *matHeaderCellDef>Phone Number </th>
+            <td mat-cell *matCellDef="let i"> {{i.Phone}} </td>
+          </ng-container>
+    
+          <ng-container matColumnDef="Physical_Address">
+              <th mat-header-cell *matHeaderCellDef> Address </th>
+              <td mat-cell *matCellDef="let i"> {{i.Physical_Address}} </td>
+            </ng-container>
+    
+            <ng-container matColumnDef="Physical_Zip">
+                <th mat-header-cell *matHeaderCellDef> ZipCode </th>
+                <td mat-cell *matCellDef="let i"> {{i.Physical_Zip}} </td>
+            </ng-container>
+    
+    
+              <tr mat-header-row *matHeaderRowDef="displayedColumns"></tr>
+      <tr mat-row *matRowDef="let row; columns: displayedColumns;"></tr>
+    
+          </table>
+          <mat-paginator [pageSizeOptions]="[5, 10, 20,50]" showFirstLastButtons></mat-paginator>
+        </div>
+    </div>
+    
+    </mat-card>
 
+
+    <!-- form group for business data -->
  <mat-card  *ngIf="dataType !='' && dataType == 'business' && search_count=='0' ">
-    <form [formGroup]="businessForm"  (ngSubmit)="businessFormSubmit()">
+    <form [formGroup]="businessForm">
         <mat-accordion >
                 <mat-expansion-panel [expanded]="step === 0" (opened)="setStep(0)" >
                         <mat-expansion-panel-header>
@@ -213,92 +287,23 @@
 
         </mat-accordion>
         <br>
-        <button mat-raised-button color="primary">Search</button>
+        <button mat-raised-button color="primary" (click)='businessFormSubmit()'>Search</button>
       </form>
 </mat-card>
-
+<!-- search count for business data -->
 <mat-card *ngIf="dataType == 'business' && search_count !='0'">
-  <mat-label>Total Result :{{search_count}}</mat-label>
+  <h3>Total Result :{{search_count}}</h3>
   <br>
   <button type="button" *ngIf="search_count!='' && search_count!='0'" mat-raised-button color="primary" (click)="showbusinessdata()">Show Sample Data</button>
-</mat-card>
-
-<br>
-
-<mat-card *ngIf="dataType ==='consumer' && search_count!='0'">
-
-    <h4>Total Data found : {{search_count}}</h4>
-
-    <button mat-raised-button *ngIf="search_count!='' && search_count!='0'" color="primary" (click)="showconsumerdata()" >Show Sample Data</button>
-
-  </mat-card>
-  <br>
-<!-- table for consumer -->
- <mat-card>
-
-<ng-container  *ngIf="search_count!='0' && dataType ==='consumer' && consumerdata!=null "  >
-  <mat-form-field>
-    <input matInput (keyup)="filter($event.target.value)" placeholder="Filter">
-  </mat-form-field>
-  <div class="mat-elevation-z8">
-  <table mat-table [dataSource]="consumerdata" matSort>
-
   
-      <ng-container matColumnDef="First_Name" >
-        <th mat-header-cell *matHeaderCellDef>First Name </th>
-        <td mat-cell *matCellDef="let i" [innerHTML]="i.First_Name" > {{i.First_Name}} </td>
-      </ng-container>
-    <ng-container matColumnDef="Last_Name">
-        <th mat-header-cell *matHeaderCellDef>Last Name </th>
-        <td mat-cell *matCellDef="let i " [innerHTML]="i.Last_Name" > {{i.Last_Name}} </td>
-      </ng-container>
-
-      <ng-container matColumnDef="Ind_Gender_Code">
-          <th mat-header-cell *matHeaderCellDef> Gender</th>
-          <td mat-cell *matCellDef="let i"> {{i.Ind_Gender_Code}} </td>
-        </ng-container>
-
-
-      <ng-container matColumnDef="Ind_Age">
-          <th mat-header-cell *matHeaderCellDef>Age </th>
-          <td mat-cell *matCellDef="let i " > {{i.Ind_Age}} </td>
-        </ng-container>
-
-        <ng-container matColumnDef="Email">
-            <th mat-header-cell *matHeaderCellDef>Email </th>
-            <td mat-cell *matCellDef="let i "> {{i.Email}} </td>
-          </ng-container>
-
-    <ng-container matColumnDef="Phone">
-        <th mat-header-cell *matHeaderCellDef>Phone Number </th>
-        <td mat-cell *matCellDef="let i"> {{i.Phone}} </td>
-      </ng-container>
-
-      <ng-container matColumnDef="Physical_Address">
-          <th mat-header-cell *matHeaderCellDef> Address </th>
-          <td mat-cell *matCellDef="let i"> {{i.Physical_Address}} </td>
-        </ng-container>
-
-        <ng-container matColumnDef="Physical_Zip">
-            <th mat-header-cell *matHeaderCellDef> ZipCode </th>
-            <td mat-cell *matCellDef="let i"> {{i.Physical_Zip}} </td>
-        </ng-container>
-
-
-          <tr mat-header-row *matHeaderRowDef="displayedColumns"></tr>
-  <tr mat-row *matRowDef="let row; columns: displayedColumns;"></tr>
-
-      </table>
-      <mat-paginator [pageSizeOptions]="[5, 10, 25, 100]"></mat-paginator>
-    </div>
-</ng-container>
 </mat-card>
-
+<br>
 <!-- table for business -->
 
-<mat-card>
+<mat-card  *ngIf="search_count!='0' && dataType ==='business' && businessdata!=null ">
 
-  <ng-container  *ngIf="search_count!='0' && dataType ==='business' && businessdata!=null "  >
+  <div  *ngIf="search_count!='0' && dataType ==='business' && businessdata!=null "  >
+      <button mat-raised-button color="primary" [routerLink]="'/billing'">Purchase Now!</button>
     <mat-form-field>
       <input matInput (keyup)="filter($event.target.value)" placeholder="Filter">
     </mat-form-field>
@@ -351,9 +356,10 @@
     <tr mat-row *matRowDef="let row; columns: displayedColumns;"></tr>
   
         </table>
-        <mat-paginator [pageSizeOptions]="[5, 10, 25, 100]"></mat-paginator>
+        <mat-paginator [pageSizeOptions]="[5, 10, 20,50]" showFirstLastButtons></mat-paginator>
       </div>
-  </ng-container>
+    </div>
   </mat-card>
+  
 
 </app-adminheader>

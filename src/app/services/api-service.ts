@@ -98,7 +98,7 @@ export class ApiService {
         const httpOptions = {
             headers: new HttpHeaders({
                 'Content-Type':  'application/json',
-                'Authorization': this.jwttoken
+                'Authorization': this.cookieService.get('jwttoken')
             })
         };
         console.log(this.cookieService.get('id'));

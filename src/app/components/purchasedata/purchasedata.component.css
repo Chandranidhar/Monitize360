@@ -1,2 +1,5 @@
 
-  
+.spinne_main{ display: table-cell; background: rgba(0, 0, 0, 0.5); position: fixed; width: 100vw; height: 100vh; z-index: 9; 
+    text-align: center; vertical-align: middle;}
+
+.spinne_wrapper{ width: 110px; display: inline-block; margin: 25% auto;}
