@@ -34,47 +34,10 @@ contactUsAllDataHeaderSkipValue: any = [];
  
    ServiceListArray:any;
   statusarray: any = [{val: 1, name: 'Active'}, {val: 2, name: 'Inactive'}]; 
-// @ViewChild(MatPaginator, {static: true}) paginator: MatPaginator;
-//   @ViewChild(MatSort, {static: true}) sort: MatSort;
+@ViewChild(MatPaginator, {static: false}) paginator: MatPaginator;
+  @ViewChild(MatSort, {static: false}) sort: MatSort;
 
-//  displayedColumns:string[] = ['First_Name','Last_Name','Ind_Gender_Code','Ind_Age','Email','Phone','Physical_Address','Physical_Zip'];
-
- consumer_datalist_skip:[''];
- 
- updateendpoint = 'addorupdatedata';
-
-  // deleteendpoint is use for data delete endpoint
-  deleteendpoint = 'deletesingledata';
-  // this is a database collection name
-  tablename = 'user';
-
-  // searchendpoint is use for data search endpoint
-  searchendpoint = 'searchwithcount';
-
-  search_settings:any={
-
-    datesearch:[{startdatelabel:"Start Date",enddatelabel:"End Date",submit:"Search By Date",  field:"created_at"}],   // this is use for  date search 
-  
-  
-    textsearch:[{label:"Search By email",field:'email'},{label:"Search By Full name",field:'name'}],  // this is use for  text search
-  
-    search:[{label:"Search By autocomplete",field:'name'}]     // this is use for  Autocomplete search
-  };
-  
-modify_header_array: any = {
-  'First_Name': "First Name",
-  'Last_Name': 'Last Name',
-  'Ind_Gender_Code':'Gender',
-  'Ind_Age':'Age',
-  'Email': 'Email Id',
-  'Phone':'Phone Number',
-  'Physical_Address':'Address',
-  'Physical_Zip':'Zip',
-  'created at': 'Created At',
-  'updated at': 'Updated At',
- 
-
-};
+ displayedColumns:string[] = ['First_Name','Last_Name','Ind_Gender_Code','Ind_Age','Email','Phone','Physical_Address','Physical_Zip'];
 
  dspColumns:string[] = [];
   constructor(public apiservice:ApiService, public cookieservice:CookieService,public fb:FormBuilder,public activatedRoute:ActivatedRoute) {
@@ -82,6 +45,7 @@ modify_header_array: any = {
     this.generateapitoken();
   this.getStateList();
   this.getCityList();
+  //consumer form group
   this.consumarform=this.fb.group({
     First_Name:[''],
     Middle_Initial:[''],
@@ -103,6 +67,7 @@ modify_header_array: any = {
     NetWorth_Code:[''],
     Donor_Capacity_Code:['']
   });
+
   /**Busniss form group */
   this.businessForm=this.fb.group({
     Location_Sales_Code:[null],
@@ -134,29 +99,22 @@ modify_header_array: any = {
   }
 
   ngOnInit() {
-    // if(this.consumerdata.paginator){
-    //   this.consumerdata.paginator = this.paginator;
-    //   this.consumerdata.sort = this.sort;
-    // }
-    // this.activatedRoute.data.forEach(data=>{
-    //   let result:any;
-    //   result=data;
-    //   // console.log(result.res);
-    //   this.consumer_datalist = this.sourcedata;
-    
-  // })
+   
 }
+
+//business panel
   openConsumerPanel(){
     this.search_count = '0';
     
-    
   }
 
+//consumer panel
   openBusinessPanel(){
     // console.log('business')
     this.search_count = '0';
 
   }
+
   step = 0;
 
   setStep(index: number) {
@@ -171,18 +129,24 @@ modify_header_array: any = {
     this.step--;
   }
 
+//data filter for consumer and business
 filter(Value:any){
-  // console.log('this.dataSource while filtering');
-  // console.log(this.dataSource);
-  // console.log(this.dataSource.filter);
-  // console.log(Value);
-  // this.consumerdata.filter=Value.trim().toLowerCase();
-  // this.businessdata.filter=Value.trim().toLowerCase();
+  console.log('this.dataSource while filtering');
+  console.log(Value)
+  console.log(this.dataType)
+ 
+  if (this.dataType=='consumer') {
+    this.consumerdata.filter=Value.trim().toLowerCase();
+  } else {
+    this.businessdata.filter=Value.trim().toLowerCase();
+  }
 
-  // if (this.consumerdata.paginator) {
-  //   this.consumerdata.paginator.firstPage();
-  // }
+
+  if (this.consumerdata.paginator) {
+    this.consumerdata.paginator.firstPage();
+  }
     }
+    //state list Json
     getStateList (){
       this.apiservice.getJsonObject('assets/json/usa-states.json').subscribe(response=>{
         let result:any = {};
@@ -191,6 +155,8 @@ filter(Value:any){
         
       })
     }
+
+    //city list Json
     getCityList(){
       this.apiservice.getJsonObject('assets/json/usa-cities.json').subscribe((res)=>{
         let result:any={};
@@ -228,6 +194,7 @@ businessFormSubmit() {
     return rv;
   }
 
+/**For consumer Form Submit */
     purchaseDataForConsumar(){
       this.spinnerval  = 1;
       this.search_count='0';
@@ -272,7 +239,7 @@ businessFormSubmit() {
       console.log(this.consumarform.value);
     }
 
-
+// show sample data for consumer 
     showconsumerdata(){
     let data:any={};
     data={
@@ -315,16 +282,13 @@ businessFormSubmit() {
         }
         console.log(result.data.Response.responseDetails.SearchResult.searchResultRecord.length);
         console.log('sourcedata',sourcedata);
-        
-        // this.consumerdata=new MatTableDataSource(sourcedata);
-        // this.consumerdata.paginator=this.paginator;
-        // this.consumerdata.sort=this.sort;
-        this.activatedRoute.data.forEach(data=>{
-          let result:any;
-          result=data;
-          // console.log(result.res);
-          this.consumer_datalist = result.sourcedata;
-        })    
+       
+        this.consumerdata=new MatTableDataSource(sourcedata);
+
+        setTimeout(() => {
+          this.consumerdata.paginator=this.paginator;
+          this.consumerdata.sort=this.sort;
+        }, 500);
 
       
 
@@ -334,60 +298,64 @@ businessFormSubmit() {
     })
   }
 
-  // showbusinessdata(){
+// show sample data for business 
+  showbusinessdata(){
 
-  // let data:any={};
-  //   data={
-  //     apitoken:this.apitoken,
-  //     token:this.cookieservice.get('jwttoken')
-  //   }
-  //   this.apiservice.postDatawithoutToken('dataforbusiness',data).subscribe((res)=>{
-  //     console.log('dta endpoint hit');
-  //     let result:any;
-  //     result=res;
-  //     if(result.status=='200'){
-  //       console.log(result.data.Response.responseDetails.SearchResult.searchResultRecord);
-  //       let cdata:any=result.data.Response.responseDetails.SearchResult.searchResultRecord;
-  //       let sourcedata:any=[];
-  //       for(let b in cdata){
-  //         let tempdata:any=[];
-  //         console.log(cdata[b],b,'b');
-  //         for(let n in cdata[b].resultFields){
+  let data:any={};
+    data={
+      apitoken:this.apitoken,
+      token:this.cookieservice.get('jwttoken')
+    }
+    this.apiservice.postDatawithoutToken('dataforbusiness',data).subscribe((res)=>{
+      console.log('dta endpoint hit');
+      let result:any;
+      result=res;
+      if(result.status=='200'){
+        console.log(result.data.Response.responseDetails.SearchResult.searchResultRecord);
+        let cdata:any=result.data.Response.responseDetails.SearchResult.searchResultRecord;
+        let sourcedata:any=[];
+        for(let b in cdata){
+          let tempdata:any=[];
+          console.log(cdata[b],b,'b');
+          for(let n in cdata[b].resultFields){
 
-  //           console.log(cdata[b].resultFields[n],'ddd');
-  //           //tempdata['First_Name']=cdata[b]['First_Name'];
-  //           //tempdata['Last_Name']=cdata[b]['Last_Name'];
+            console.log(cdata[b].resultFields[n],'ddd');
+            //tempdata['First_Name']=cdata[b]['First_Name'];
+            //tempdata['Last_Name']=cdata[b]['Last_Name'];
             
-  //           if(cdata[b].resultFields[n].fieldID=='First_Name')tempdata['First_Name']=cdata[b].resultFields[n].fieldValue;
-  //           if(cdata[b].resultFields[n].fieldID=='Last_Name')tempdata['Last_Name']=cdata[b].resultFields[n].fieldValue;
-  //           if(cdata[b].resultFields[n].fieldID=='Ind_Gender_Code')tempdata['Ind_Gender_Code']=cdata[b].resultFields[n].fieldValue;
-  //           if(cdata[b].resultFields[n].fieldID=='Ind_Age')tempdata['Ind_Age']=cdata[b].resultFields[n].fieldValue;
-  //           if(cdata[b].resultFields[n].fieldID=='Email')tempdata['Email']=cdata[b].resultFields[n].fieldValue;
-  //           if(cdata[b].resultFields[n].fieldID=='Phone')tempdata['Phone']=cdata[b].resultFields[n].fieldValue;
-  //           if(cdata[b].resultFields[n].fieldID=='Physical_Address')tempdata['Physical_Address']=cdata[b].resultFields[n].fieldValue;
-  //           if(cdata[b].resultFields[n].fieldID=='Physical_Zip')tempdata['Physical_Zip']=cdata[b].resultFields[n].fieldValue;
+            if(cdata[b].resultFields[n].fieldID=='First_Name')tempdata['First_Name']=cdata[b].resultFields[n].fieldValue;
+            if(cdata[b].resultFields[n].fieldID=='Last_Name')tempdata['Last_Name']=cdata[b].resultFields[n].fieldValue;
+            if(cdata[b].resultFields[n].fieldID=='Ind_Gender_Code')tempdata['Ind_Gender_Code']=cdata[b].resultFields[n].fieldValue;
+            if(cdata[b].resultFields[n].fieldID=='Ind_Age')tempdata['Ind_Age']=cdata[b].resultFields[n].fieldValue;
+            if(cdata[b].resultFields[n].fieldID=='Email')tempdata['Email']=cdata[b].resultFields[n].fieldValue;
+            if(cdata[b].resultFields[n].fieldID=='Phone')tempdata['Phone']=cdata[b].resultFields[n].fieldValue;
+            if(cdata[b].resultFields[n].fieldID=='Physical_Address')tempdata['Physical_Address']=cdata[b].resultFields[n].fieldValue;
+            if(cdata[b].resultFields[n].fieldID=='Physical_Zip')tempdata['Physical_Zip']=cdata[b].resultFields[n].fieldValue;
             
-  //           tempdata=Object.assign({}, tempdata);
-  //           //conditiondata=Object.assign({}, conditiondata);
+            tempdata=Object.assign({}, tempdata);
+            //conditiondata=Object.assign({}, conditiondata);
 
-  //         }
-  //         sourcedata.push(tempdata);
+          }
+          sourcedata.push(tempdata);
 
 
-  //       }
-  //       console.log(result.data.Response.responseDetails.SearchResult.searchResultRecord.length);
-  //       console.log('sourcedata',sourcedata);
+        }
+        console.log(result.data.Response.responseDetails.SearchResult.searchResultRecord.length);
+        console.log('sourcedata',sourcedata);
         
-  //       // this.businessdata=new MatTableDataSource(sourcedata);
-  //       
-  //       
+        this.businessdata=new MatTableDataSource(sourcedata);
+        
+        setTimeout(() => {
+          this.businessdata.paginator=this.paginator;
+          this.businessdata.sort=this.sort;
+        }, 500);
 
         
-  //     }
+      }
 
-  //   })
+    })
 
-  // }
+  }
 
 }
 

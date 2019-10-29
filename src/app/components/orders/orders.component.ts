@@ -1,41 +1,56 @@
 import { Component, OnInit } from '@angular/core';
-import {MatTableDataSource} from '@angular/material/table';
-
-export interface PeriodicElement {
-  name: string;
-  position: number;
-  weight: number;
-  symbol: string;
-}
-
-const ELEMENT_DATA: PeriodicElement[] = [
-  {position: 1, name: 'Hydrogen', weight: 1.0079, symbol: 'H'},
-  {position: 2, name: 'Helium', weight: 4.0026, symbol: 'He'},
-  {position: 3, name: 'Lithium', weight: 6.941, symbol: 'Li'},
-  {position: 4, name: 'Beryllium', weight: 9.0122, symbol: 'Be'},
-  {position: 5, name: 'Boron', weight: 10.811, symbol: 'B'},
-  {position: 6, name: 'Carbon', weight: 12.0107, symbol: 'C'},
-  {position: 7, name: 'Nitrogen', weight: 14.0067, symbol: 'N'},
-  {position: 8, name: 'Oxygen', weight: 15.9994, symbol: 'O'},
-  {position: 9, name: 'Fluorine', weight: 18.9984, symbol: 'F'},
-  {position: 10, name: 'Neon', weight: 20.1797, symbol: 'Ne'},
-];
-
+import { ApiService } from 'src/app/services/api-service';
+import { ActivatedRoute } from '@angular/router';
 @Component({
   selector: 'app-orders',
   templateUrl: './orders.component.html',
   styleUrls: ['./orders.component.css']
 })
 export class OrdersComponent implements OnInit {
-  displayedColumns: string[] = ['position', 'name', 'weight', 'symbol'];
-  dataSource = new MatTableDataSource(ELEMENT_DATA);
+  public UserAllData: any;
+  UserAllDataHeaderSkipValue: any = [];
+    UserAllDataModifyHeaderValue: any = {};
+    statusarray: any = [{val: 1, name: 'Pending'}, {val: 2, name: 'Cancelled'}, {val: 3, name: 'Delivered'}]; 
 
-  applyFilter(filterValue: string) {
-    this.dataSource.filter = filterValue.trim().toLowerCase();
+    pendingmodelapplicationarray: any = [];
+  pendingmodelapplicationarray_skip: any = ['_id', 'user_email','type', 'fullname', 'phone', 'pincode', 'city','area','landmark',
+                                            'housenumber','state','billing_type'];
+  pendingmodelapplicationarray_detail_skip: any = ['_id', 'user_email', 'fullname','phone'];
+
+    updateendpoint = 'addorupdatedata';
+    deleteendpoint = 'deletesingledata';
+    tablename = 'user';
+    searchendpoint = 'datalist';
+    editroute: any = 'editroute';
+    modify_header_array: any = {
+        'billing fullname': "Name",
+        'billing phone': "Phone Number",
+        'search count': "Data Number",
+        'search query':"Data Criteria",
+        'created at': "Created on"
+    };
+
+     // this is use for  All type of search 
+     search_settings:any={
+
+      datesearch:[{startdatelabel:"Start Date",enddatelabel:"End Date",submit:"Search By Date",  field:"created_at"}],   // this is use for  date search 
+
+      textsearch:[{label:"Search By email",field:'email'},{label:"Search By Full name",field:'name'}],  // this is use for  text search
+
+      search:[{label:"Search By autocomplete",field:'name'}]     // this is use for  Autocomplete search
   }
-  constructor() { }
+
+  
+  constructor(public apiService: ApiService, public activatedRoute: ActivatedRoute) { }
 
   ngOnInit() {
+    this.activatedRoute.data.forEach(data=>{
+      let result:any;
+      result=data;
+    //console.log(data.results.res);
+      this.pendingmodelapplicationarray = result.results.res;
+    
+    })
   }
 
 }
