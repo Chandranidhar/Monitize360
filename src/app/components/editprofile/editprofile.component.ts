@@ -254,8 +254,8 @@ export class EditprofileComponent implements OnInit {
       "abbreviation": "WY"
     }
   ];
-  constructor(public fb: FormBuilder, public router: Router, public dialog: MatDialog, 
-    public apiService: ApiService, public cook: CookieService,public _snackBar: MatSnackBar) {
+  constructor(public fb: FormBuilder, public router: Router, public dialog: MatDialog,
+    public apiService: ApiService, public cook: CookieService, public _snackBar: MatSnackBar) {
     this.UpdateForm = this.fb.group({
       id: [null, null],
       email: [null, Validators.compose([Validators.required, Validators.pattern(/^\s*[\w\-\+_]+(\.[\w\-\+_]+)*\@[\w\-\+_]+\.[\w\-\+_]+(\.[\w\-\+_]+)*\s*$/)])],
@@ -315,17 +315,26 @@ export class EditprofileComponent implements OnInit {
     }
 
     if (this.UpdateForm.valid) {
-      console.log(this.UpdateForm.value);
+      //console.log(this.UpdateForm.value);
       let data: any = { 'source': 'user', 'data': this.UpdateForm.value };
       this.apiService.postData('addorupdatedata', data).subscribe((data) => {
-       // console.log(data);
-        let result:any={}
-        result=data;
-        if(result.status=='success')
-        {
+        console.log(data);
+        let result: any = {}
+        result = data;
+        if (result.status == 'success') {
+
+          this.cook.delete('user_details');
+
+          this.cook.set('user_details', JSON.stringify(result.data[0]));
+
+          this.UpdateForm.reset();
+          /**Success snakbar */
           this._snackBar.open('Update Complete', '', {
-            duration: 3000
+            duration: 2000
           });
+          setTimeout(() => {
+            this.router.navigateByUrl('/user-dashboard');
+          }, 500);
         }
       });
     }
@@ -335,7 +344,6 @@ export class EditprofileComponent implements OnInit {
   inputUntouched(val: any) {
     this.UpdateForm.controls[val].markAsUntouched();
   }
-
 
   openDialog(): void {
     const dialogRef = this.dialog.open(commonModalComponent, {
@@ -352,7 +360,7 @@ export class EditprofileComponent implements OnInit {
 }
 
 
-
+/**Change password section */
 import { MatSnackBar } from '@angular/material/snack-bar';
 @Component({
   selector: 'commonModal',
@@ -372,10 +380,10 @@ export class commonModalComponent {
       oldpass: [null, Validators.required],
       newpass: [null, Validators.required],
       conpass: [null, Validators.required],
-      
-    },{
+
+    }, {
       validator: this.machpassword('newpass', 'conpass')
-  });
+    });
   }
   machpassword(passwordkye: string, confirmpasswordkye: string) {
     return (group: FormGroup) => {
@@ -395,7 +403,7 @@ export class commonModalComponent {
       this.resetForm.controls[x].markAsTouched();
     }
     if (this.resetForm.valid) {
-      console.log(this.resetForm.value);
+      //console.log(this.resetForm.value);
       if (this.resetForm.value.conpass != null) {
         delete this.resetForm.value.conpass;
         let data: any = {
@@ -409,15 +417,15 @@ export class commonModalComponent {
             this._snackBar.open(d.message, '', {
               duration: 3000
             });
-            setTimeout(()=>{
+            setTimeout(() => {
               this.dialogRef.close();
-            },3000);
+            }, 3000);
           }
           else {
             this._snackBar.open(d.message, '', {
               duration: 3000
             });
-           
+
           }
 
         })

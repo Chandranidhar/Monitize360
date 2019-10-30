@@ -17,17 +17,20 @@ export declare class ForgetPasswordComponent implements OnInit {
     private domanUrlValue;
     addEndpointValue: any;
     logoValue: any;
+    loginRouteingUrlValue: any;
     domanUrl: any;
     formTitle: any;
     serverUrl: any;
     logo: any;
     addEndpoint: any;
     signUpRouteingUrl: any;
+    loginRouteingUrl: any;
     constructor(fb: FormBuilder, http: HttpClient, router: Router, apiService: ApiService);
     ngOnInit(): void;
     /********* Forget password  Form Submit start here*********/
     forgetPasswordSubmit(): void;
     /********* Forget password  Form Submit end here*********/
     signup(): void;
+    login(): void;
     inputUntouched(val: any): void;
 }
