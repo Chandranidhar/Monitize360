@@ -136,6 +136,7 @@ export class PurchasedataComponent implements OnInit {
   
   }
 
+  
   //consumer panel
   openBusinessPanel() {
     // console.log('business')
