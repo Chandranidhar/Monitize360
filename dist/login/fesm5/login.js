@@ -1738,6 +1738,7 @@ var ForgetPasswordComponent = /** @class */ (function () {
         this.domanUrlValue = '';
         this.addEndpointValue = '';
         this.logoValue = '';
+        this.loginRouteingUrlValue = '';
         this.forgetPasswordForm = this.fb.group({
             email: ['', Validators.compose([Validators.required, Validators.pattern(/^\s*[\w\-\+_]+(\.[\w\-\+_]+)*\@[\w\-\+_]+\.[\w\-\+_]+(\.[\w\-\+_]+)*\s*$/)])],
         });
@@ -1750,7 +1751,7 @@ var ForgetPasswordComponent = /** @class */ (function () {
         function (domanUrlVal) {
             this.domanUrlValue = (domanUrlVal) || '<no name set>';
             this.domanUrlValue = domanUrlVal;
-            console.log(this.domanUrlValue);
+            //console.log(this.domanUrlValue);
         },
         enumerable: true,
         configurable: true
@@ -1813,6 +1814,22 @@ var ForgetPasswordComponent = /** @class */ (function () {
         enumerable: true,
         configurable: true
     });
+    Object.defineProperty(ForgetPasswordComponent.prototype, "loginRouteingUrl", {
+        //sourav
+        set: 
+        //sourav
+        /**
+         * @param {?} routeingUrlval
+         * @return {?}
+         */
+        function (routeingUrlval) {
+            this.loginRouteingUrlValue = (routeingUrlval) || '<no name set>';
+            this.loginRouteingUrlValue = routeingUrlval;
+            // console.log(this.loginRouteingUrlValue);
+        },
+        enumerable: true,
+        configurable: true
+    });
     /**
      * @return {?}
      */
@@ -1864,7 +1881,7 @@ var ForgetPasswordComponent = /** @class */ (function () {
              * @return {?}
              */
             function (response) {
-                console.log(response);
+                //console.log(response);
                 /** @type {?} */
                 var result = {};
                 result = response;
@@ -1894,6 +1911,19 @@ var ForgetPasswordComponent = /** @class */ (function () {
     function () {
         this.router.navigateByUrl('/' + this.signUpRouteingUrlValue);
     };
+    // This is use for navigate this component to forget component 
+    // This is use for navigate this component to forget component 
+    /**
+     * @return {?}
+     */
+    ForgetPasswordComponent.prototype.login = 
+    // This is use for navigate this component to forget component 
+    /**
+     * @return {?}
+     */
+    function () {
+        this.router.navigateByUrl('/' + this.loginRouteingUrlValue);
+    };
     /**
      * @param {?} val
      * @return {?}
@@ -1908,7 +1938,7 @@ var ForgetPasswordComponent = /** @class */ (function () {
     ForgetPasswordComponent.decorators = [
         { type: Component, args: [{
                     selector: 'lib-forget-password',
-                    template: "<div class=\"main-div\">\r\n\r\n  <mat-card class=\"from\">\r\n      <span class=\"logowrapper\" *ngIf=\"logoValue != ''\" >\r\n          <img  [src]=\"logoValue\">\r\n      </span>\r\n\r\n    <h2 *ngIf=\"formTitleValue != ''\"> {{formTitleValue}}</h2>\r\n\r\n\r\n    <form class=\"example-container\" [formGroup]=\"forgetPasswordForm\" (ngSubmit)=\"forgetPasswordSubmit()\" novalidate>\r\n<mat-error class=\"error\" *ngIf=\"message !=''\">{{message}}</mat-error>\r\n\r\n      <mat-form-field>\r\n        <input matInput type=\"text\" placeholder=\"Email\"  formControlName=\"email\" (blur)=\"inputUntouched('email')\">\r\n        <mat-error\r\n          *ngIf=\"!forgetPasswordForm.controls['email'].valid && forgetPasswordForm.controls['email'].errors.required && forgetPasswordForm.controls['email'].touched\">\r\n          Email field can not be blank</mat-error>\r\n        <mat-error\r\n          *ngIf=\"!forgetPasswordForm.controls['email'].valid && !forgetPasswordForm.controls['email'].errors.required\">\r\n          Email is not valid</mat-error>\r\n      </mat-form-field>\r\n\r\n      <button mat-raised-button color=\"primary\">Forget Password</button>\r\n      <span class=\"signupfooter\">\r\n        <a (click)=\"signup()\">Sign Up</a>\r\n      </span>\r\n    </form>\r\n  </mat-card>\r\n</div>",
+                    template: "<div class=\"main-div\">\r\n\r\n  <mat-card class=\"from\">\r\n      <span class=\"logowrapper\" *ngIf=\"logoValue != ''\" >\r\n          <img  [src]=\"logoValue\">\r\n      </span>\r\n\r\n    <h2 *ngIf=\"formTitleValue != ''\"> {{formTitleValue}}</h2>\r\n\r\n\r\n    <form class=\"example-container\" [formGroup]=\"forgetPasswordForm\" (ngSubmit)=\"forgetPasswordSubmit()\" novalidate>\r\n<mat-error class=\"error\" *ngIf=\"message !=''\">{{message}}</mat-error>\r\n\r\n      <mat-form-field>\r\n        <input matInput type=\"text\" placeholder=\"Email\"  formControlName=\"email\" (blur)=\"inputUntouched('email')\">\r\n        <mat-error\r\n          *ngIf=\"!forgetPasswordForm.controls['email'].valid && forgetPasswordForm.controls['email'].errors.required && forgetPasswordForm.controls['email'].touched\">\r\n          Email field can not be blank</mat-error>\r\n        <mat-error\r\n          *ngIf=\"!forgetPasswordForm.controls['email'].valid && !forgetPasswordForm.controls['email'].errors.required\">\r\n          Email is not valid</mat-error>\r\n      </mat-form-field>\r\n\r\n      <button mat-raised-button color=\"primary\">Forget Password</button>\r\n      <span class=\"signupfooter\">\r\n        <a (click)=\"signup()\">Sign Up</a>\r\n        <a (click)=\"login()\">Login</a>\r\n      </span>\r\n    </form>\r\n  </mat-card>\r\n</div>",
                     styles: [".example-container{display:flex;flex-direction:column}.example-container>*{width:100%}.from{width:30%;margin:0 auto}.from h2{text-align:center;background-color:#00f;color:#fff;padding:15px}.from a{padding-right:30px}.main-div{height:100vh;display:flex;justify-content:center;align-items:center}.signupfooter{margin-top:12px;display:flex;justify-content:space-between;align-items:center}.signupfooter a{cursor:pointer}.error{text-align:center}.logowrapper{margin:0 auto;display:block;text-align:center}"]
                 }] }
     ];
@@ -1926,7 +1956,8 @@ var ForgetPasswordComponent = /** @class */ (function () {
         serverUrl: [{ type: Input }],
         logo: [{ type: Input }],
         addEndpoint: [{ type: Input }],
-        signUpRouteingUrl: [{ type: Input }]
+        signUpRouteingUrl: [{ type: Input }],
+        loginRouteingUrl: [{ type: Input }]
     };
     return ForgetPasswordComponent;
 }());

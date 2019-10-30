@@ -322,13 +322,19 @@ export class EditprofileComponent implements OnInit {
         let result: any = {}
         result = data;
         if (result.status == 'success') {
+
+          this.cook.delete('user_details');
+
+          this.cook.set('user_details', JSON.stringify(result.data[0]));
+
+          this.UpdateForm.reset();
+          /**Success snakbar */
           this._snackBar.open('Update Complete', '', {
-            duration: 3000
+            duration: 2000
           });
-          // setTimeout(() => {
-          //this.cook.delete('user_details');
-          // }, 500);
-          // this.cook.set('user_details','');
+          setTimeout(() => {
+            this.router.navigateByUrl('/user-dashboard');
+          }, 500);
         }
       });
     }
@@ -397,7 +403,7 @@ export class commonModalComponent {
       this.resetForm.controls[x].markAsTouched();
     }
     if (this.resetForm.valid) {
-      console.log(this.resetForm.value);
+      //console.log(this.resetForm.value);
       if (this.resetForm.value.conpass != null) {
         delete this.resetForm.value.conpass;
         let data: any = {
