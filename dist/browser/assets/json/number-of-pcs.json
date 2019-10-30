@@ -1,0 +1,8 @@
+[
+    {"value":"A","name":"Up to 4"},
+    {"value":"B","name":"5 to 9"},
+    {"value":"C","name":"10 to 24"},
+    {"value":"D","name":"25 to 99"},
+    {"value":"E","name":"100 to 499"},
+    {"value":"F","name":"500 or more"}
+]

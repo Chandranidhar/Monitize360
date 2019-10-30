@@ -6,6 +6,7 @@ import { FormGroup, FormBuilder, Validators, FormGroupDirective } from '@angular
 import { MatPaginator } from '@angular/material/paginator';
 import { MatSort } from '@angular/material/sort';
 import { ActivatedRoute, Router } from '@angular/router';
+import {MatSnackBar} from '@angular/material/snack-bar';
 
 
 @Component({
@@ -40,6 +41,8 @@ export class PurchasedataComponent implements OnInit {
   public NumberOfPcsList: any = {};
   public squareFootageList: any = {};
   public yearofbusinessList: any = {};
+  public totalIncomeList:any={};
+  public CreditCapacityList:any={};
   public contactUsAllData: any;
   contactUsAllDataHeaderSkipValue: any = [];
   contactUsAllDataModifyHeaderValue: any = {};
@@ -52,7 +55,7 @@ export class PurchasedataComponent implements OnInit {
   displayedColumns: string[] = ['First_Name', 'Last_Name', 'Ind_Gender_Code', 'Ind_Age', 'Email', 'Phone', 'Physical_Address', 'Physical_Zip'];
 
   dspColumns: string[] = [];
-  constructor(public apiservice: ApiService, public cookieservice: CookieService, public fb: FormBuilder, public activatedRoute: ActivatedRoute) {
+  constructor(public apiservice: ApiService, public cookieservice: CookieService, public fb: FormBuilder, public activatedRoute: ActivatedRoute,public snackBar: MatSnackBar) {
     this.spinnerval = 0;
     this.generateapitoken();
     this.getStateList();
@@ -65,6 +68,8 @@ export class PurchasedataComponent implements OnInit {
     this.getNumberOfPcsList();
     this.getSquarefootageList();
     this.getyearofbusinessList();
+    this.getCreditCapacityList();
+    this. getTotalIncomeList();
     //consumer form group
     this.consumarform = this.fb.group({
       First_Name: [''],
@@ -90,10 +95,10 @@ export class PurchasedataComponent implements OnInit {
 
     /**Busniss form group */
     this.businessForm = this.fb.group({
-      Location_Sales_Code: [null],
-      Years_In_Business_Code: [null],
-      Square_Footage_Code: [null],
-      Number_Of_PCs_Code: [null]
+      Location_Sales_Code: [''],
+      Years_In_Business_Code: [''],
+      Square_Footage_Code: [''],
+      Number_Of_PCs_Code: ['']
     });
   }
 
@@ -109,8 +114,11 @@ export class PurchasedataComponent implements OnInit {
       if (result.status == '200') {
         this.apitoken = result.apitoken;
         this.cookieservice.set('apitoken', result.apitoken);
+        setTimeout(() => {
+          this.apitoken = this.cookieservice.get('apitoken');
+        },);
 
-        this.apitoken = this.cookieservice.get('apitoken');
+        
       }
       else {
         console.log("Null")
@@ -125,17 +133,14 @@ export class PurchasedataComponent implements OnInit {
   //business panel
   openConsumerPanel() {
     this.search_count = '0';
-    this.businessForm.reset();
-
-
+  
   }
 
   //consumer panel
   openBusinessPanel() {
     // console.log('business')
     this.search_count = '0';
-    this.consumarform.reset();
-
+  
   }
 
   step = 0;
@@ -243,18 +248,48 @@ export class PurchasedataComponent implements OnInit {
       this.yearofbusinessList = result;
     })
   }
-
+  getCreditCapacityList() {
+    this.apiservice.getJsonObject('assets/json/credit-capacity.json').subscribe((res) => {
+      let result: any = {};
+      result = res;
+      this.CreditCapacityList = result;
+    })
+  }
+  getTotalIncomeList() {
+    this.apiservice.getJsonObject('assets/json/total-income.json').subscribe((res) => {
+      let result: any = {};
+      result = res;
+      this.totalIncomeList = result;
+    })
+  }
 
   /**For business Form Submit */
   businessFormSubmit() {
     this.spinnerval = 1;
     this.search_count = '0';
-    console.log(this.businessForm.value);
+    let conditiondata: any = [];
+    if(this.businessForm.valid){
+      // console.log( this.businessForm.value)
+    for (let cv in this.businessForm.value) {
+      // console.log(this.businessForm, cv, this.businessForm.value[cv]);
+    //   // console.log(this.businessForm.value[cv])
+
+    console.log(this.businessForm, cv, this.businessForm.value[cv]);
+      if (this.businessForm.value[cv].length >= 1) {
+
+        conditiondata[cv] = this.businessForm.value[cv];
+      }
+    }
+    console.log(conditiondata, 'cdata');
+
+    conditiondata = Object.assign({}, conditiondata);
+    console.log(conditiondata, 'cdata obj');
+    
     let data: any = {};
     data = {
       "apitoken": this.apitoken,
       "token": this.cookieservice.get('jwttoken'),
-      "condition": this.businessForm.value
+      "condition": conditiondata
     };
     this.apiservice.postDatawithoutToken('searchwithcountforbusiness', data).subscribe((res) => {
       let result: any = {};
@@ -262,10 +297,19 @@ export class PurchasedataComponent implements OnInit {
       console.log(result.data.Response.responseDetails.SearchCount);
 
       this.search_count = result.data.Response.responseDetails.SearchCount;
+    
       this.spinnerval = 0;
+      if(this.search_count=='0'){
+        this.snackBar.open('No Data Found..!', 'Ok', {
+           duration: 4000
+         });
+        //  this.businessForm.reset()
+       }
 
     })
   }
+  console.log(this.businessForm.value);
+}
 
   toObject(arr) {
     var rv = {};
@@ -314,6 +358,12 @@ export class PurchasedataComponent implements OnInit {
         let s_query = JSON.stringify(conditiondata)
         this.cookieservice.set('search_query', s_query);
         this.cookieservice.set('search_count', this.search_count);
+        if(this.search_count=='0'){
+         this.snackBar.open('No Data Found..!', 'Ok', {
+            duration: 4000
+          });
+          // this.consumarform.reset()
+        }
       })
     }
     console.log(this.consumarform.value);
@@ -361,7 +411,7 @@ export class PurchasedataComponent implements OnInit {
 
 
         }
-        console.log(result.data.Response.responseDetails.SearchResult.searchResultRecord.length);
+        // console.log(result.data.Response.responseDetails.SearchResult.searchResultRecord.length);
         console.log('sourcedata', sourcedata);
 
         this.consumerdata = new MatTableDataSource(sourcedata);
@@ -421,7 +471,7 @@ export class PurchasedataComponent implements OnInit {
 
 
         }
-        console.log(result.data.Response.responseDetails.SearchResult.searchResultRecord.length);
+        // console.log(result.data.Response.responseDetails.SearchResult.searchResultRecord.length);
         console.log('sourcedata', sourcedata);
 
         this.businessdata = new MatTableDataSource(sourcedata);

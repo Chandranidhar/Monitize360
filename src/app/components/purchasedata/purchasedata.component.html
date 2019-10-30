@@ -38,7 +38,7 @@
                 <mat-expansion-panel [expanded]="step === 0" (opened)="setStep(0)" >
                         <mat-expansion-panel-header>
                           <mat-panel-title>
-                            Personal Data
+                            Personal
                           </mat-panel-title>
                         
                         </mat-expansion-panel-header>
@@ -111,7 +111,10 @@
                         </mat-expansion-panel-header>
 
                         <mat-form-field>
-                          <input matInput formControlName="Income_Code" placeholder="Total Income">
+                          <mat-label>Select Total Income</mat-label>
+                          <mat-select formControlName="Income_Code">
+                          <mat-option *ngFor="let totalIncome of totalIncomeList" [value]="totalIncome.value">{{totalIncome.name}}</mat-option>
+                          </mat-select>
                         </mat-form-field>
                     
                         <mat-form-field>
@@ -141,7 +144,10 @@
                           </mat-form-field>
 
                         <mat-form-field>
-                          <input matInput formControlName="UnsecuredCreditCapacityCode" placeholder="Unsecured Credit Capacity">
+                          <mat-label>Select Credit Capacity</mat-label>
+                          <mat-select formControlName="UnsecuredCreditCapacityCode">
+                          <mat-option *ngFor="let creditcapacity of CreditCapacityList" [value]="creditcapacity.value">{{creditcapacity.name}}</mat-option>
+                          </mat-select>
                         </mat-form-field>
 
                         <mat-form-field>
