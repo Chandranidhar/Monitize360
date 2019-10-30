@@ -13,6 +13,7 @@
     <span>Purchase Data</span>
   </mat-toolbar-row>
   </mat-toolbar>
+  <br>
 <!-- consumer panel and business panel -->
 <mat-card class="asnewclass">
 
@@ -32,12 +33,12 @@
 </mat-card>
 <!-- form group for consumer data -->
 <mat-card  *ngIf="dataType != '' && dataType == 'consumer' && search_count=='0'">
-  <form [formGroup]="consumarform" >
+  <form [formGroup]="consumarform"  >
         <mat-accordion >
                 <mat-expansion-panel [expanded]="step === 0" (opened)="setStep(0)" >
                         <mat-expansion-panel-header>
                           <mat-panel-title>
-                            Personal Data
+                            Personal
                           </mat-panel-title>
                         
                         </mat-expansion-panel-header>
@@ -74,7 +75,7 @@
                         <mat-form-field >
                           <mat-label>Select State</mat-label>
                          <mat-select formControlName="Physical_State">
-                          <mat-option *ngFor="let state of stateList" [value]="state.name">{{state.name}}</mat-option>
+                          <mat-option *ngFor="let state of stateList" [value]="state.abbreviation">{{state.name}}</mat-option>
                           </mat-select>
                         </mat-form-field>
 
@@ -104,40 +105,65 @@
                       <mat-expansion-panel [expanded]="step === 2" (opened)="setStep(2)" >
                         <mat-expansion-panel-header>
                           <mat-panel-title>
-                            Household                          </mat-panel-title>
+                            Household  
+                           </mat-panel-title>
                           
                         </mat-expansion-panel-header>
 
                         <mat-form-field>
-                          <input matInput formControlName="Income_Code" placeholder="Total Income">
+                          <mat-label>Select Total Income</mat-label>
+                          <mat-select formControlName="Income_Code">
+                          <mat-option *ngFor="let totalIncome of totalIncomeList" [value]="totalIncome.value">{{totalIncome.name}}</mat-option>
+                          </mat-select>
                         </mat-form-field>
+                    
                         <mat-form-field>
-                          <input matInput formControlName="Number_Children" placeholder="Number of Children">
-                        </mat-form-field>
+                            <mat-label>Select Number of Children</mat-label>
+                            <mat-select formControlName="Number_Children">
+                            <mat-option *ngFor="let children of ChildrenList" [value]="children.value">{{children.name}}</mat-option>
+                            </mat-select>
+                          </mat-form-field>
 
                         <mat-form-field>
                           <input matInput formControlName="DiscretionaryIncomeCode" placeholder="Discretionary Income ">
                         </mat-form-field>
 
+                  
                         <mat-form-field>
-                          <input matInput formControlName="Median_HseHld_Income_Code" placeholder="Median Income">
+                            <mat-label>Select Median Household Income</mat-label>
+                            <mat-select formControlName="Median_HseHld_Income_Code">
+                            <mat-option *ngFor="let home of homeList" [value]="home.value">{{home.name}}</mat-option>
+                            </mat-select>
+                          </mat-form-field>
+
+                          <mat-form-field>
+                            <mat-label>Select Household Size</mat-label>
+                            <mat-select formControlName="Household_Size">
+                            <mat-option *ngFor="let household of HouseholdList" [value]="household.value">{{household.name}}</mat-option>
+                            </mat-select>
+                          </mat-form-field>
+
+                        <mat-form-field>
+                          <mat-label>Select Credit Capacity</mat-label>
+                          <mat-select formControlName="UnsecuredCreditCapacityCode">
+                          <mat-option *ngFor="let creditcapacity of CreditCapacityList" [value]="creditcapacity.value">{{creditcapacity.name}}</mat-option>
+                          </mat-select>
                         </mat-form-field>
 
                         <mat-form-field>
-                          <input matInput formControlName="Household_Size" placeholder="Household Size">
-                        </mat-form-field>
+                            <mat-label>Select Vehicle Dominate</mat-label>
+                            <mat-select formControlName="Vehicle_Dominate">
+                            <mat-option *ngFor="let vehicle of VehicleList" [value]="vehicle.value">{{vehicle.name}}</mat-option>
+                            </mat-select>
+                          </mat-form-field>
 
+                       
                         <mat-form-field>
-                          <input matInput formControlName="UnsecuredCreditCapacityCode" placeholder="Unsecured Credit Capacity">
-                        </mat-form-field>
-
-                        <mat-form-field>
-                          <input matInput formControlName="Vehicle_Dominate" placeholder="Vehicle Dominate">
-                        </mat-form-field>
-
-                        <mat-form-field>
-                          <input matInput formControlName="Business_Owner" placeholder="Business Owner">
-                        </mat-form-field>
+                            <mat-label>Select Business Owner</mat-label>
+                            <mat-select formControlName="Business_Owner">
+                          <mat-option *ngFor="let Business of BusinessownerList" [value]="Business.value">{{Business.name}}</mat-option>
+                            </mat-select>
+                          </mat-form-field>
 
                         <mat-form-field>
                           <input matInput formControlName="NetWorth_Code" placeholder="NetWorth Code">
@@ -264,17 +290,29 @@
                         
                         </mat-expansion-panel-header>
 
+                        
                         <mat-form-field>
-                          <input matInput placeholder="Years In Business" formControlName="Years_In_Business_Code">
-                        </mat-form-field>
+                            <mat-label>Select Years In Business</mat-label>
+                            <mat-select formControlName="Years_In_Business_Code">
+                            <mat-option *ngFor="let business of yearofbusinessList" [value]="business.value">{{business.name}}</mat-option>
+                            </mat-select>
+                          </mat-form-field>
 
+                       
                         <mat-form-field>
-                          <input matInput placeholder="Square Footage" formControlName="Square_Footage_Code">
-                        </mat-form-field>
+                            <mat-label>Select Square Footage</mat-label>
+                            <mat-select formControlName="Square_Footage_Code">
+                            <mat-option *ngFor="let footage of squareFootageList" [value]="footage.value">{{footage.name}}</mat-option>
+                            </mat-select>
+                          </mat-form-field>
 
+                        
                         <mat-form-field>
-                          <input matInput placeholder="Number Of PCs" formControlName="Number_Of_PCs_Code">
-                        </mat-form-field>
+                            <mat-label>Select Number Of PCs</mat-label>
+                            <mat-select formControlName="Number_Of_PCs_Code">
+                            <mat-option *ngFor="let NumberOfPcs of NumberOfPcsList" [value]="NumberOfPcs.value">{{NumberOfPcs.name}}</mat-option>
+                            </mat-select>
+                          </mat-form-field>
 
                         <mat-action-row>
                           <button mat-button color="warn" (click)="prevStep()">Previous</button>

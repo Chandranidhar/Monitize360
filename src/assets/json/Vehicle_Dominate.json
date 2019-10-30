@@ -1,0 +1,10 @@
+[
+    {"value":"A","name":"Luxury / Upper sporty Classification"},
+    {"value":"B","name":"Truck Classification"},
+    {"value":"C","name":"Sport Utility Vehicle Classification"},
+    {"value":"D","name":"Mini-Van Classification"},
+    {"value":"E","name":"Regular Classification (Mid-Size / Small)"},
+    {"value":"F","name":"Upper Classification ( Large)"},
+    {"value":"G","name":"Basic Sporty Classification"}
+]
+

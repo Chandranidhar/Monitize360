@@ -124,7 +124,7 @@ export class ApiService {
             headers: new HttpHeaders({
                 'Content-Type':  'application/json',
                 // 'access-token': this.cookieService.get('jwttoken'),
-                'Authorization': this.jwttoken
+                'Authorization': this.cookieService.get('jwttoken')
             })
         
         };
@@ -140,6 +140,7 @@ export class ApiService {
         const httpOptions = {
             headers: new HttpHeaders({
                 'Content-Type':  'application/json'
+                
             })
         };
         // console.log(this.cookieService.get('jwttoken'));
