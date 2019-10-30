@@ -33,7 +33,7 @@
 </mat-card>
 <!-- form group for consumer data -->
 <mat-card  *ngIf="dataType != '' && dataType == 'consumer' && search_count=='0'">
-  <form [formGroup]="consumarform" >
+  <form [formGroup]="consumarform"  >
         <mat-accordion >
                 <mat-expansion-panel [expanded]="step === 0" (opened)="setStep(0)" >
                         <mat-expansion-panel-header>

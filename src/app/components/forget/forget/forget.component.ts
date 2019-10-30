@@ -8,13 +8,15 @@ import { ApiService } from 'src/app/services/api-service';
 })
 export class ForgetComponent implements OnInit {
 
-  public logo: any = '../../assets/favicon.ico';
+  public logo: any = '';
   public signUpRouteingUrl: any = '/sign-up';
+  public loginRouteingUrl: any = '/login';
   public formTitle: any = 'Forget Password';
   public serverUrl:any = this.apiService.api_url;
   public addEndpoint: any = {
     endpoint:'forgetpassword'
   };
+
   public domanUrl: any = '';
   constructor(public apiService: ApiService) { }
 
