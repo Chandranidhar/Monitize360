@@ -35,7 +35,7 @@ export class UserlistComponent implements OnInit {
       // searchendpoint is use for data search endpoint
       searchendpoint = 'datalist';
     // public serverURL: any = '';
-    editroute: any = 'editroute';
+    editroute: any = 'editprofile';
       // use for Table Header modification 
   
       // Like Table head name is " firstname" => "First Name"

@@ -84,9 +84,11 @@ export class AddadminComponent implements OnInit {
     })
   }
 
-  openDialog(): void {
+  openDialog(x:any): void {
     const dialogRef = this.dialog.open(ModaleComponent, {
-      panelClass:['modal-md','success-modal']
+      panelClass:['modal-md','success-modal'],
+      data:{msg:x}
+
     });
 
     dialogRef.afterClosed().subscribe(result => {
@@ -113,7 +115,7 @@ export class AddadminComponent implements OnInit {
       result = res;
       
       if(result.status=='success'){
-        this.openDialog();
+        this.openDialog(this.message);
         setTimeout(()=>{
           this.dialog.closeAll();
         },2000);

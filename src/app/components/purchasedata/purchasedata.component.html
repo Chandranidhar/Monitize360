@@ -271,13 +271,16 @@
                 <mat-expansion-panel [expanded]="step === 0" (opened)="setStep(0)" >
                         <mat-expansion-panel-header>
                           <mat-panel-title>
-                            Location
+                            Location Sales
                           </mat-panel-title>
                           
                         </mat-expansion-panel-header>
 
                         <mat-form-field>
-                          <input matInput placeholder="Location sales Code" formControlName="Location_Sales_Code">
+                          <mat-label>Select Location Sales</mat-label>
+                          <mat-select formControlName="Location_Sales_Code">
+                        <mat-option *ngFor="let locationsales of LocationSalesList" [value]="locationsales.value">{{locationsales .name}}</mat-option>
+                          </mat-select>
                         </mat-form-field>
 
                         <mat-action-row>

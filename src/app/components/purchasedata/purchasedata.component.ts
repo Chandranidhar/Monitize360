@@ -45,6 +45,7 @@ export class PurchasedataComponent implements OnInit {
   public CreditCapacityList:any;
   public donorCapacityList:any;
   public contactUsAllData: any;
+  public LocationSalesList:any;
   contactUsAllDataHeaderSkipValue: any = [];
   contactUsAllDataModifyHeaderValue: any = {};
 
@@ -72,6 +73,7 @@ export class PurchasedataComponent implements OnInit {
     this.getCreditCapacityList();
     this. getTotalIncomeList();
     this.getDonorCapacityList();
+    this.getLocationSalesList();
     //consumer form group
     this.consumarform = this.fb.group({
       First_Name: [''],
@@ -270,6 +272,13 @@ export class PurchasedataComponent implements OnInit {
       let result: any = {};
       result = res;
       this.donorCapacityList = result;
+    })
+  }
+  getLocationSalesList(){
+    this.apiservice.getJsonObject('assets/json/location-sales.json').subscribe((res) => {
+      let result: any = {};
+      result = res;
+      this.LocationSalesList = result;
     })
   }
 
