@@ -23,7 +23,7 @@ export class AddadminComponent implements OnInit {
   public user_data:any=[];
   public data:any=[];
   public cityList: any;
-
+  public message:any="Submitted Successfully";
   constructor(public formbuilder:FormBuilder, public apiservice:ApiService, public cookieservice:CookieService, public dialog: MatDialog, public router:Router, public activatedRouter:ActivatedRoute) {
 
     this.getStateList();
@@ -31,6 +31,8 @@ export class AddadminComponent implements OnInit {
 
 
     if (router.url != '/addadmin') {
+
+      this.message = "Updateded Successfully";
       this.editform();
       this.addadminform = this.formbuilder.group({
         id:this.activatedRouter.snapshot.params.id,
@@ -93,7 +95,7 @@ export class AddadminComponent implements OnInit {
   }
 
   register(){
-    console.log('ojhgfhfchvjkl');
+    
     console.log(this.addadminform.value)
     if(this.addadminform.valid)
     {

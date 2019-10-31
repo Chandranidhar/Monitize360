@@ -166,11 +166,14 @@
                           </mat-form-field>
 
                         <mat-form-field>
-                          <input matInput formControlName="NetWorth_Code" placeholder="NetWorth Code">
+                          <input matInput formControlName="NetWorth_Code" placeholder="Net Worth">
                         </mat-form-field>
 
                         <mat-form-field>
-                          <input matInput formControlName="Donor_Capacity_Code" placeholder="Donor Capacity Code">
+                          <mat-label>Select Donor Capacity</mat-label>
+                          <mat-select formControlName="Donor_Capacity_Code">
+                        <mat-option *ngFor="let donorcapacity of donorCapacityList" [value]="donorcapacity.value">{{donorcapacity.name}}</mat-option>
+                          </mat-select>
                         </mat-form-field>
 
                         <mat-action-row>
@@ -274,7 +277,7 @@
                         </mat-expansion-panel-header>
 
                         <mat-form-field>
-                          <input matInput placeholder="Location" formControlName="Location_Sales_Code">
+                          <input matInput placeholder="Location sales Code" formControlName="Location_Sales_Code">
                         </mat-form-field>
 
                         <mat-action-row>

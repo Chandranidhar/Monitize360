@@ -19,7 +19,7 @@ export class PurchasedataComponent implements OnInit {
   @ViewChild(FormGroupDirective, { static: true }) formDirective: FormGroupDirective;
 
 
-  public dataType: any = '';
+  public dataType: any = 'consumer';
   public data: any = {}
   public dataSource: any;
   public businessForm: FormGroup;
@@ -43,6 +43,7 @@ export class PurchasedataComponent implements OnInit {
   public yearofbusinessList: any ;
   public totalIncomeList:any;
   public CreditCapacityList:any;
+  public donorCapacityList:any;
   public contactUsAllData: any;
   contactUsAllDataHeaderSkipValue: any = [];
   contactUsAllDataModifyHeaderValue: any = {};
@@ -70,6 +71,7 @@ export class PurchasedataComponent implements OnInit {
     this.getyearofbusinessList();
     this.getCreditCapacityList();
     this. getTotalIncomeList();
+    this.getDonorCapacityList();
     //consumer form group
     this.consumarform = this.fb.group({
       First_Name: [''],
@@ -116,7 +118,7 @@ export class PurchasedataComponent implements OnInit {
         this.cookieservice.set('apitoken', result.apitoken);
         setTimeout(() => {
           this.apitoken = this.cookieservice.get('apitoken');
-        },);
+        },200);
 
         
       }
@@ -261,6 +263,13 @@ export class PurchasedataComponent implements OnInit {
       let result: any = {};
       result = res;
       this.totalIncomeList = result;
+    })
+  }
+  getDonorCapacityList(){
+    this.apiservice.getJsonObject('assets/json/donor-capacity.json').subscribe((res) => {
+      let result: any = {};
+      result = res;
+      this.donorCapacityList = result;
     })
   }
 
