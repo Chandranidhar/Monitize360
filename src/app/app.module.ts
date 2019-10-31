@@ -29,12 +29,15 @@ import { NgxUploaderModule } from 'ngx-uploader';
 import { Resolveservice } from './services/resolve-service';
 
 import {AddadminComponent, ModaleComponent} from './components/addadmin/addadmin.component';
+import {EditModaleComponent} from './components/edituser/edituser.component';
 import { AdminlistComponent } from './components/adminlist/adminlist.component';
 import { UserlistComponent } from './components/userlist/userlist.component';
 import { PurchasedataComponent } from './components/purchasedata/purchasedata.component';
 import { BillingDetailsComponent } from './components/billing-details/billing-details.component';
 import { CKEditorModule } from 'ckeditor4-angular';
 import {OrdersComponent} from './components/orders/orders.component';
+import { EdituserComponent } from './components/edituser/edituser.component';
+
 @NgModule({
   declarations: [
     AppComponent,
@@ -50,6 +53,7 @@ import {OrdersComponent} from './components/orders/orders.component';
     SupportComponent,
     AddadminComponent,
     ModaleComponent,
+    EditModaleComponent,
     UserDashboardComponent,
     AdminlistComponent,
     UserlistComponent,
@@ -57,6 +61,7 @@ import {OrdersComponent} from './components/orders/orders.component';
     PurchasedataComponent,
     BillingDetailsComponent,
     OrdersComponent,
+    EdituserComponent,
   ],
   imports: [
     BrowserModule.withServerTransition({ appId: 'serverApp' }),
@@ -78,6 +83,6 @@ import {OrdersComponent} from './components/orders/orders.component';
   providers: [AuthGuard,CookieService,ApiService, Resolveservice],
   bootstrap: [AppComponent],
   schemas: [CUSTOM_ELEMENTS_SCHEMA],
-  entryComponents: [commonModalComponent,ModaleComponent]
+  entryComponents: [commonModalComponent,ModaleComponent,EditModaleComponent]
 })
 export class AppModule { }

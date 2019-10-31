@@ -77,7 +77,7 @@ export class UserDashboardComponent implements OnInit {
     this.activatedRoute.data.forEach(data=>{
       let result:any;
       result=data;
-    console.log(result.results.res);
+    // console.log(result.results.res);
       this.pendingmodelapplicationarray = result.results.res;
     
     })

@@ -98,7 +98,7 @@ export class AddadminComponent implements OnInit {
 
   register(){
     
-    console.log(this.addadminform.value)
+    // console.log(this.addadminform.value)
     if(this.addadminform.valid)
     {
      

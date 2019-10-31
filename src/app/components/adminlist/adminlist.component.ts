@@ -15,11 +15,11 @@ contactUsAllDataHeaderSkipValue: any = [];
   contactUsAllDataModifyHeaderValue: any = {};
   admin_datalist:any=[];
    ServiceListArray:any;
-  statusarray: any = [{val: 1, name: 'Active'}, {val: 2, name: 'Inactive'}]; 
+  statusarray: any = [{val: "1", name: 'Active'}, {val: "2", name: 'Inactive'}]; 
   
  
 
-  admin_datalist_skip: any = ['_id', 'type', 'password','confirmpassword','zip','status','companywebsite','designation','type','accesscode','id','companyname'];
+  admin_datalist_skip: any = ['_id', 'type', 'password','confirmpassword','zip','companywebsite','designation','type','accesscode','id','companyname'];
   
 
   
@@ -50,6 +50,7 @@ modify_header_array: any = {
   'state':'State',
   'created at': 'Created At',
   'updated at': 'Updated At',
+  'status':'Status'
  
 
 };

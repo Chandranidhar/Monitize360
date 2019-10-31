@@ -17,7 +17,7 @@ export class UserlistComponent implements OnInit {
   
   
   
-    statusarray: any = [{val: 1, name: 'Active'}, {val: 2, name: 'Inactive'}]; 
+    statusarray: any = [{val: "1", name: 'Active'}, {val: "2", name: 'Inactive'}]; 
     
     pendingmodelapplicationarray: any = [];
     pendingmodelapplicationarray_skip: any = ['_id', 'type', 'password', 'id', 'created_at', 'accesscode'];
@@ -33,9 +33,9 @@ export class UserlistComponent implements OnInit {
       tablename = 'user';
   
       // searchendpoint is use for data search endpoint
-      searchendpoint = 'datalist';
+      searchendpoint = 'addorupdatedata';
     // public serverURL: any = '';
-    editroute: any = 'editprofile';
+    editroute: any = 'edituser';
       // use for Table Header modification 
   
       // Like Table head name is " firstname" => "First Name"
@@ -43,7 +43,15 @@ export class UserlistComponent implements OnInit {
           'firstname': "First Name",
           'email': 'Email Id',
           'lastname': 'Last Name',
-          'name': "Full Name"
+          'phone': 'Phone Number',
+          'zip':'Zip Code',
+          'city':'City',
+          'state':'State',
+          'companyname':'Company Name',
+          'designation':'Designation',
+          'companywebsite':'Company Website',
+          'status':'Status',
+          'updated at':'Update At',
       };
   
        // this is use for  All type of search 
