@@ -9,6 +9,7 @@ import {ActivatedRoute, Router} from '@angular/router'
 
 export interface DialogData {
   data: any;
+  msg:any;
 } 
 
 @Component({

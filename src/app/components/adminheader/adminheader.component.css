@@ -19,7 +19,7 @@
   align-items: center;}
 .techdashboard_header  .profile_section .username{ padding-right: 20px; display: block; } 
 .techdashboard_header   .quotation .mat-list-base{ display: flex; padding-top: 0;}
- 
+
 .active{ color: #c18500!important; }
 .techdashboard_header  .quotation .mat-nav-list .mat-list-item { margin: 0 1px; color: #fff; position: relative; height: auto;}
 .mat-action-list .mat-list-item:focus, .mat-action-list .mat-list-item:hover, .mat-list-option:focus, .mat-list-option:hover, .mat-nav-list .mat-list-item:focus, .mat-nav-list .mat-list-item:hover { background: #242a2b; color: #fff; }

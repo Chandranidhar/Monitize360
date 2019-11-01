@@ -9,6 +9,7 @@ import {ActivatedRoute, Router} from '@angular/router'
 
 export interface DialogData {
   data: any;
+  msg:any;
 } 
 
 @Component({
@@ -58,7 +59,6 @@ export class EdituserComponent implements OnInit {
     const dialogRef = this.dialog.open(EditModaleComponent, {
       panelClass:['modal-md','success-modal'],
       data:{msg:x}
-
     });
 
     dialogRef.afterClosed().subscribe(result => {
@@ -172,6 +172,7 @@ export class EdituserComponent implements OnInit {
   selector:'app-modale',
   templateUrl:'./modale.html'
 })
+
 export class EditModaleComponent {
   constructor( public dialogRef: MatDialogRef<EditModaleComponent>,
                @Inject(MAT_DIALOG_DATA) public data: DialogData){
