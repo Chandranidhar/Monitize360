@@ -19,8 +19,10 @@ contactUsAllDataHeaderSkipValue: any = [];
   
  
 
-  admin_datalist_skip: any = ['_id', 'type', 'password','confirmpassword','zip','companywebsite','designation','type','accesscode','id','companyname'];
+  admin_datalist_skip: any = ['_id', 'type', 'password','confirmpassword','companywebsite','designation','type','accesscode','id','companyname','updated_at'];
   
+  //all details skip from action 
+  detail_skip:any=['_id','password','created_at','updated_at','accesscode']
 
   
   // updateendpoint is use for data update endpoint
@@ -42,15 +44,16 @@ editroute: any = 'editadmin';
   // use for Table Header modification 
 // Like Table head name is " firstname" => "First Name"
 modify_header_array: any = {
-  'firstname': "First Name",
-  'lastname': 'Last Name',
-  'email': 'Email Id',
+  'firstname': "Name",
+  'lastname': '',
+  'email': 'Email',
   'phone':'Phone Number',
   'city':'City',
   'state':'State',
   'created at': 'Created At',
-  'updated at': 'Updated At',
-  'status':'Status'
+
+  'status':'Status',
+  'zip':'Zip Code'
  
 
 };
