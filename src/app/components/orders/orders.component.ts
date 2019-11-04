@@ -13,7 +13,7 @@ export class OrdersComponent implements OnInit {
     statusarray: any = [{val: 1, name: 'Pending'}, {val: 2, name: 'Cancelled'}, {val: 3, name: 'Delivered'}]; 
 
     pendingmodelapplicationarray: any = [];
-  pendingmodelapplicationarray_skip: any = ['_id','user_id' ,'user_type','user_phone' ,'fullname',  'pincode','area','landmark',
+  pendingmodelapplicationarray_skip: any = ['_id','user_id' ,'user_type','user_phone' ,  'pincode','area','landmark',
   'housenumber','billing_type'];
   pendingmodelapplicationarray_detail_skip: any = ['_id','user_id','user_fullname','user_type',];
 
@@ -23,13 +23,14 @@ export class OrdersComponent implements OnInit {
     searchendpoint = 'datalist';
     editroute: any = 'editroute';
     modify_header_array: any = {
-      'fullname': "Name",
-      'phone': "Phone Number",
+      'fullname': "Billing Name",
+      'phone': "Phone",
       'search count': "Data Purchase",
-      'user email':"Email ID",
-      'created at': "Created on",
+      'user email':"Email",
+      'created at': "Date",
       'state':"State",
-      'city':"City"
+      'city':"City",
+      'user fullname':"Name"
     };
 
      // this is use for  All type of search 
@@ -49,7 +50,7 @@ export class OrdersComponent implements OnInit {
     this.activatedRoute.data.forEach(data=>{
       let result:any;
       result=data;
-    //console.log(data.results.res);
+    console.log(data.results.res);
       this.pendingmodelapplicationarray = result.results.res;
     
     })
