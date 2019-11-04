@@ -150,7 +150,8 @@
   body{overflow-y: hidden;}
   .as_mainwrapper {box-shadow: none !important;}
   .as_mainwrapper mat-list mat-list-item{height: auto;}
-  .as_mainwrapper .mat-list-base .mat-list-item .mat-list-item-content{flex-wrap: wrap;padding: 0;}
+  .as_mainwrapper .mat-list-base .mat-list-item .mat-list-item-content{flex-wrap: wrap;padding: 0; position: relative;
+    z-index: 9;}
   .as_mainwrapper mat-list mat-list-item mat-card-title{
     display: block;
     width: 100%;
@@ -163,16 +164,7 @@
     text-transform: uppercase;
   }
   .as_mainwrapper mat-list mat-list-item.aslist2  mat-card-title{background: #0f59a0;}
-  .as_mainwrapper mat-list mat-list-item.aslist2 mat-card-content{
-    background: rgba(145,202,227,1);
-    background: -moz-linear-gradient(left, rgba(145,202,227,1) 0%, rgba(1,77,153,1) 100%);
-    background: -webkit-gradient(left top, right top, color-stop(0%, rgba(145,202,227,1)), color-stop(100%, rgba(1,77,153,1)));
-    background: -webkit-linear-gradient(left, rgba(145,202,227,1) 0%, rgba(1,77,153,1) 100%);
-    background: -o-linear-gradient(left, rgba(145,202,227,1) 0%, rgba(1,77,153,1) 100%);
-    background: -ms-linear-gradient(left, rgba(145,202,227,1) 0%, rgba(1,77,153,1) 100%);
-    background: linear-gradient(to right, rgba(145,202,227,1) 0%, rgba(1,77,153,1) 100%);
-    filter: progid:DXImageTransform.Microsoft.gradient( startColorstr='#91cae3', endColorstr='#014d99', GradientType=1 );
-  }
+  
   .blockimg{width: 375px; margin: 0 auto; display: block;}
   .blockimg img{max-width: 100%;}
   .paybtn {
@@ -235,19 +227,11 @@
     opacity: 0.1;
   }
   .as_mainwrapper mat-list mat-list-item mat-card-content {
-    width: 93%;
-    background: rgba(93,109,112,1);
-    background: -moz-linear-gradient(left, rgba(93,109,112,1) 0%, rgba(36,42,43,1) 100%);
-    background: -webkit-gradient(left top, right top, color-stop(0%, rgba(93,109,112,1)), color-stop(100%, rgba(36,42,43,1)));
-    background: -webkit-linear-gradient(left, rgba(93,109,112,1) 0%, rgba(36,42,43,1) 100%);
-    background: -o-linear-gradient(left, rgba(93,109,112,1) 0%, rgba(36,42,43,1) 100%);
-    background: -ms-linear-gradient(left, rgba(93,109,112,1) 0%, rgba(36,42,43,1) 100%);
-    background: linear-gradient(to right, rgba(93,109,112,1) 0%, rgba(36,42,43,1) 100%);
-    filter: progid:DXImageTransform.Microsoft.gradient( startColorstr='#5d6d70', endColorstr='#242a2b', GradientType=1 );
     margin: 0 auto;
     margin-bottom: 21px;
     padding-top: 15px;
     position: relative;
+    width: 90%;
   }
   .editbtn{
     position: relative !important;
@@ -284,6 +268,38 @@
       min-width: 100%;
       min-height: 100%;
   }
+  .as_mainwrapper mat-list mat-list-item:after{
+    content: '';
+    position: absolute;
+    left: 50%;
+    top: 54%;
+    transform: translate(-50%, -50%);
+    height: 85%;
+    width: 96%;
+    background: rgba(93,109,112,1);
+    background: -moz-linear-gradient(left, rgba(93,109,112,1) 0%, rgba(36,42,43,1) 100%);
+    background: -webkit-gradient(left top, right top, color-stop(0%, rgba(93,109,112,1)), color-stop(100%, rgba(36,42,43,1)));
+    background: -webkit-linear-gradient(left, rgba(93,109,112,1) 0%, rgba(36,42,43,1) 100%);
+    background: -o-linear-gradient(left, rgba(93,109,112,1) 0%, rgba(36,42,43,1) 100%);
+    background: -ms-linear-gradient(left, rgba(93,109,112,1) 0%, rgba(36,42,43,1) 100%);
+    background: linear-gradient(to right, rgba(93,109,112,1) 0%, rgba(36,42,43,1) 100%);
+    filter: progid:DXImageTransform.Microsoft.gradient( startColorstr='#5d6d70', endColorstr='#242a2b', GradientType=1 );
+  }
+
+  .as_mainwrapper mat-list mat-list-item.aslist2:after{
+    background: rgba(145,202,227,1);
+    background: -moz-linear-gradient(left, rgba(145,202,227,1) 0%, rgba(1,77,153,1) 100%);
+    background: -webkit-gradient(left top, right top, color-stop(0%, rgba(145,202,227,1)), color-stop(100%, rgba(1,77,153,1)));
+    background: -webkit-linear-gradient(left, rgba(145,202,227,1) 0%, rgba(1,77,153,1) 100%);
+    background: -o-linear-gradient(left, rgba(145,202,227,1) 0%, rgba(1,77,153,1) 100%);
+    background: -ms-linear-gradient(left, rgba(145,202,227,1) 0%, rgba(1,77,153,1) 100%);
+    background: linear-gradient(to right, rgba(145,202,227,1) 0%, rgba(1,77,153,1) 100%);
+    filter: progid:DXImageTransform.Microsoft.gradient( startColorstr='#91cae3', endColorstr='#014d99', GradientType=1 );
+  }
+
+
+
+
   .as_mainwrapper mat-list{display: flex; justify-content: space-between;    flex-wrap: wrap;}
   .as_mainwrapper mat-list mat-list-item{
     width: 48% !important;
@@ -493,7 +509,7 @@
    color: #fff;
   }
 
-.mat-list-base .mat-list-item .mat-list-item-content, .mat-list-base .mat-list-option .mat-list-item-content{justify-content: center !important;}
+/* .mat-list-base .mat-list-item .mat-list-item-content, .mat-list-base .mat-list-option .mat-list-item-content{justify-content: center !important;} */
 .asnewclass mat-list mat-list-item h2{text-align: center; font-size: 24px;width: 100%;font-weight: normal; color: #fff;}
 
 table {
@@ -508,12 +524,32 @@ table {
 
 
 
+  .mat-spinner{    margin-left: auto;
+    margin-right: auto;}
 
 
+
+    .p_datawrapper {border-radius: 0!important;box-shadow: none !important; background: #a2b3b6!important;}
+
+    .p_datawrapper mat-expansion-panel{background: #fff !important; border-radius: 0 !important;}
+    .p_datawrapper mat-expansion-panel mat-expansion-panel-header{background: #49595c !important;}
+    .p_datawrapper mat-expansion-panel mat-expansion-panel-header span mat-panel-title{color: #fff !important;font-size: 18px !important;text-transform: uppercase !important;}
+    .p_datawrapper mat-expansion-panel mat-expansion-panel-header span:after{color: #fff !important;}
+    .nextbtn, .p_datawrapper mat-expansion-panel .nextbtn {
+      color: #fff !important;
+      background: #01b0d0 !important;
+      border-radius: 0 !important;
+      padding: 0px 33px !important;
+    }
+    .p_datawrapper mat-expansion-panel .prebtn{
+      background: #de7108 !important;
+      color: #fff !important;
+      border-radius: 0;
+      padding: 0px 33px !important;
+    }
   /*--------------------- avijit css end ----------------- */
   @media only screen and (max-width: 1700px) {
     .techdashboard_header .logo_wrapper {max-width: 175px !important;}
-    .as_mainwrapper mat-list mat-list-item mat-card-content{min-height: 100vh !important;}
   }
 
   @media only screen and (max-width: 1400px) {

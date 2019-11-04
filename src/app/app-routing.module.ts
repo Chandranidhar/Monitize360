@@ -16,7 +16,7 @@ import { UserlistComponent } from './components/userlist/userlist.component'
 import { PurchasedataComponent } from './components/purchasedata/purchasedata.component';
 import { BillingDetailsComponent } from './components/billing-details/billing-details.component';
 import { OrdersComponent } from './components/orders/orders.component';
-
+import { EdituserComponent } from './components/edituser/edituser.component';
 
 const routes: Routes = [
   { path: '', component: LoginComponent },
@@ -26,18 +26,19 @@ const routes: Routes = [
   { path: 'resetpassword', component: ResetpasswordComponent },
   // {path:'admin-dashboard', component:AdmindashboardComponent,canActivate:[AuthGuard]},
   { path: 'admin-dashboard', component: UserDashboardComponent,resolve: { results: Resolveservice }, data: { source: 'billing_details_view'}, canActivate: [AuthGuard] },
-  { path: 'editprofile', component: EditprofileComponent },
-  { path: 'support', component: SupportComponent },
+  { path: 'editprofile', component: EditprofileComponent ,canActivate: [AuthGuard] },
+  { path: 'support', component: SupportComponent, canActivate: [AuthGuard]},
   // {path:'user-dashboard', component:UserDashboardComponent},
-  { path: "user-dashboard", component: UserDashboardComponent, resolve: { results: Resolveservice },data: { source: 'billing_details_view',condition:{'user_id_object':'user_id_object'}},canActivate: [AuthGuard] },
-  { path: 'addadmin', component: AddadminComponent },
-  { path: 'editadmin/:id', component: AddadminComponent },
+  { path: "user-dashboard", component: UserDashboardComponent, resolve: { results: Resolveservice },data: { source: 'billing_details_view',condition:{'user_id_object':'user_id_object'}}, canActivate: [AuthGuard] },
+  { path: 'addadmin', component: AddadminComponent ,canActivate: [AuthGuard] },
+  { path: 'editadmin/:id', component: AddadminComponent ,canActivate: [AuthGuard] },
   { path: 'adminlist', component: AdminlistComponent, resolve: { results: Resolveservice }, data: { source: 'user', "condition": { "type": "admin" } }, canActivate: [AuthGuard] },
   { path: 'userlist', component: UserlistComponent, resolve: { results: Resolveservice }, data: { source: 'user', "condition": { "type": "user" } }, canActivate: [AuthGuard] },
-  { path: 'purchasedata', component: PurchasedataComponent },
-  { path: 'billing', component: BillingDetailsComponent },
-  { path: 'myorders', component: OrdersComponent, resolve: { results: Resolveservice }, data: { source: 'billing_details_view',condition:{'user_id_object':'user_id_object'}},canActivate: [AuthGuard] },
-  { path: 'orderlist', component: OrdersComponent, resolve: { results: Resolveservice }, data: { source: 'billing_details_view'},canActivate: [AuthGuard] }
+  { path: 'purchasedata', component: PurchasedataComponent,canActivate: [AuthGuard]  },
+  { path: 'billing', component: BillingDetailsComponent,canActivate: [AuthGuard]  },
+  { path: 'myorders', component: OrdersComponent, resolve: { results: Resolveservice }, data: { source: 'billing_details_view',condition:{'user_id_object':'user_id_object'}}, canActivate: [AuthGuard] },
+  { path: 'orderlist', component: OrdersComponent, resolve: { results: Resolveservice }, data: { source: 'billing_details_view'},canActivate: [AuthGuard] },
+  {path:'edituser/:id',component:EdituserComponent ,canActivate: [AuthGuard] }
 
 ];
 

@@ -1,0 +1,117 @@
+<app-adminheader>
+        <div class="edituserform_wrapper">
+        <form [formGroup]="edituserForm" (ngSubmit)="register()" class="edituser_registerform" >
+            <mat-form-field>
+                <input matInput  type="text" formControlName="firstname" (blur)="inputBlur('firstname')"  placeholder="Enter First Name" >
+                <mat-error
+                        *ngIf="!edituserForm.controls['firstname'].touched && edituserForm.controls['firstname'].errors">
+                    First name is required</mat-error>
+            </mat-form-field>
+           
+            
+            <mat-form-field>
+                <input matInput  type="text" formControlName="lastname" (blur)="inputBlur('lastname')" placeholder="Enter Last Name" >
+                <mat-error
+                        *ngIf="!edituserForm.controls['lastname'].touched && edituserForm.controls['lastname'].errors">
+                    Last name is required</mat-error>
+            </mat-form-field>
+            
+            <mat-form-field>
+                <input matInput type="email" placeholder="Email" formControlName="email" (blur)="inputBlur('email')">
+                <mat-error
+                        *ngIf="!edituserForm.controls['email'].touched && edituserForm.controls['email'].errors">
+                    Email is required</mat-error>
+            </mat-form-field>
+            
+            <mat-form-field>
+                <input matInput  type="text" formControlName="phone" (blur)="inputBlur('phone')"  placeholder="Enter Phone Number" >
+                <mat-error
+                        *ngIf="!edituserForm.controls['phone'].touched && edituserForm.controls['phone'].errors">
+                    Phone Number name is required</mat-error> 
+            </mat-form-field>
+            
+            <mat-form-field *ngIf="router.url == '/addadmin'">
+                <input matInput  type="password" formControlName="password" (blur)="inputBlur('password')"  placeholder="Enter Password" >
+                <mat-error
+                        *ngIf="!edituserForm.controls['password'].touched && edituserForm.controls['password'].errors">
+                    Password is required</mat-error>
+            </mat-form-field>
+            
+            <mat-form-field *ngIf="router.url == '/addadmin'">
+                <input matInput  type="password" formControlName="confirmpassword" (blur)="inputBlur('confirmpassword')"  placeholder="Enter Confirm Password" >
+                <mat-error
+                        *ngIf="!edituserForm.controls['confirmpassword'].touched && edituserForm.controls['confirmpassword'].errors">
+                    Confirm Password is required</mat-error>
+            </mat-form-field>
+            <div style="color: red;" *ngIf="edituserForm.hasError('mismatchedPasswords')">Passwords does not match</div>
+            
+            <mat-form-field>
+                <!-- <input matInput  type="text" formControlName="state" (blur)="inputBlur('state')"  placeholder="Enter State" > -->
+                <mat-label>Select State</mat-label>
+                <mat-select formControlName="state">
+                    <mat-option *ngFor="let statename of stateList" [value]="statename.abbreviation">{{statename.name}}</mat-option>
+                  </mat-select>
+                <mat-error
+                        *ngIf="!edituserForm.controls['state'].touched && edituserForm.controls['state'].errors">
+                    State is required</mat-error>
+            </mat-form-field>
+            
+        
+            <mat-form-field>
+                <input matInput  type="text" formControlName="city" (blur)="inputBlur('city')"  placeholder="Enter City" >
+                    <!-- <mat-label>select city</mat-label>
+                    <mat-select formControlName="city">
+                    <mat-option *ngFor="let cityname of cityList" [value]="cityname.city">{{cityname.city}}</mat-option>
+                    </mat-select> -->
+                <mat-error
+                        *ngIf="!edituserForm.controls['city'].touched && edituserForm.controls['city'].errors">
+                    City is required</mat-error>
+            </mat-form-field>
+            
+            <mat-form-field>
+                <input matInput  type="text" formControlName="zip" (blur)="inputBlur('zip')" placeholder="Enter Zip Code" >
+                <mat-error
+                        *ngIf="!edituserForm.controls['zip'].touched && edituserForm.controls['zip'].errors">
+                    Zipcode is required</mat-error>
+            </mat-form-field>
+
+            <mat-form-field>
+                    <input matInput  type="text" formControlName="companyname" (blur)="inputBlur('companyname')" placeholder="Enter Company Name" >
+                    <mat-error
+                            *ngIf="!edituserForm.controls['companyname'].touched && edituserForm.controls['companyname'].errors">
+                        Zipcode is required</mat-error>
+                </mat-form-field>
+
+                <mat-form-field>
+                        <input matInput  type="text" formControlName="designation" (blur)="inputBlur('designation')" placeholder="Enter designation" >
+                        <mat-error
+                                *ngIf="!edituserForm.controls['designation'].touched && edituserForm.controls['designation'].errors">
+                            Zipcode is required</mat-error>
+                    </mat-form-field>
+
+                    <mat-form-field>
+                            <input matInput  type="text" formControlName="companywebsite" (blur)="inputBlur('companywebsite')" placeholder="Enter companywebsite" >
+                            <mat-error
+                                    *ngIf="!edituserForm.controls['companywebsite'].touched && edituserForm.controls['companywebsite'].errors">
+                                Zipcode is required</mat-error>
+                        </mat-form-field>
+                        
+                         <label class="example-margin" >Status :
+                                 <mat-radio-group  formControlName="status" (blur)="inputBlur('status')" >
+                                 <mat-radio-button class="example-margin"  value= "1" >Active</mat-radio-button>&nbsp;
+                                  <mat-radio-button class="example-margin" value= "2" >Inactive</mat-radio-button>
+                                 </mat-radio-group>
+                                 
+                          
+                        </label>
+
+                        <!-- <mat-checkbox [formControl]="edituserForm.controls['status']" checked>Status</mat-checkbox> -->
+
+            <br>
+            <br>
+            <button mat-raised-button color="primary" type="submit" >Update</button>
+            
+        </form>
+    </div>
+    </app-adminheader>
+    

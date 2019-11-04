@@ -1,0 +1,14 @@
+[
+    {"value":"A","name":"Up to $500,000"},
+    {"value":"B","name":"$500,000 to $1 Million"},
+    {"value":"C","name":"$1 to $2.5 Million"},
+    {"value":"D","name":"$2.5 to $5 Million"},
+    {"value":"E","name":"$5 to $10 Million"},
+    {"value":"F","name":"$10 to $50 Million"},
+    {"value":"G","name":"$50 to $100 Million"},
+    {"value":"H","name":"$100 to $500 Million"},
+    {"value":"I","name":"$500 Million to $1 Billion"},
+    {"value":"J","name":"Over $1 Billion"},
+    {"value":"U","name":"Unknown"},
+    {"value":"P","name":"Professional"}
+]

@@ -9,6 +9,7 @@ import {ActivatedRoute, Router} from '@angular/router'
 
 export interface DialogData {
   data: any;
+  msg:any;
 } 
 
 @Component({
@@ -19,16 +20,35 @@ export interface DialogData {
 export class AddadminComponent implements OnInit {
   addadminform:FormGroup;
   public controls:FormControl;
-  public stateList:any = [];
+  public stateList:any ;
   public user_data:any=[];
   public data:any=[];
-
+  public cityList: any;
+  public message:any="Submitted Successfully";
   constructor(public formbuilder:FormBuilder, public apiservice:ApiService, public cookieservice:CookieService, public dialog: MatDialog, public router:Router, public activatedRouter:ActivatedRoute) {
 
     this.getStateList();
+    this.getCityList();
+
+
     if (router.url != '/addadmin') {
+
+      this.message = "Updateded Successfully";
       this.editform();
-    }
+      this.addadminform = this.formbuilder.group({
+        id:this.activatedRouter.snapshot.params.id,
+        firstname:['',Validators.required],
+        lastname:['',Validators.required],
+        email:['',Validators.required],
+        phone:['',Validators.required],
+        zip:['',Validators.required],
+        city:['',Validators.required],
+        state:['',Validators.required],
+        type:['admin'],
+        status:1
+      });
+      
+    } else {
     this.addadminform = this.formbuilder.group({
       firstname:['',Validators.required],
       lastname:['',Validators.required],
@@ -45,7 +65,7 @@ export class AddadminComponent implements OnInit {
     {
       validators: matchingPasswords('password', 'confirmpassword')
     });
-  
+    }
   }
   ngOnInit() {
   }
@@ -57,10 +77,19 @@ export class AddadminComponent implements OnInit {
       
     })
   }
+  getCityList() {
+    this.apiservice.getJsonObject('assets/json/usa-cities.json').subscribe((res) => {
+      let result: any = {};
+      result = res;
+      this.cityList = result;
+    })
+  }
 
-  openDialog(): void {
+  openDialog(x:any): void {
     const dialogRef = this.dialog.open(ModaleComponent, {
-      panelClass:['modal-md','success-modal']
+      panelClass:['modal-md','success-modal'],
+      data:{msg:x}
+
     });
 
     dialogRef.afterClosed().subscribe(result => {
@@ -69,6 +98,8 @@ export class AddadminComponent implements OnInit {
   }
 
   register(){
+    
+    // console.log(this.addadminform.value)
     if(this.addadminform.valid)
     {
      
@@ -85,7 +116,7 @@ export class AddadminComponent implements OnInit {
       result = res;
       
       if(result.status=='success'){
-        this.openDialog();
+        this.openDialog(this.message);
         setTimeout(()=>{
           this.dialog.closeAll();
         },2000);
@@ -95,18 +126,12 @@ export class AddadminComponent implements OnInit {
         }, 2100);
       }
       
-    })
-
-           
+    })      
     }
     else{
       
     }
-
-
   }
-
-  
 
   editform(){
     let data:any={};
@@ -138,21 +163,13 @@ export class AddadminComponent implements OnInit {
 
     })
 
-  });
-
-  
+  }); 
 }
-  
-  
   inputBlur(val:any){
     
     this.addadminform.controls[val].markAsUntouched();
 }
-  
-
 }
-
-
 @Component({
   selector:'app-modale',
   templateUrl:'./modale.html'

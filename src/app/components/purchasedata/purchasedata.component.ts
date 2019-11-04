@@ -19,7 +19,7 @@ export class PurchasedataComponent implements OnInit {
   @ViewChild(FormGroupDirective, { static: true }) formDirective: FormGroupDirective;
 
 
-  public dataType: any = '';
+  public dataType: any = 'consumer';
   public data: any = {}
   public dataSource: any;
   public businessForm: FormGroup;
@@ -29,21 +29,23 @@ export class PurchasedataComponent implements OnInit {
   public consumerdata: any = null;
   public businessdata: any = null;
   public spinnerval: any = 0;
-  public stateList: any = {};
-  public cityList: any = {};
-  public homeList: any = {};
-  public sourcedata: any = {};
-  public VehicleList: any = {};
-  public ChildrenList: any = {};
-  public HouseholdList: any = {};
-  public BusinessownerList: any = {};
-  public consumer_datalist: any = {};
-  public NumberOfPcsList: any = {};
-  public squareFootageList: any = {};
-  public yearofbusinessList: any = {};
-  public totalIncomeList:any={};
-  public CreditCapacityList:any={};
+  public stateList: any ;
+  public cityList: any ;
+  public homeList: any ;
+  public sourcedata: any ;
+  public VehicleList: any ;
+  public ChildrenList: any ;
+  public HouseholdList: any ;
+  public BusinessownerList: any ;
+  public consumer_datalist: any ;
+  public NumberOfPcsList: any ;
+  public squareFootageList: any ;
+  public yearofbusinessList: any ;
+  public totalIncomeList:any;
+  public CreditCapacityList:any;
+  public donorCapacityList:any;
   public contactUsAllData: any;
+  public LocationSalesList:any;
   contactUsAllDataHeaderSkipValue: any = [];
   contactUsAllDataModifyHeaderValue: any = {};
 
@@ -70,6 +72,8 @@ export class PurchasedataComponent implements OnInit {
     this.getyearofbusinessList();
     this.getCreditCapacityList();
     this. getTotalIncomeList();
+    this.getDonorCapacityList();
+    this.getLocationSalesList();
     //consumer form group
     this.consumarform = this.fb.group({
       First_Name: [''],
@@ -116,7 +120,7 @@ export class PurchasedataComponent implements OnInit {
         this.cookieservice.set('apitoken', result.apitoken);
         setTimeout(() => {
           this.apitoken = this.cookieservice.get('apitoken');
-        },);
+        },200);
 
         
       }
@@ -263,6 +267,20 @@ export class PurchasedataComponent implements OnInit {
       this.totalIncomeList = result;
     })
   }
+  getDonorCapacityList(){
+    this.apiservice.getJsonObject('assets/json/donor-capacity.json').subscribe((res) => {
+      let result: any = {};
+      result = res;
+      this.donorCapacityList = result;
+    })
+  }
+  getLocationSalesList(){
+    this.apiservice.getJsonObject('assets/json/location-sales.json').subscribe((res) => {
+      let result: any = {};
+      result = res;
+      this.LocationSalesList = result;
+    })
+  }
 
   /**For business Form Submit */
   businessFormSubmit() {
@@ -275,16 +293,16 @@ export class PurchasedataComponent implements OnInit {
       // console.log(this.businessForm, cv, this.businessForm.value[cv]);
     //   // console.log(this.businessForm.value[cv])
 
-    console.log(this.businessForm, cv, this.businessForm.value[cv]);
+    // console.log(this.businessForm, cv, this.businessForm.value[cv]);
       if (this.businessForm.value[cv].length >= 1) {
 
         conditiondata[cv] = this.businessForm.value[cv];
       }
     }
-    console.log(conditiondata, 'cdata');
+    // console.log(conditiondata, 'cdata');
 
     conditiondata = Object.assign({}, conditiondata);
-    console.log(conditiondata, 'cdata obj');
+    // console.log(conditiondata, 'cdata obj');
     
     let data: any = {};
     data = {
@@ -295,7 +313,7 @@ export class PurchasedataComponent implements OnInit {
     this.apiservice.postDatawithoutToken('searchwithcountforbusiness', data).subscribe((res) => {
       let result: any = {};
       result = res;
-      console.log(result.data.Response.responseDetails.SearchCount);
+      // console.log(result.data.Response.responseDetails.SearchCount);
 
       this.search_count = result.data.Response.responseDetails.SearchCount;
     
@@ -309,7 +327,7 @@ export class PurchasedataComponent implements OnInit {
 
     })
   }
-  console.log(this.businessForm.value);
+  // console.log(this.businessForm.value);
 }
 
   toObject(arr) {
@@ -329,7 +347,7 @@ export class PurchasedataComponent implements OnInit {
     if (this.consumarform.valid) {
 
       for (let cv in this.consumarform.value) {
-        console.log(this.consumarform, cv, this.consumarform.value[cv]);
+        // console.log(this.consumarform, cv, this.consumarform.value[cv]);
 
         if (this.consumarform.value[cv].length >= 2) {
           //let cval:any=[];
@@ -338,10 +356,10 @@ export class PurchasedataComponent implements OnInit {
           //conditiondata.push(cval);
         }
       }
-      console.log(conditiondata, 'cdata');
+      // console.log(conditiondata, 'cdata');
 
       conditiondata = Object.assign({}, conditiondata);
-      console.log(conditiondata, 'cdata obj');
+      // console.log(conditiondata, 'cdata obj');
       let data: any = {};
       data = {
         "apitoken": this.apitoken,
@@ -352,8 +370,8 @@ export class PurchasedataComponent implements OnInit {
         let result: any = {};
         result = res;
 
-        console.log(result.data.Response.responseDetails.SearchCount);
-        console.log(typeof (result.data.Response.responseDetails.SearchCount));
+        // console.log(result.data.Response.responseDetails.SearchCount);
+        // console.log(typeof (result.data.Response.responseDetails.SearchCount));
         this.search_count = result.data.Response.responseDetails.SearchCount;
         this.spinnerval = 0;
         let s_query = JSON.stringify(conditiondata)
@@ -367,7 +385,7 @@ export class PurchasedataComponent implements OnInit {
         }
       })
     }
-    console.log(this.consumarform.value);
+    // console.log(this.consumarform.value);
   }
 
   // show sample data for consumer 
@@ -379,19 +397,19 @@ export class PurchasedataComponent implements OnInit {
       token: this.cookieservice.get('jwttoken')
     }
     this.apiservice.postDatawithoutToken('data', data).subscribe((res) => {
-      console.log('dta endpoint hit');
+      // console.log('dta endpoint hit');
       let result: any;
       result = res;
       if (result.status == '200') {
-        console.log(result.data.Response.responseDetails.SearchResult.searchResultRecord);
+        // console.log(result.data.Response.responseDetails.SearchResult.searchResultRecord);
         let cdata: any = result.data.Response.responseDetails.SearchResult.searchResultRecord;
         let sourcedata: any = [];
         for (let b in cdata) {
           let tempdata: any = [];
-          console.log(cdata[b], b, 'b');
+          // console.log(cdata[b], b, 'b');
           for (let n in cdata[b].resultFields) {
 
-            console.log(cdata[b].resultFields[n], 'ddd');
+            // console.log(cdata[b].resultFields[n], 'ddd');
             //tempdata['First_Name']=cdata[b]['First_Name'];
             //tempdata['Last_Name']=cdata[b]['Last_Name'];
 
@@ -413,7 +431,7 @@ export class PurchasedataComponent implements OnInit {
 
         }
         // console.log(result.data.Response.responseDetails.SearchResult.searchResultRecord.length);
-        console.log('sourcedata', sourcedata);
+        // console.log('sourcedata', sourcedata);
 
         this.consumerdata = new MatTableDataSource(sourcedata);
 
@@ -439,19 +457,19 @@ export class PurchasedataComponent implements OnInit {
       token: this.cookieservice.get('jwttoken')
     }
     this.apiservice.postDatawithoutToken('dataforbusiness', data).subscribe((res) => {
-      console.log('dta endpoint hit');
+      // console.log('dta endpoint hit');
       let result: any;
       result = res;
       if (result.status == '200') {
-        console.log(result.data.Response.responseDetails.SearchResult.searchResultRecord);
+        // console.log(result.data.Response.responseDetails.SearchResult.searchResultRecord);
         let cdata: any = result.data.Response.responseDetails.SearchResult.searchResultRecord;
         let sourcedata: any = [];
         for (let b in cdata) {
           let tempdata: any = [];
-          console.log(cdata[b], b, 'b');
+          // console.log(cdata[b], b, 'b');
           for (let n in cdata[b].resultFields) {
 
-            console.log(cdata[b].resultFields[n], 'ddd');
+            // console.log(cdata[b].resultFields[n], 'ddd');
             //tempdata['First_Name']=cdata[b]['First_Name'];
             //tempdata['Last_Name']=cdata[b]['Last_Name'];
 
@@ -473,7 +491,7 @@ export class PurchasedataComponent implements OnInit {
 
         }
         // console.log(result.data.Response.responseDetails.SearchResult.searchResultRecord.length);
-        console.log('sourcedata', sourcedata);
+        // console.log('sourcedata', sourcedata);
 
         this.businessdata = new MatTableDataSource(sourcedata);
 

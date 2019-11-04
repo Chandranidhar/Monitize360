@@ -49,7 +49,7 @@
             <!-- <input matInput  type="text" formControlName="state" (blur)="inputBlur('state')"  placeholder="Enter State" > -->
             <mat-label>Select State</mat-label>
             <mat-select formControlName="state">
-                <mat-option *ngFor="let state of stateList" [value]="state.name">{{state.name}}</mat-option>
+                <mat-option *ngFor="let statename of stateList" [value]="statename.abbreviation">{{statename.name}}</mat-option>
               </mat-select>
             <mat-error
                     *ngIf="!addadminform.controls['state'].touched && addadminform.controls['state'].errors">
@@ -58,7 +58,11 @@
         
     
         <mat-form-field>
-            <input matInput  type="text" formControlName="city" (blur)="inputBlur('city')"  placeholder="Enter City" >
+            <!-- <input matInput  type="text" formControlName="city" (blur)="inputBlur('city')"  placeholder="Enter City" > -->
+                <mat-label>select city</mat-label>
+                <mat-select formControlName="city">
+                <mat-option *ngFor="let cityname of cityList" [value]="cityname.city">{{cityname.city}}</mat-option>
+                </mat-select>
             <mat-error
                     *ngIf="!addadminform.controls['city'].touched && addadminform.controls['city'].errors">
                 City is required</mat-error>

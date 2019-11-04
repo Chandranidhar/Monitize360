@@ -327,7 +327,7 @@ export class EditprofileComponent implements OnInit {
 
           this.cook.set('user_details', JSON.stringify(result.data[0]));
 
-          this.UpdateForm.reset();
+         
           /**Success snakbar */
           this._snackBar.open('Update Complete', '', {
             duration: 2000

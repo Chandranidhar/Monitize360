@@ -32,7 +32,7 @@
 
 </mat-card>
 <!-- form group for consumer data -->
-<mat-card  *ngIf="dataType != '' && dataType == 'consumer' && search_count=='0'">
+<mat-card class="p_datawrapper"  *ngIf="dataType != '' && dataType == 'consumer' && search_count=='0'">
   <form [formGroup]="consumarform"  >
         <mat-accordion >
                 <mat-expansion-panel [expanded]="step === 0" (opened)="setStep(0)" >
@@ -56,7 +56,7 @@
                           </mat-form-field>
 
                         <mat-action-row>
-                          <button mat-button color="primary" (click)="nextStep()">Next</button>
+                          <button mat-button color="primary"  class="nextbtn" (click)="nextStep()">Next</button>
                         </mat-action-row>
                       </mat-expansion-panel>
 
@@ -98,8 +98,8 @@
                                     <input matInput formControlName="Tally_County_Code"   placeholder="County Code">
                                   </mat-form-field>
                         <mat-action-row>
-                          <button mat-button color="warn" (click)="prevStep()">Previous</button>
-                          <button mat-button color="primary" (click)="nextStep()">Next</button>
+                          <button mat-button color="warn" class="prebtn" (click)="prevStep()">Previous</button>
+                          <button mat-button color="primary" class="nextbtn" (click)="nextStep()">Next</button>
                         </mat-action-row>
                       </mat-expansion-panel>
                       <mat-expansion-panel [expanded]="step === 2" (opened)="setStep(2)" >
@@ -166,16 +166,19 @@
                           </mat-form-field>
 
                         <mat-form-field>
-                          <input matInput formControlName="NetWorth_Code" placeholder="NetWorth Code">
+                          <input matInput formControlName="NetWorth_Code" placeholder="Net Worth">
                         </mat-form-field>
 
                         <mat-form-field>
-                          <input matInput formControlName="Donor_Capacity_Code" placeholder="Donor Capacity Code">
+                          <mat-label>Select Donor Capacity</mat-label>
+                          <mat-select formControlName="Donor_Capacity_Code">
+                        <mat-option *ngFor="let donorcapacity of donorCapacityList" [value]="donorcapacity.value">{{donorcapacity.name}}</mat-option>
+                          </mat-select>
                         </mat-form-field>
 
                         <mat-action-row>
-                          <button mat-button color="warn" (click)="prevStep()">Previous</button>
-                          <button mat-button color="primary" (click)="nextStep()">End</button>
+                          <button mat-button color="warn"  class="prebtn" (click)="prevStep()">Previous</button>
+                          <button mat-button color="primary"  class="nextbtn" (click)="nextStep()">End</button>
                         </mat-action-row>
                       </mat-expansion-panel>
 
@@ -183,23 +186,23 @@
         </mat-accordion>
         <br>
         
-        <button mat-raised-button color="primary"  (click)="purchaseDataForConsumar()">Search</button>
+        <button mat-raised-button color="primary" class="nextbtn" (click)="purchaseDataForConsumar()">Search</button>
       
       </form>
 
 </mat-card>
 <!-- search count for consumer data -->
-<mat-card *ngIf="dataType ==='consumer' && search_count!='0'">
+<mat-card class="p_datawrapper" *ngIf="dataType ==='consumer' && search_count!='0'">
 
   <h4>Total Data found : {{search_count}}</h4>
 
-  <button mat-raised-button *ngIf="search_count!='' && search_count!='0'" color="primary" (click)="showconsumerdata()" >Show Sample Data</button>
+  <button class="nextbtn" mat-raised-button *ngIf="search_count!='' && search_count!='0'" color="primary" (click)="showconsumerdata()" >Show Sample Data</button>
 
 </mat-card>
 
 <br>
 <!-- table for consumer data -->
-<mat-card *ngIf="search_count!='0' && dataType ==='consumer' && consumerdata!=null ">
+<mat-card class="p_datawrapper" *ngIf="search_count!='0' && dataType ==='consumer' && consumerdata!=null ">
     <div  *ngIf="search_count!='0' && dataType ==='consumer' && consumerdata!=null ">
         <button mat-raised-button color="primary" [routerLink]="'/billing'">Purchase Now!</button>
       <mat-form-field>
@@ -262,19 +265,22 @@
 
 
     <!-- form group for business data -->
- <mat-card  *ngIf="dataType !='' && dataType == 'business' && search_count=='0' ">
+ <mat-card class="p_datawrapper"  *ngIf="dataType !='' && dataType == 'business' && search_count=='0' ">
     <form [formGroup]="businessForm">
         <mat-accordion >
                 <mat-expansion-panel [expanded]="step === 0" (opened)="setStep(0)" >
                         <mat-expansion-panel-header>
                           <mat-panel-title>
-                            Location
+                            Location Sales
                           </mat-panel-title>
                           
                         </mat-expansion-panel-header>
 
                         <mat-form-field>
-                          <input matInput placeholder="Location" formControlName="Location_Sales_Code">
+                          <mat-label>Select Location Sales</mat-label>
+                          <mat-select formControlName="Location_Sales_Code">
+                        <mat-option *ngFor="let locationsales of LocationSalesList" [value]="locationsales.value">{{locationsales .name}}</mat-option>
+                          </mat-select>
                         </mat-form-field>
 
                         <mat-action-row>
@@ -315,8 +321,8 @@
                           </mat-form-field>
 
                         <mat-action-row>
-                          <button mat-button color="warn" (click)="prevStep()">Previous</button>
-                          <button mat-button color="primary" (click)="nextStep()">End</button>
+                          <button mat-button color="warn" class="prebtn" (click)="prevStep()">Previous</button>
+                          <button mat-button color="primary" class="nextbtn" (click)="nextStep()">End</button>
                         </mat-action-row>
                       </mat-expansion-panel>
 
@@ -325,7 +331,7 @@
 
         </mat-accordion>
         <br>
-        <button mat-raised-button color="primary" (click)='businessFormSubmit()'>Search</button>
+        <button mat-raised-button color="primary" class="nextbtn" (click)='businessFormSubmit()'>Search</button>
       </form>
 </mat-card>
 <!-- search count for business data -->
@@ -338,7 +344,7 @@
 <br>
 <!-- table for business -->
 
-<mat-card  *ngIf="search_count!='0' && dataType ==='business' && businessdata!=null ">
+<mat-card class="p_datawrapper"  *ngIf="search_count!='0' && dataType ==='business' && businessdata!=null ">
 
   <div  *ngIf="search_count!='0' && dataType ==='business' && businessdata!=null "  >
       <button mat-raised-button color="primary" [routerLink]="'/billing'">Purchase Now!</button>
