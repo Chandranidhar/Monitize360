@@ -72,8 +72,6 @@ import {OrdersComponent} from './components/orders/orders.component';
     ListingModule,
     NgxUploaderModule,
     CKEditorModule,
-    
-    
   ],
   providers: [AuthGuard,CookieService,ApiService, Resolveservice],
   bootstrap: [AppComponent],
