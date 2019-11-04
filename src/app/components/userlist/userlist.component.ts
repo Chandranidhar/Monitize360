@@ -24,7 +24,7 @@ export class UserlistComponent implements OnInit {
     // pendingmodelapplicationarray_detail_skip: any = ['_id', 'email', 'name'];
 
 
-    detail_skip:any=['_id','password','created_at','updated_at','accesscode']
+    detail_skip:any=['_id','password','created_at','updated_at','accesscode','id']
 
       // updateendpoint is use for data update endpoint
       updateendpoint = 'addorupdatedata';
