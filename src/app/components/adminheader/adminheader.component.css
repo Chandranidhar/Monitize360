@@ -69,7 +69,7 @@
 .table_structure .mat-list-item .title_n { font-size: 26px; }
 .table_structure .mat-list-item .title_a { font-size: 22px; }
 .content_wrapper .itemsection p{ width: 100%; font-size: 22px; }
-.techdashboard_header  { height: auto; flex-direction: column; }
+/* .techdashboard_header  { height: auto; flex-direction: column; } */
 
 }
 
