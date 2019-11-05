@@ -589,11 +589,18 @@ table {
     .inner_wrapper .rightpannel {width: 85% !important;}
   }
 
-  @media only screen and (max-width: 1400px) {
-    .as_editprofile form {width: 60%;}
+  @media only screen and (max-width: 1600px) {
+    .Successmodallogowrapper {width: 86%;}
   }
+ 
   @media only screen and (max-width: 1440px) {
     .as_loginbg.as_forgotpassbg .from button.mat-primary{font-size: 30px;}
+  }
+  @media only screen and (max-width: 1400px) {
+    .success-modal.cdk-overlay-pane {
+      width: 26% !important;
+  }
+    .as_editprofile form {width: 60%;}
   }
   @media only screen and (max-width: 1320px) {
     .inner_wrapper .rightpannel {
