@@ -549,7 +549,34 @@ table {
     }
 
 .tabneworder table tr td .ng-star-inserted .cursor:nth-child(1){display: none;}
-
+/* ------- modal css start ------------------ */
+.success-modal.cdk-overlay-pane{width: 20% !important;}
+.success-modal .mat-dialog-container{
+  background: #323c3e;
+    color: rgba(255, 255, 255, 0.87);
+    text-align: center;
+}
+.Successbuttonwraooer{justify-content: center;}
+.Successmodallogowrapper {
+  width: 259px;
+  display: block;
+  margin: 0 auto;
+  padding-bottom: 19px;
+}
+.Successmodallogowrapper img {
+  max-width: 100%;
+}
+.Successmodalmainwrapper h2{
+    margin: 0;
+    font-size: 14px;
+    font-weight: normal;
+    line-height: 21px;
+}
+.Successmodalmainwrapper .mat-dialog-content p{
+  margin: 0;
+    padding: 10px 0;
+}
+/* ------- modal css end ------------------ */
     
   /*--------------------- avijit css end ----------------- */
   @media only screen and (max-width: 1700px) {

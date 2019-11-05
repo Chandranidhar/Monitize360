@@ -86,13 +86,13 @@ export class EdituserComponent implements OnInit {
       
       if(result.status=='success'){
         this.openDialog(this.message);
-        setTimeout(()=>{
-          this.dialog.closeAll();
-        },2000);
-        setTimeout(() => {
-          this.router.navigateByUrl('/userlist');
+        // setTimeout(()=>{
+        //   this.dialog.closeAll();
+        // },2000);
+        // setTimeout(() => {
+        //   this.router.navigateByUrl('/userlist');
 
-        }, 2100);
+        // }, 2100);
       }
       
     })      
