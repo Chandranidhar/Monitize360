@@ -362,14 +362,15 @@ export class EditprofileComponent implements OnInit {
 
 /**Change password section */
 import { MatSnackBar } from '@angular/material/snack-bar';
+
 @Component({
   selector: 'commonModal',
   templateUrl: '../commonModal/commonModal.html',
 })
 export class commonModalComponent {
-  public msg: any = '';
+  public msg: any = null;
   public resetForm: FormGroup;
-  constructor(public dialogRef: MatDialogRef<commonModalComponent>, public fbb: FormBuilder, public cook: CookieService, public apiService: ApiService,
+  constructor(public dialogRef: MatDialogRef<commonModalComponent>,public router: Router ,public fbb: FormBuilder, public cook: CookieService, public apiService: ApiService,
     public _snackBar: MatSnackBar) {
     let userdetails = this.cook.get('user_details');
     let cookie: any;
@@ -413,19 +414,18 @@ export class commonModalComponent {
         };
         this.apiService.postDatawithoutToken('changepassword', data).subscribe((data) => {
           let d: any = data;
-          if (d.Status == "true") {
+         
+          if (d.Status == true) {
             this._snackBar.open(d.message, '', {
               duration: 3000
             });
+           
             setTimeout(() => {
-              this.dialogRef.close();
-            }, 3000);
+             this.dialogRef.close();
+            }, 100);
           }
           else {
-            this._snackBar.open(d.message, '', {
-              duration: 3000
-            });
-
+            this.msg=d.message;
           }
 
         })

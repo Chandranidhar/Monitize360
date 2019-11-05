@@ -20,8 +20,12 @@ export class UserlistComponent implements OnInit {
     statusarray: any = [{val: "1", name: 'Active'}, {val: "2", name: 'Inactive'}]; 
     
     pendingmodelapplicationarray: any = [];
-    pendingmodelapplicationarray_skip: any = ['_id', 'type', 'password', 'id', 'created_at', 'accesscode'];
-    pendingmodelapplicationarray_detail_skip: any = ['_id', 'email', 'name'];
+    pendingmodelapplicationarray_skip: any = ['_id', 'type', 'password','confirmpassword','companywebsite','designation','type','accesscode','id','companyname','updated_at'];
+    // pendingmodelapplicationarray_detail_skip: any = ['_id', 'email', 'name'];
+
+
+    detail_skip:any=['_id','password','created_at','updated_at','accesscode','id']
+
       // updateendpoint is use for data update endpoint
       updateendpoint = 'addorupdatedata';
   
@@ -40,18 +44,16 @@ export class UserlistComponent implements OnInit {
   
       // Like Table head name is " firstname" => "First Name"
       modify_header_array: any = {
-          'firstname': "First Name",
-          'email': 'Email Id',
-          'lastname': 'Last Name',
-          'phone': 'Phone Number',
-          'zip':'Zip Code',
-          'city':'City',
-          'state':'State',
-          'companyname':'Company Name',
-          'designation':'Designation',
-          'companywebsite':'Company Website',
-          'status':'Status',
-          'updated at':'Update At',
+           'firstname': "Name",
+           'lastname': '',
+           'email': 'Email',
+            'phone':'Phone Number',
+            'city':'City',
+            'state':'State',
+           'created at': 'Created At',
+
+             'status':'Status',
+              'zip':'Zip Code'
       };
   
        // this is use for  All type of search 

@@ -77,8 +77,6 @@ import { EdituserComponent } from './components/edituser/edituser.component';
     ListingModule,
     NgxUploaderModule,
     CKEditorModule,
-    
-    
   ],
   providers: [AuthGuard,CookieService,ApiService, Resolveservice],
   bootstrap: [AppComponent],
