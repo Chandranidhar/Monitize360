@@ -2,7 +2,7 @@
 /* header css */
 .techdashboard_header { height: auto; }
 .techdashboard_header .logo_wrapper{
-  max-width: 179px;
+  max-width: 202px;
     display: block;
     cursor: pointer;
     background: #242a2b;
@@ -33,7 +33,7 @@
 .inner_wrapper .leftpannel{ width: 221px; background: #4a595c; height: 100%; }
 .inner_wrapper .leftpannel .mat-nav-list .mat-list-item{ border-top: 1px solid #29383b; color: #fff; }
 .inner_wrapper .leftpannel .mat-nav-list .mat-list-item:nth-child(1){ border-top: 0px; }
-.inner_wrapper .rightpannel{ width: 100%; padding: 16px; box-sizing: border-box; overflow: scroll; position: relative;}
+.inner_wrapper .rightpannel{ width: 88%; padding: 16px; box-sizing: border-box; overflow: scroll; position: relative;}
 /* dashboard end */
 
 

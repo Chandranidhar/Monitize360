@@ -547,9 +547,13 @@ table {
       border-radius: 0;
       padding: 0px 33px !important;
     }
+
+.tabneworder table tr td .ng-star-inserted .cursor:nth-child(1){display: none;}
+
+    
   /*--------------------- avijit css end ----------------- */
   @media only screen and (max-width: 1700px) {
-    .techdashboard_header .logo_wrapper {max-width: 175px !important;}
+    .inner_wrapper .rightpannel {width: 85% !important;}
   }
 
   @media only screen and (max-width: 1400px) {
@@ -557,6 +561,11 @@ table {
   }
   @media only screen and (max-width: 1440px) {
     .as_loginbg.as_forgotpassbg .from button.mat-primary{font-size: 30px;}
+  }
+  @media only screen and (max-width: 1320px) {
+    .inner_wrapper .rightpannel {
+      width: 82% !important;
+  }
   }
   @media only screen and (max-width: 1300px) {
     .as_loginbg .from{
