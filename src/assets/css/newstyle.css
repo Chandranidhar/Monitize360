@@ -577,7 +577,13 @@ table {
     padding: 10px 0;
 }
 /* ------- modal css end ------------------ */
-    
+    .listpagemainwrapper .mat-toolbar-row .mat-form-field{width: 30%;}
+    .listpagemainwrapper .mat-raised-button.mat-primary{
+      background: #de7108 !important;
+      color: #fff !important;
+      border-radius: 0;
+      padding: 0px 33px !important;
+    }
   /*--------------------- avijit css end ----------------- */
   @media only screen and (max-width: 1700px) {
     .inner_wrapper .rightpannel {width: 85% !important;}
