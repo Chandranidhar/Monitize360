@@ -37,7 +37,7 @@
     "ckeditor": "^4.12.1",
     "ckeditor4-angular": "^1.0.0-beta.2",
     "domino": "^2.1.3",
-    "express": "^4.15.2",
+    "express": "^4.17.3",
     "hammerjs": "^2.0.8",
     "listing-angular7": "0.0.94",
     "login": "^0.8.0",
